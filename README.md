@@ -20,7 +20,7 @@ Os membros do grupo são:
 
 # Estrutura do Projeto
 
-1. [Contexto](./docs/1-Contexto.md)
+1. [Contexto](C:\Users\palum\2016-1-tiaw-g3-travelsync\Contexto do projeto.docx)
 2. [Especificações do Projeto](./docs/2-Especificação.md)
 3. [Projeto da Interface](./docs/3-Interface.md)
 4. [Gerenciamento do Projeto](./docs/4-Gerenciamento-Projeto.md)
