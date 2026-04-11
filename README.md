@@ -3,15 +3,18 @@
 
 Trabalho Interdisciplinar - Aplicacões Web
 
-`CURSO`
+`ADS\SI`
 
-`SEMESTRE`
+`SEMESTRE 1`
 
 ## Participantes
 
 Os membros do grupo são: 
-- Fulano da Silva
-- Ciclano Albuquerque
+- Pedro Augusto Noronha Palumbo
+- Izadora Santiago Fernandes
+- Ana Clara de Castro Oliveira
+- Isabela Loscha Rajão Silva
+- Sara Assis Figueiredo Dias
 
 > Inclua a lista dos membros da equipe com seus nomes completos.
 
