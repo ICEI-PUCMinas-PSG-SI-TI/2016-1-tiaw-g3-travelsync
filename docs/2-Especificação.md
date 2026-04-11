@@ -7,21 +7,27 @@ Esses elementos ajudam a entender as necessidades dos usuários e servem como ba
 ## Personas
 
 Persona 1 – Eduardo
+
 Eduardo tem 29 anos, é empreendedor digital e trabalha de forma remota. Ele gosta de viajar com frequência, mas precisa de locais que ofereçam boa infraestrutura, especialmente internet de qualidade e espaços confortáveis para trabalhar. Valoriza praticidade, organização e informações confiáveis. Seu objetivo é conseguir conciliar trabalho e lazer durante suas viagens, mantendo produtividade sem abrir mão de conhecer novos lugares.
 
 Persona 2 – Beatriz
+
 Beatriz tem 35 anos, é casada e possui filhos. Ela costuma planejar viagens em família e busca locais que agradem tanto adultos quanto crianças. Enfrenta dificuldades na organização das viagens e na escolha de destinos que atendam a todos. Seu objetivo é proporcionar momentos agradáveis para sua família com segurança e praticidade.
 
 Persona 3 – Helena
+
 Helena tem 22 anos, é fisioterapeuta e gosta de conhecer novos lugares e pessoas. Possui o desejo de ser bem-sucedida e viajar pelo mundo. Durante suas viagens, busca conforto, segurança e praticidade, evitando situações problemáticas relacionadas à falta de infraestrutura nos destinos. Seu principal objetivo é facilitar o planejamento e garantir uma experiência de viagem tranquila e organizada por meio de uma plataforma digital.
 
 Persona 4 – Carlos
+
 Carlos tem 27 anos, é programador e aprecia visitar museus, geralmente viajando com sua namorada. Ele busca locais que ofereçam boa conexão com a internet, de modo que consiga conciliar lazer e trabalho. Seu objetivo é encontrar museus e destinos confiáveis, permitindo que aproveite novas experiências sem se desconectar de suas responsabilidades profissionais.
 
 Persona 5 – Neiva
+
 Neiva tem 63 anos, é aposentada e costuma viajar com seu marido. Prefere destinos turísticos mais calmos e que atendam às suas necessidades físicas. Possui certa dificuldade com o uso de tecnologias digitais, o que faz com que busque plataformas simples e de fácil utilização. Seu objetivo é organizar viagens de forma prática, segura e econômica, garantindo momentos agradáveis ao lado de seu companheiro.
 
 Persona 6 – Heitor
+
 Heitor tem 23 anos e possui deficiência auditiva. Ele gosta de viajar e deseja aproveitar os destinos turísticos sem enfrentar barreiras relacionadas à falta de acessibilidade. Busca locais que ofereçam estrutura adequada e comunicação inclusiva. Seu objetivo é sentir-se acolhido e respeitado, podendo vivenciar experiências completas e acessíveis durante suas viagens.
 
 
