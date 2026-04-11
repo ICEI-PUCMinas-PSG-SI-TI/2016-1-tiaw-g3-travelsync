@@ -1,5 +1,5 @@
 # Informações do Projeto
-`TÍTULO DO PROJETO`  
+`TravelSync`  
 
 Trabalho Interdisciplinar - Aplicacões Web
 
