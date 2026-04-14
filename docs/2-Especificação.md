@@ -3,6 +3,10 @@
 Esta seção apresenta as principais definições do sistema, descrevendo suas funcionalidades e características. Para isso, foram utilizadas técnicas como criação de personas, histórias de usuário e levantamento de requisitos.
 
 Esses elementos ajudam a entender as necessidades dos usuários e servem como base para o desenvolvimento da plataforma.
+## Matriz CSD
+[imagem matriz csd](docs\images\WhatsApp Image 2026-04-14 at 19.33.38.jpeg)
+## Mapa de stakeholders
+[imagem matriz de stakeholders](docs\images\WhatsApp Image 2026-04-14 at 19.33.46.jpeg)
 ## Contexto
 O Brasil tem os patrimônios naturais e a biodiversidade mais ricos do planeta e isso não é novidade. Mas não estamos conseguindo vender o nosso potencial turístico para o restante do mundo devido às nossas deficiências em segurança. 
 No ranking geral, o país fica na 27ª posição, o que representa uma pequena melhora com relação a anos anteriores, mas ainda muito longe do ideal, diante do nosso enorme potencial. 
@@ -110,7 +114,11 @@ Heitor tem 23 anos e possui deficiência auditiva. Ele gosta de viajar e deseja 
 | Heitor     | Avaliar acessibilidade dos locais       | Ajudar outros usuários   |
 | Heitor     | Participar de grupos                    | Se sentir incluído       |
 
-
+## Proposta de valor 
+[Proposta de valor1](docs\images\WhatsApp Image 2026-04-14 at 19.38.21.jpeg)
+[proposta de valor2](docs\images\WhatsApp Image 2026-04-14 at 19.38.33.jpeg)
+[Proposta de valor3](docs\images\WhatsApp Image 2026-04-14 at 19.38.44.jpeg)
+[Prosposta de valor 4](docs\images\WhatsApp Image 2026-04-14 at 19.38.54.jpeg)
 
 ## Requisitos
 
