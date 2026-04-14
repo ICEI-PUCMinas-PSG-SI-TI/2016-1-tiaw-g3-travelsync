@@ -141,3 +141,9 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 | 04 | O sistema não utilizará tecnologias muito complexas devido ao prazo |
 
 
+## Fluxo de Usuário
+[wireframe-travelsync]("C:\Users\NaClara\Downloads\wireframe-travelsync.png")
+
+
+
+
