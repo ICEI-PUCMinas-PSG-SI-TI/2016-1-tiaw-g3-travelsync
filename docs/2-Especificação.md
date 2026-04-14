@@ -3,6 +3,28 @@
 Esta seção apresenta as principais definições do sistema, descrevendo suas funcionalidades e características. Para isso, foram utilizadas técnicas como criação de personas, histórias de usuário e levantamento de requisitos.
 
 Esses elementos ajudam a entender as necessidades dos usuários e servem como base para o desenvolvimento da plataforma.
+## Contexto
+O Brasil tem os patrimônios naturais e a biodiversidade mais ricos do planeta e isso não é novidade. Mas não estamos conseguindo vender o nosso potencial turístico para o restante do mundo devido às nossas deficiências em segurança. 
+No ranking geral, o país fica na 27ª posição, o que representa uma pequena melhora com relação a anos anteriores, mas ainda muito longe do ideal, diante do nosso enorme potencial. 
+ 
+## Principais Problemas de Infraestrutura: 
+Mobilidade: Dificuldades de acesso a destinos, estradas em mau estado, malha ferroviária limitada e altos custos de passagens aéreas e falta de voos diretos para regiões turísticas. 
+Saneamento e Meio Ambiente: Destinos populares, incluindo áreas de ecoturismo, enfrentam falta de coleta e tratamento de esgoto, comprometendo a sustentabilidade e a atratividade. 
+Segurança: A criminalidade é citada como fator negativo, especialmente em áreas urbanas turísticas. 
+Hospedagem: O setor reclama da necessidade de maior oferta de quartos e linhas de financiamento adequadas, com situações mais complexas nas regiões Sul e Sudeste. 
+ 
+ 
+## Mapeamento do Problema 
+A partir das dores identificadas nas personas de Beatriz, Eduardo, Helena, Carlos, Neiva e Heitor, o problema pode ser dividido em 3 partes: 
+ Fragmentação e Falta de Confiança 
+•Problema: Usuários perdem muito tempo saltando de site em site sem saber se as informações são reais ou atualizadas. 
+•Impacto: Ansiedade e medo de cair em golpes ou reservas que não correspondem às fotos (principalmente para Beatriz e Helena). 
+Inexistência de Filtros de Acessibilidade Real 
+• Problema: Falta de detalhes técnicos para nichos. O Heitor (deficiente auditivo) e a Neiva (idosa) sofrem com locais que dizem ser "abertos ao público", mas não possuem infraestrutura inclusiva ou atendimento preparado. 
+• Impacto: Exclusão social e insegurança física/comunicativa durante a viagem. 
+Descompasso entre Perfil e Sugestão 
+• Problema: Algoritmos de viagem comuns sugerem "o que é popular" e não o que se encaixa no estilo de vida. O Carlos quer museus com Wi-Fi para trabalhar; o Eduardo quer locais animados para solteiros com preço baixo. 
+• Impacto: Frustração e sensação de dinheiro mal gasto
 
 ## Personas
 
@@ -142,11 +164,11 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 
 ## Fluxo de Usuário
-[fluxo de usuario-travelsync]("C:\Users\NaClara\Downloads\wireframe-travelsync.png")
+[fluxo de usuario-travelsync] 
 
 
 ## Wireframe
-[wireframe-travelsync]("C:\Users\NaClara\Downloads\wireframe-travelsync.png")
+[wireframe-travelsync]
 
 
 ## Protótipo Interativo

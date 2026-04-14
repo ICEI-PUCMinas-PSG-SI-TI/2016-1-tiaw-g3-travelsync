@@ -58,6 +58,112 @@ Neiva tem 63 anos, é aposentada e costuma viajar com seu marido. Prefere destin
 Persona 6 – Heitor
 
 Heitor tem 23 anos e possui deficiência auditiva. Ele gosta de viajar e deseja aproveitar os destinos turísticos sem enfrentar barreiras relacionadas à falta de acessibilidade. Busca locais que ofereçam estrutura adequada e comunicação inclusiva. Seu objetivo é sentir-se acolhido e respeitado, podendo vivenciar experiências completas e acessíveis durante suas viagens.
+## Histórias de Usuários
+
+| EU COMO... | QUERO/PRECISO...                     | PARA...                     |
+| ---------- | ------------------------------------ | --------------------------- |
+| Eduardo    | Encontrar locais com boa internet    | Trabalhar remotamente       |
+| Eduardo    | Encontrar espaços confortáveis       | Manter produtividade        |
+| Eduardo    | Ver avaliações sobre infraestrutura  | Escolher locais adequados   |
+| Eduardo    | Planejar viagens com praticidade     | Economizar tempo            |
+| Eduardo    | Utilizar mapa interativo             | Encontrar locais próximos   |
+| Eduardo    | Organizar roteiros                   | Equilibrar trabalho e lazer |
+| Eduardo    | Ver recomendações de outros usuários | Tomar melhores decisões     |
+| Eduardo    | Participar de equipes de viagem      | Compartilhar experiências   |
+
+
+| EU COMO... | QUERO/PRECISO...                  | PARA...                   |
+| ---------- | --------------------------------- | ------------------------- |
+| Beatriz    | Planejar viagens em família       | Organizar melhor a viagem |
+| Beatriz    | Encontrar locais para crianças    | Agradar toda a família    |
+| Beatriz    | Ver avaliações de outros usuários | Tomar decisões seguras    |
+| Beatriz    | Criar roteiros                    | Facilitar o planejamento  |
+| Beatriz    | Economizar tempo                  | Reduzir esforço           |
+
+| EU COMO... | QUERO/PRECISO...                          | PARA...                      |
+| ---------- | ----------------------------------------- | ---------------------------- |
+| Helena     | Encontrar destinos seguros e estruturados | Ter uma viagem tranquila     |
+| Helena     | Ter informações claras sobre os locais    | Evitar imprevistos           |
+| Helena     | Planejar viagens com facilidade           | Reduzir ansiedade            |
+| Helena     | Usar mapa interativo                      | Localizar pontos importantes |
+| Helena     | Interagir com outros viajantes            | Fazer novas conexões         |
+
+
+| EU COMO... | QUERO/PRECISO...                  | PARA...                    |
+| ---------- | --------------------------------- | -------------------------- |
+| Carlos     | Encontrar locais com boa internet | Conciliar trabalho e lazer |
+| Carlos     | Ver informações confiáveis        | Evitar experiências ruins  |
+| Carlos     | Encontrar museus e eventos        | Aproveitar o passeio       |
+| Carlos     | Avaliar locais visitados          | Compartilhar experiências  |
+| Carlos     | Acessar links oficiais            | Ter informações seguras    |
+
+| EU COMO... | QUERO/PRECISO...                | PARA...                          |
+| ---------- | ------------------------------- | -------------------------------- |
+| Neiva      | Encontrar destinos tranquilos   | Viajar com conforto              |
+| Neiva      | Utilizar um site simples        | Evitar dificuldades tecnológicas |
+| Neiva      | Ver informações claras          | Entender melhor os locais        |
+| Neiva      | Planejar viagens com facilidade | Organizar o passeio              |
+| Neiva      | Garantir segurança              | Viajar sem preocupações          |
+
+
+| EU COMO... | QUERO/PRECISO...                        | PARA...                  |
+| ---------- | --------------------------------------- | ------------------------ |
+| Heitor     | Encontrar locais acessíveis             | Não enfrentar barreiras  |
+| Heitor     | Ter informações inclusivas              | Se sentir respeitado     |
+| Heitor     | Saber se os locais têm suporte adequado | Planejar melhor a visita |
+| Heitor     | Avaliar acessibilidade dos locais       | Ajudar outros usuários   |
+| Heitor     | Participar de grupos                    | Se sentir incluído       |
+
+## Requisitos
+
+| ID     | Descrição do Requisito              | Prioridade |
+| ------ | ----------------------------------- | ---------- |
+| RF-001 | Permitir cadastro de usuários       | ALTA       |
+| RF-002 | Permitir login e logout             | ALTA       |
+| RF-003 | Permitir edição de perfil           | MÉDIA      |
+| RF-004 | Permitir criação de equipes         | ALTA       |
+| RF-005 | Permitir entrada em equipes         | ALTA       |
+| RF-006 | Permitir gerenciamento de membros   | MÉDIA      |
+| RF-007 | Exibir mapa interativo              | ALTA       |
+| RF-008 | Permitir visualização de destinos   | ALTA       |
+| RF-009 | Permitir criação de roteiros        | MÉDIA      |
+| RF-010 | Permitir envio de fotos             | ALTA       |
+| RF-011 | Permitir avaliação de locais        | ALTA       |
+| RF-012 | Permitir visualização de avaliações | ALTA       |
+| RF-013 | Permitir busca de destinos          | MÉDIA      |
+
+
+### Requisitos Funcionais
+
+|ID    | Descrição do Requisito  | Prioridade |
+|------|-----------------------------------------|----|
+|RF-001| Permitir que o usuário cadastre tarefas | ALTA | 
+|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
+
+### Requisitos não Funcionais
+
+| ID      | Descrição do Requisito                              | Prioridade |
+| ------- | --------------------------------------------------- | ---------- |
+| RNF-001 | O sistema deve ser responsivo (mobile e desktop)    | ALTA       |
+| RNF-002 | O sistema deve responder em até 3 segundos          | MÉDIA      |
+| RNF-003 | O sistema deve garantir segurança no login          | ALTA       |
+| RNF-004 | O sistema deve proteger dados dos usuários          | ALTA       |
+| RNF-005 | O sistema deve ser fácil de usar                    | ALTA       |
+| RNF-006 | O sistema deve funcionar nos principais navegadores | MÉDIA      |
+
+
+## Restrições
+
+O projeto está restrito pelos itens apresentados na tabela a seguir.
+
+| ID | Restrição                                                           |
+| -- | ------------------------------------------------------------------- |
+| 01 | O projeto deverá ser entregue até o final do semestre               |
+| 02 | O sistema será desenvolvido como aplicação web                      |
+| 03 | O desenvolvimento será realizado com recursos limitados             |
+| 04 | O sistema não utilizará tecnologias muito complexas devido ao prazo |
+
+
 3. [Projeto da Interface](./docs/3-Interface.md)
 4. [Gerenciamento do Projeto](./docs/4-Gerenciamento-Projeto.md)
 5. [Implementação](./docs/5-Implementação.md)
