@@ -24,7 +24,7 @@
 
 ## Wireframes
 
-![Exemplo de Wireframe](docs\images\WhatsApp Image 2026-04-14 at 18.55.40.jpeg)
+![Exemplo de Wireframe](./images/WhatsApp%20Image%202026-04-14%20at%2018.55.40.jpeg)
 
 ## Protótipo Interativo
 https://emblem-fleck-66847159.figma.site
