@@ -142,7 +142,16 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 
 ## Fluxo de Usuário
+[fluxo de usuario-travelsync]("C:\Users\NaClara\Downloads\wireframe-travelsync.png")
+
+
+## Wireframe
 [wireframe-travelsync]("C:\Users\NaClara\Downloads\wireframe-travelsync.png")
+
+
+## Protótipo Interativo
+https://emblem-fleck-66847159.figma.site
+
 
 
 
