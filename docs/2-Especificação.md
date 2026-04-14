@@ -1,58 +1,113 @@
 # Especificações Do Projeto
 
-<span style="color:red">Pré-requisitos: <a href="1-Contexto.md"> Documentação de Contexto</a></span>
+Esta seção apresenta as principais definições do sistema, descrevendo suas funcionalidades e características. Para isso, foram utilizadas técnicas como criação de personas, histórias de usuário e levantamento de requisitos.
 
-> Apresente uma visão geral do que será abordado nesta parte do
-> documento, enumerando as técnicas e/ou ferramentas utilizadas para
-> realizar a especificações do projeto
+Esses elementos ajudam a entender as necessidades dos usuários e servem como base para o desenvolvimento da plataforma.
 
 ## Personas
 
-Pedro Paulo tem 26 anos, é arquiteto recém-formado e autônomo. Pensa em
-se desenvolver profissionalmente através de um mestrado fora do país,
-pois adora viajar, é solteiro e sempre quis fazer um intercâmbio. Está
-buscando uma agência que o ajude a encontrar universidades na Europa
-que aceitem alunos estrangeiros.
+Persona 1 – Eduardo
 
+Eduardo tem 29 anos, é empreendedor digital e trabalha de forma remota. Ele gosta de viajar com frequência, mas precisa de locais que ofereçam boa infraestrutura, especialmente internet de qualidade e espaços confortáveis para trabalhar. Valoriza praticidade, organização e informações confiáveis. Seu objetivo é conseguir conciliar trabalho e lazer durante suas viagens, mantendo produtividade sem abrir mão de conhecer novos lugares.
 
-> Enumere e detalhe as personas da sua solução. Para
-> tanto, baseie-se tanto nos documentos disponibilizados na disciplina
-> e/ou nos seguintes links:
->
-> **Links Úteis**:
-> - [Rock Content](https://rockcontent.com/blog/personas/)
-> - [Hotmart](https://blog.hotmart.com/pt-br/como-criar-persona-negocio/)
-> - [O que é persona?](https://resultadosdigitais.com.br/blog/persona-o-que-e/)
-> - [Persona x Público-alvo](https://flammo.com.br/blog/persona-e-publico-alvo-qual-a-diferenca/)
-> - [Mapa de Empatia](https://resultadosdigitais.com.br/blog/mapa-da-empatia/)
-> - [Mapa de Stalkeholders](https://www.racecomunicacao.com.br/blog/como-fazer-o-mapeamento-de-stakeholders/)
->
-> Lembre-se que você deve ser enumerar e descrever precisamente e
-> personalizada todos os clientes ideais que sua solução almeja.
+Persona 2 – Beatriz
+
+Beatriz tem 35 anos, é casada e possui filhos. Ela costuma planejar viagens em família e busca locais que agradem tanto adultos quanto crianças. Enfrenta dificuldades na organização das viagens e na escolha de destinos que atendam a todos. Seu objetivo é proporcionar momentos agradáveis para sua família com segurança e praticidade.
+
+Persona 3 – Helena
+
+Helena tem 22 anos, é fisioterapeuta e gosta de conhecer novos lugares e pessoas. Possui o desejo de ser bem-sucedida e viajar pelo mundo. Durante suas viagens, busca conforto, segurança e praticidade, evitando situações problemáticas relacionadas à falta de infraestrutura nos destinos. Seu principal objetivo é facilitar o planejamento e garantir uma experiência de viagem tranquila e organizada por meio de uma plataforma digital.
+
+Persona 4 – Carlos
+
+Carlos tem 27 anos, é programador e aprecia visitar museus, geralmente viajando com sua namorada. Ele busca locais que ofereçam boa conexão com a internet, de modo que consiga conciliar lazer e trabalho. Seu objetivo é encontrar museus e destinos confiáveis, permitindo que aproveite novas experiências sem se desconectar de suas responsabilidades profissionais.
+
+Persona 5 – Neiva
+
+Neiva tem 63 anos, é aposentada e costuma viajar com seu marido. Prefere destinos turísticos mais calmos e que atendam às suas necessidades físicas. Possui certa dificuldade com o uso de tecnologias digitais, o que faz com que busque plataformas simples e de fácil utilização. Seu objetivo é organizar viagens de forma prática, segura e econômica, garantindo momentos agradáveis ao lado de seu companheiro.
+
+Persona 6 – Heitor
+
+Heitor tem 23 anos e possui deficiência auditiva. Ele gosta de viajar e deseja aproveitar os destinos turísticos sem enfrentar barreiras relacionadas à falta de acessibilidade. Busca locais que ofereçam estrutura adequada e comunicação inclusiva. Seu objetivo é sentir-se acolhido e respeitado, podendo vivenciar experiências completas e acessíveis durante suas viagens.
+
 
 ## Histórias de Usuários
 
-Com base na análise das personas forma identificadas as seguintes histórias de usuários:
+| EU COMO... | QUERO/PRECISO...                     | PARA...                     |
+| ---------- | ------------------------------------ | --------------------------- |
+| Eduardo    | Encontrar locais com boa internet    | Trabalhar remotamente       |
+| Eduardo    | Encontrar espaços confortáveis       | Manter produtividade        |
+| Eduardo    | Ver avaliações sobre infraestrutura  | Escolher locais adequados   |
+| Eduardo    | Planejar viagens com praticidade     | Economizar tempo            |
+| Eduardo    | Utilizar mapa interativo             | Encontrar locais próximos   |
+| Eduardo    | Organizar roteiros                   | Equilibrar trabalho e lazer |
+| Eduardo    | Ver recomendações de outros usuários | Tomar melhores decisões     |
+| Eduardo    | Participar de equipes de viagem      | Compartilhar experiências   |
 
-|EU COMO... `PERSONA`| QUERO/PRECISO ... `FUNCIONALIDADE` |PARA ... `MOTIVO/VALOR`                 |
-|--------------------|------------------------------------|----------------------------------------|
-|Usuário do sistema  | Registrar minhas tarefas           | Não esquecer de fazê-las               |
-|Administrador       | Alterar permissões                 | Permitir que possam administrar contas |
 
-> Apresente aqui as histórias de usuário que são relevantes para o
-> projeto de sua solução. As Histórias de Usuário consistem em uma
-> ferramenta poderosa para a compreensão e elicitação dos requisitos
-> funcionais e não funcionais da sua aplicação. Se possível, agrupe as
-> histórias de usuário por contexto, para facilitar consultas
-> recorrentes à essa parte do documento.
->
-> **Links Úteis**:
-> - [Histórias de usuários com exemplos e template](https://www.atlassian.com/br/agile/project-management/user-stories)
-> - [Como escrever boas histórias de usuário (User Stories)](https://medium.com/vertice/como-escrever-boas-users-stories-hist%C3%B3rias-de-usu%C3%A1rios-b29c75043fac)
+| EU COMO... | QUERO/PRECISO...                  | PARA...                   |
+| ---------- | --------------------------------- | ------------------------- |
+| Beatriz    | Planejar viagens em família       | Organizar melhor a viagem |
+| Beatriz    | Encontrar locais para crianças    | Agradar toda a família    |
+| Beatriz    | Ver avaliações de outros usuários | Tomar decisões seguras    |
+| Beatriz    | Criar roteiros                    | Facilitar o planejamento  |
+| Beatriz    | Economizar tempo                  | Reduzir esforço           |
+
+
+| EU COMO... | QUERO/PRECISO...                          | PARA...                      |
+| ---------- | ----------------------------------------- | ---------------------------- |
+| Helena     | Encontrar destinos seguros e estruturados | Ter uma viagem tranquila     |
+| Helena     | Ter informações claras sobre os locais    | Evitar imprevistos           |
+| Helena     | Planejar viagens com facilidade           | Reduzir ansiedade            |
+| Helena     | Usar mapa interativo                      | Localizar pontos importantes |
+| Helena     | Interagir com outros viajantes            | Fazer novas conexões         |
+
+
+| EU COMO... | QUERO/PRECISO...                  | PARA...                    |
+| ---------- | --------------------------------- | -------------------------- |
+| Carlos     | Encontrar locais com boa internet | Conciliar trabalho e lazer |
+| Carlos     | Ver informações confiáveis        | Evitar experiências ruins  |
+| Carlos     | Encontrar museus e eventos        | Aproveitar o passeio       |
+| Carlos     | Avaliar locais visitados          | Compartilhar experiências  |
+| Carlos     | Acessar links oficiais            | Ter informações seguras    |
+
+| EU COMO... | QUERO/PRECISO...                | PARA...                          |
+| ---------- | ------------------------------- | -------------------------------- |
+| Neiva      | Encontrar destinos tranquilos   | Viajar com conforto              |
+| Neiva      | Utilizar um site simples        | Evitar dificuldades tecnológicas |
+| Neiva      | Ver informações claras          | Entender melhor os locais        |
+| Neiva      | Planejar viagens com facilidade | Organizar o passeio              |
+| Neiva      | Garantir segurança              | Viajar sem preocupações          |
+
+
+| EU COMO... | QUERO/PRECISO...                        | PARA...                  |
+| ---------- | --------------------------------------- | ------------------------ |
+| Heitor     | Encontrar locais acessíveis             | Não enfrentar barreiras  |
+| Heitor     | Ter informações inclusivas              | Se sentir respeitado     |
+| Heitor     | Saber se os locais têm suporte adequado | Planejar melhor a visita |
+| Heitor     | Avaliar acessibilidade dos locais       | Ajudar outros usuários   |
+| Heitor     | Participar de grupos                    | Se sentir incluído       |
+
+
 
 ## Requisitos
 
-As tabelas que se seguem apresentam os requisitos funcionais e não funcionais que detalham o escopo do projeto.
+| ID     | Descrição do Requisito              | Prioridade |
+| ------ | ----------------------------------- | ---------- |
+| RF-001 | Permitir cadastro de usuários       | ALTA       |
+| RF-002 | Permitir login e logout             | ALTA       |
+| RF-003 | Permitir edição de perfil           | MÉDIA      |
+| RF-004 | Permitir criação de equipes         | ALTA       |
+| RF-005 | Permitir entrada em equipes         | ALTA       |
+| RF-006 | Permitir gerenciamento de membros   | MÉDIA      |
+| RF-007 | Exibir mapa interativo              | ALTA       |
+| RF-008 | Permitir visualização de destinos   | ALTA       |
+| RF-009 | Permitir criação de roteiros        | MÉDIA      |
+| RF-010 | Permitir envio de fotos             | ALTA       |
+| RF-011 | Permitir avaliação de locais        | ALTA       |
+| RF-012 | Permitir visualização de avaliações | ALTA       |
+| RF-013 | Permitir busca de destinos          | MÉDIA      |
+
 
 ### Requisitos Funcionais
 
@@ -64,42 +119,40 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 ### Requisitos não Funcionais
 
-|ID     | Descrição do Requisito  |Prioridade |
-|-------|-------------------------|----|
-|RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel | MÉDIA | 
-|RNF-002| Deve processar requisições do usuário em no máximo 3s |  BAIXA | 
+| ID      | Descrição do Requisito                              | Prioridade |
+| ------- | --------------------------------------------------- | ---------- |
+| RNF-001 | O sistema deve ser responsivo (mobile e desktop)    | ALTA       |
+| RNF-002 | O sistema deve responder em até 3 segundos          | MÉDIA      |
+| RNF-003 | O sistema deve garantir segurança no login          | ALTA       |
+| RNF-004 | O sistema deve proteger dados dos usuários          | ALTA       |
+| RNF-005 | O sistema deve ser fácil de usar                    | ALTA       |
+| RNF-006 | O sistema deve funcionar nos principais navegadores | MÉDIA      |
 
-> Com base nas Histórias de Usuário, enumere os requisitos da sua
-> solução. Classifique esses requisitos em dois grupos:
->
-> - [Requisitos Funcionais
->   (RF)](https://pt.wikipedia.org/wiki/Requisito_funcional):
->   correspondem a uma funcionalidade que deve estar presente na
->   plataforma (ex: cadastro de usuário).
->
-> - [Requisitos Não Funcionais
->   (RNF)](https://pt.wikipedia.org/wiki/Requisito_n%C3%A3o_funcional):
->   correspondem a uma característica técnica, seja de usabilidade,
->   desempenho, confiabilidade, segurança ou outro (ex: suporte a
->   dispositivos iOS e Android).
->
-> Lembre-se que cada requisito deve corresponder à uma e somente uma
-> característica alvo da sua solução. Além disso, certifique-se de que
-> todos os aspectos capturados nas Histórias de Usuário foram cobertos.
 
 ## Restrições
 
 O projeto está restrito pelos itens apresentados na tabela a seguir.
 
-|ID| Restrição                                             |
-|--|-------------------------------------------------------|
-|01| O projeto deverá ser entregue até o final do semestre |
-|02| Não pode ser desenvolvido um módulo de backend        |
+| ID | Restrição                                                           |
+| -- | ------------------------------------------------------------------- |
+| 01 | O projeto deverá ser entregue até o final do semestre               |
+| 02 | O sistema será desenvolvido como aplicação web                      |
+| 03 | O desenvolvimento será realizado com recursos limitados             |
+| 04 | O sistema não utilizará tecnologias muito complexas devido ao prazo |
 
 
-> Enumere as restrições à sua solução. Lembre-se de que as restrições
-> geralmente limitam a solução candidata.
-> 
-> **Links Úteis**:
-> - [O que são Requisitos Funcionais e Requisitos Não Funcionais?](https://codificar.com.br/requisitos-funcionais-nao-funcionais/)
-> - [O que são requisitos funcionais e requisitos não funcionais?](https://analisederequisitos.com.br/requisitos-funcionais-e-requisitos-nao-funcionais-o-que-sao/)
+## Fluxo de Usuário
+[fluxo de usuario-travelsync]("C:\Users\NaClara\Downloads\wireframe-travelsync.png")
+
+
+## Wireframe
+[wireframe-travelsync]("C:\Users\NaClara\Downloads\wireframe-travelsync.png")
+
+
+## Protótipo Interativo
+https://emblem-fleck-66847159.figma.site
+
+
+
+
+
