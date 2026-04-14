@@ -172,11 +172,11 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 
 ## Fluxo de Usuário
-[fluxo de usuario-travelsync] 
+[fluxo de usuario-travelsync](docs\images\WhatsApp Image 2026-04-14 at 18.55.40 (1).jpeg) 
 
 
 ## Wireframe
-[wireframe-travelsync]
+[wireframe-travelsync](docs\images\WhatsApp Image 2026-04-14 at 18.55.40.jpeg)
 
 
 ## Protótipo Interativo

@@ -198,7 +198,16 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 3. [Projeto da Interface](./docs/3-Interface.md)
 
+## User Flow
 
+[User flow](docs\images\WhatsApp Image 2026-04-14 at 18.55.40 (1).jpeg)
+
+## Wireframes
+
+![Exemplo de Wireframe](docs\images\WhatsApp Image 2026-04-14 at 18.55.40.jpeg)
+
+## Protótipo Interativo
+https://emblem-fleck-66847159.figma.site
 
 4. [Gerenciamento do Projeto](./docs/4-Gerenciamento-Projeto.md)
 ## Quadro de tarefas
