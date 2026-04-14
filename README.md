@@ -34,6 +34,32 @@ Os membros do grupo são:
 > O público algo se divide em duas partes. Primeiro nos usuários viajantes que precisam de uma plataforma que ache locais baseados nas necessidades individuais deles ou possam dar feedbacks sobre algum local que já visitaram para ajudar outros usuários nessa decisão. Segundo são os donos dos locais, que por meio do site podem promover seus eventos e terem um contato mais direto com os possíveis clientes listando o que o local pode oferecer a eles e também ouvir suas reclamações e angústias.
 >
 2. [Especificações do Projeto](./docs/2-Especificação.md)
+## Matriz CSD
+[imagem matriz csd](docs\images\WhatsApp Image 2026-04-14 at 19.33.38.jpeg)
+## Mapa de stakeholders
+[imagem matriz de stakeholders](docs\images\WhatsApp Image 2026-04-14 at 19.33.46.jpeg)
+## Contexto
+O Brasil tem os patrimônios naturais e a biodiversidade mais ricos do planeta e isso não é novidade. Mas não estamos conseguindo vender o nosso potencial turístico para o restante do mundo devido às nossas deficiências em segurança. 
+No ranking geral, o país fica na 27ª posição, o que representa uma pequena melhora com relação a anos anteriores, mas ainda muito longe do ideal, diante do nosso enorme potencial. 
+ 
+## Principais Problemas de Infraestrutura: 
+Mobilidade: Dificuldades de acesso a destinos, estradas em mau estado, malha ferroviária limitada e altos custos de passagens aéreas e falta de voos diretos para regiões turísticas. 
+Saneamento e Meio Ambiente: Destinos populares, incluindo áreas de ecoturismo, enfrentam falta de coleta e tratamento de esgoto, comprometendo a sustentabilidade e a atratividade. 
+Segurança: A criminalidade é citada como fator negativo, especialmente em áreas urbanas turísticas. 
+Hospedagem: O setor reclama da necessidade de maior oferta de quartos e linhas de financiamento adequadas, com situações mais complexas nas regiões Sul e Sudeste. 
+
+## Mapeamento do Problema 
+A partir das dores identificadas nas personas de Beatriz, Eduardo, Helena, Carlos, Neiva e Heitor, o problema pode ser dividido em 3 partes: 
+ Fragmentação e Falta de Confiança 
+•Problema: Usuários perdem muito tempo saltando de site em site sem saber se as informações são reais ou atualizadas. 
+•Impacto: Ansiedade e medo de cair em golpes ou reservas que não correspondem às fotos (principalmente para Beatriz e Helena). 
+Inexistência de Filtros de Acessibilidade Real 
+• Problema: Falta de detalhes técnicos para nichos. O Heitor (deficiente auditivo) e a Neiva (idosa) sofrem com locais que dizem ser "abertos ao público", mas não possuem infraestrutura inclusiva ou atendimento preparado. 
+• Impacto: Exclusão social e insegurança física/comunicativa durante a viagem. 
+Descompasso entre Perfil e Sugestão 
+• Problema: Algoritmos de viagem comuns sugerem "o que é popular" e não o que se encaixa no estilo de vida. O Carlos quer museus com Wi-Fi para trabalhar; o Eduardo quer locais animados para solteiros com preço baixo. 
+• Impacto: Frustração e sensação de dinheiro mal gasto
+
 ## Personas
 
 Persona 1 – Eduardo
@@ -114,6 +140,12 @@ Heitor tem 23 anos e possui deficiência auditiva. Ele gosta de viajar e deseja 
 | Heitor     | Avaliar acessibilidade dos locais       | Ajudar outros usuários   |
 | Heitor     | Participar de grupos                    | Se sentir incluído       |
 
+## Proposta de valor 
+[Proposta de valor1](docs\images\WhatsApp Image 2026-04-14 at 19.38.21.jpeg)
+[proposta de valor2](docs\images\WhatsApp Image 2026-04-14 at 19.38.33.jpeg)
+[Proposta de valor3](docs\images\WhatsApp Image 2026-04-14 at 19.38.44.jpeg)
+[Prosposta de valor 4](docs\images\WhatsApp Image 2026-04-14 at 19.38.54.jpeg)
+
 ## Requisitos
 
 | ID     | Descrição do Requisito              | Prioridade |
@@ -165,7 +197,36 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 
 3. [Projeto da Interface](./docs/3-Interface.md)
+
+
+
 4. [Gerenciamento do Projeto](./docs/4-Gerenciamento-Projeto.md)
+## Quadro de tarefas
+
+> Apresente a divisão de tarefas entre os membros do grupo e o acompanhamento da execução, conforme exemplo abaixo.
+
+Atualizado em: 14/04/2026
+
+| Responsável      | Tarefa/Requisito                  | Iniciado em    | Prazo      | Status | Terminado em |
+| :----            |    :----                          |      :----:    | :----:     | :----: | :----:       |
+| Ana Clara        | Product discovery                 | 09/04/2026     | 14/04/2026 | ✔️    | 14/04/2026   |
+| Isabela Loscha   | Wireframe e metodologia           | 09/04/2026     | 14/04/2026 | ✔️    | 14/04/2026   |
+| Izadora Santiago | Protótipo interativo e wireframe  | 09/04/2026     | 14/04/2026 | ✔️    | 14/04/2026   |
+| Pedro Palumbo    | Contexto                          | 09/04/2026     | 14/04/2026 | ✔️    | 14/04/2026   |
+| Sara Dias        | Product design                    | 09/04/2026     | 14/04/2026 | ✔️    | 12/04/2026   |
+
+## Ferramentas
+
+> Liste quais ferramentas foram empregadas no desenvolvimento do  projeto, justificando a escolha de cada uma delas. Use o formato abaixo como exemplo.
+
+As ferramentas empregadas no projeto são:
+
+- Visual Studio Code 
+- Github 
+- Figma 
+- Miro 
+- Canvas 
+- Canva
 5. [Implementação](./docs/5-Implementação.md)
 6. [Referências](./docs/8-Referências.md)
 7. [Apresentação do trabalho](./docs/apresentacao) 
