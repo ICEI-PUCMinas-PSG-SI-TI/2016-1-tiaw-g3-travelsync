@@ -22,14 +22,15 @@
 
 > Apresente a divisão de tarefas entre os membros do grupo e o acompanhamento da execução, conforme exemplo abaixo.
 
-Atualizado em: 09/01/2005
+Atualizado em: 14/04/2026
 
-| Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
-| :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
-| AlunaX        | Home-Page        | 01/01/2005     | 07/01/2005 | ✔️    | 05/01/2005      |
-| AlunaZ        | CSS Unificado    | 03/01/2005     | 10/01/2005 | 📝    |                 |
-| AlunoY        | Página de login  | 01/01/2005     | 07/01/2005 | ⌛     |                 |
-| AlunoK        | Script de login  |                | 12/01/2005 | ❌    |       |
+| Responsável      | Tarefa/Requisito                  | Iniciado em    | Prazo      | Status | Terminado em |
+| :----            |    :----                          |      :----:    | :----:     | :----: | :----:       |
+| Ana Clara        | Product discovery                 | 09/04/2026     | 14/04/2026 | ✔️    | 14/04/2026   |
+| Isabela Loscha   | Wireframe e metodologia           | 09/04/2026     | 14/04/2026 | ✔️    | 14/04/2026   |
+| Izadora Santiago | Protótipo interativo e wireframe  | 09/04/2026     | 14/04/2026 | ✔️    | 14/04/2026   |
+| Pedro Palumbo    | Contexto                          | 09/04/2026     | 14/04/2026 | ✔️    | 14/04/2026   |
+| Sara Dias        | Product design                    | 09/04/2026     | 14/04/2026 | ✔️    | 12/04/2026   |
 
 Legenda:
 - ✔️: terminado
@@ -43,10 +44,12 @@ Legenda:
 
 As ferramentas empregadas no projeto são:
 
-- Editor de código.
-- Ferramentas de diagramação.
-- Frameworks 
-- Outras ferramentas externas
+- Visual Studio Code 
+- Github 
+- Figma 
+- Miro 
+- Canvas 
+- Canva
 
 
 ## Links Úteis
