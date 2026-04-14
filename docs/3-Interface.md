@@ -10,7 +10,7 @@
 
 ## User Flow
 
-![User flow](./images/WhatsApp Image 2026-04-14 at 18.55.40 (1).jpeg)
+![User flow](./images/WhatsApp%20Image%202026-04-14%20at%2018.55.40%20(1).jpeg)
 
 > Fluxo de usuário (User Flow) é uma técnica que permite ao desenvolvedor
 > mapear todo fluxo de telas do site ou app. Essa técnica funciona
