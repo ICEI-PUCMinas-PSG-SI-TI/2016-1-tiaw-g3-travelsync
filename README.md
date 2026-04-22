@@ -10,11 +10,12 @@ Trabalho Interdisciplinar - Aplicacões Web
 ## Participantes
 
 Os membros do grupo são: 
-- Pedro Augusto Noronha Palumbo
+- Pedro Augusto Noronha Palumbo 
 - Izadora Santiago Fernandes
 - Ana Clara de Castro Oliveira
 - Isabela Loscha Rajão Silva
 - Sara Assis Figueiredo Dias
+
 
 > Inclua a lista dos membros da equipe com seus nomes completos.
 
