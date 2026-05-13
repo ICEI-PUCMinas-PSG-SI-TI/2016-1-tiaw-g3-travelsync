@@ -1,0 +1,23 @@
+body{
+    background-color: black;
+}
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    background-color: black;
+}
+#logo {
+    width: 15vw;
+    max-width: 220px;
+    min-width: 120px;
+    height: auto;
+}
+.menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    list-style: none;
+}
