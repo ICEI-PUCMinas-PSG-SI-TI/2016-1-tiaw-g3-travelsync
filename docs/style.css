@@ -27,4 +27,12 @@ nav a{
 }
 .lugares{
     color: white;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.foto_local{
+width: 300px;
+height: 150px;
 }
