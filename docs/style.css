@@ -14,10 +14,14 @@ header {
     min-width: 120px;
     height: auto;
 }
-.menu{
+.menu {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 30px;
     list-style: none;
+}
+nav a{
+    color: white;
+    text-decoration: none;
 }
