@@ -1,0 +1,15 @@
+{
+  "comentarios": [
+    {
+      "nome": "Maria",
+      "texto": "Amei essa viagem! Recomendo muito o Travel Sync!",
+      "id": "xqFLTAKxiUs"
+    },
+    {
+      "nome": "José",
+      "texto": "Muito bom!",
+      "id": "Nb5n0uCNr0Y"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
