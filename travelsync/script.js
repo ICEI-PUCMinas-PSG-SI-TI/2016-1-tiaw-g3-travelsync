@@ -1,6 +1,6 @@
 const api = "http://localhost:3000/comentarios";
 
-// Função para carregar comentários
+// Carregar comentários
 async function carregarComentarios() {
 
     let resposta = await fetch(api);
@@ -17,21 +17,104 @@ async function carregarComentarios() {
 
         novoComentario.classList.add("comentario");
 
+        let inicial =
+            comentario.nome.charAt(0).toUpperCase();
+
+        let respostasHTML = "";
+
+        if (comentario.respostas) {
+
+            comentario.respostas.forEach(resposta => {
+
+                respostasHTML += `
+                    <div class="resposta">
+                        ${resposta.texto}
+                    </div>
+                `;
+            });
+        }
+
         novoComentario.innerHTML = `
-            <strong>${comentario.nome}</strong>
-            <p>${comentario.texto}</p>
+
+            <div class="cabecalho">
+
+                <div class="usuario">
+
+                    <div class="avatar">
+                        ${inicial}
+                    </div>
+
+                    <strong>
+                        ${comentario.nome}
+                    </strong>
+
+                </div>
+
+                <span
+                    class="coracao ${comentario.favorito ? 'favoritado' : ''}"
+                    onclick="favoritar('${comentario.id}', ${comentario.favorito})">
+
+                    ♥
+
+                </span>
+
+            </div>
+
+            <p class="texto-comentario">
+                ${comentario.texto}
+            </p>
+
+            <button
+                class="btn-responder"
+                onclick="mostrarResposta('${comentario.id}')">
+
+                Responder
+
+            </button>
+
+            <div
+                id="resposta-${comentario.id}"
+                style="display:none; margin-top:10px;">
+
+                <input
+                    type="text"
+                    id="texto-${comentario.id}"
+                    placeholder="Digite sua resposta">
+
+                <button
+                    onclick="enviarResposta('${comentario.id}')">
+
+                    Enviar
+
+                </button>
+
+            </div>
+
+            <div class="respostas">
+
+                ${respostasHTML}
+
+            </div>
+
         `;
 
         lista.appendChild(novoComentario);
+
     });
 }
 
-// Função para adicionar comentário
-async function adicionarComentario() {
+// Adicionar comentário
+async function adicionarComentario(event) {
 
-    let nome = document.getElementById("nome").value;
+    if (event) {
+        event.preventDefault();
+    }
 
-    let comentario = document.getElementById("comentario").value;
+    let nome =
+        document.getElementById("nome").value;
+
+    let comentario =
+        document.getElementById("comentario").value;
 
     if (nome === "" || comentario === "") {
 
@@ -40,7 +123,6 @@ async function adicionarComentario() {
         return;
     }
 
-    // Envia para API
     await fetch(api, {
 
         method: "POST",
@@ -50,26 +132,120 @@ async function adicionarComentario() {
         },
 
         body: JSON.stringify({
+
             nome: nome,
-            texto: comentario
+
+            texto: comentario,
+
+            favorito: false,
+
+            respostas: []
+
         })
     });
 
-    // Mensagem
-    document.getElementById("mensagem").innerText =
+    let mensagem =
+        document.getElementById("mensagem");
+
+    mensagem.innerText =
         "Comentário enviado com sucesso!";
 
-    setTimeout(() => {
-        document.getElementById("mensagem").innerText = "";
-    }, 4000);
-
-    // Limpa campos
     document.getElementById("nome").value = "";
     document.getElementById("comentario").value = "";
 
-    // Atualiza lista
+    carregarComentarios();
+
+    setTimeout(() => {
+
+        mensagem.innerText = "";
+
+    }, 3000);
+}
+
+// Favoritar comentário
+async function favoritar(id, favoritoAtual) {
+
+    await fetch(`${api}/${id}`, {
+
+        method: "PATCH",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+
+            favorito: !favoritoAtual
+
+        })
+    });
+
     carregarComentarios();
 }
 
-// Carrega comentários ao abrir página
+// Mostrar campo de resposta
+function mostrarResposta(id) {
+
+    let campo =
+        document.getElementById(`resposta-${id}`);
+
+    if (campo.style.display === "none") {
+
+        campo.style.display = "block";
+
+    } else {
+
+        campo.style.display = "none";
+    }
+}
+
+// Enviar resposta
+async function enviarResposta(id) {
+
+    let texto =
+        document.getElementById(`texto-${id}`).value;
+
+    if (texto === "") {
+
+        alert("Digite uma resposta!");
+
+        return;
+    }
+
+    let resposta =
+        await fetch(`${api}/${id}`);
+
+    let comentario =
+        await resposta.json();
+
+    if (!comentario.respostas) {
+
+        comentario.respostas = [];
+    }
+
+    comentario.respostas.push({
+
+        texto: texto
+
+    });
+
+    await fetch(`${api}/${id}`, {
+
+        method: "PATCH",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+
+            respostas: comentario.respostas
+
+        })
+    });
+
+    carregarComentarios();
+}
+
+// Inicialização
 carregarComentarios();

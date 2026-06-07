@@ -1,30 +1,59 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>TravelSync</title>
-<link rel="icon" href="logo.jpeg" type="logo.jpeg">
+
+    <link rel="icon" href="logo.jpeg">
+
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
-<div class="container">
-    <h1>TravelSync</h1>
+    <div class="container">
 
-<input type="text"id="nome" placeholder="Seu nome">
-<textarea id="comentario" placeholder="Escreva seu comentário"></textarea>
-<button onclick="adicionarComentario()">
-    Enviar
-</button>
+        <div class="topo">
 
-<p id="mensagem"></p>
+            <h1>TravelSync</h1>
 
-<div id="listaComentarios">
-    <!--comentarios aq-->
-</div>
+        </div>
 
-</div>
-<script src="script.js"></script>
+        <div class="formulario">
+
+            <input
+                type="text"
+                id="nome"
+                placeholder="Seu nome">
+
+            <textarea
+                id="comentario"
+                placeholder="Compartilhe sua experiência de viagem..."></textarea>
+
+            <button
+                class="btn-escrever"
+                onclick="adicionarComentario(event)">
+
+                + Publicar Comentário
+
+            </button>
+
+        </div>
+
+        <p id="mensagem"></p>
+
+        <div id="listaComentarios"></div>
+
+    </div>
+
+    <script src="script.js"></script>
+
 </body>
+
 </html>
