@@ -1,4 +1,5 @@
 const searchInput = document.getElementById('searchInput');
+const searchSuggestions = document.getElementById('searchSuggestions');
 const btnSearch = document.getElementById('btnSearch');
 const dateFilter = document.getElementById('dateFilter');
 const cardsGrid = document.getElementById('cardsGrid');
@@ -18,6 +19,52 @@ function getCards() {
 
 function normalizeStr(str) {
   return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+function getSuggestions() {
+  return getCards().map(card => card.dataset.name);
+}
+
+function showSuggestions() {
+  const query = normalizeStr(searchInput.value.trim());
+
+  const suggestions = getCards().filter(card => {
+    const name = normalizeStr(card.dataset.name || '');
+    const city = normalizeStr(card.dataset.cidade || '');
+    const category = normalizeStr(card.dataset.categoria || '');
+
+    return !query || name.includes(query) || city.includes(query) || category.includes(query);
+  });
+
+  searchSuggestions.innerHTML = '';
+
+  suggestions.forEach(card => {
+    const name = card.dataset.name;
+    const city = card.dataset.cidade;
+    const category = card.dataset.categoria;
+    const img = card.querySelector('img').src;
+
+    const item = document.createElement('div');
+    item.classList.add('suggestion-card');
+
+    item.innerHTML = `
+      <img src="${img}" alt="${name}">
+      <div>
+        <h4>${name}</h4>
+        <p>${city}</p>
+        <span>${category}</span>
+      </div>
+    `;
+
+    item.addEventListener('click', () => {
+      searchInput.value = name;
+      searchSuggestions.classList.remove('open');
+      filterCards();
+    });
+
+    searchSuggestions.appendChild(item);
+  });
+
+  searchSuggestions.classList.toggle('open', suggestions.length > 0);
 }
 
 function filterCards() {
@@ -48,11 +95,21 @@ function filterCards() {
   noResults.style.display = visible === 0 ? 'block' : 'none';
 }
 
-searchInput.addEventListener('input', filterCards);
+searchInput.addEventListener('input', () => {
+  showSuggestions();
+  filterCards();
+});
 btnSearch.addEventListener('click', filterCards);
 
 searchInput.addEventListener('keydown', e => {
   if (e.key === 'Enter') filterCards();
+});
+searchInput.addEventListener('focus', showSuggestions);
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.search-box')) {
+    searchSuggestions.classList.remove('open');
+  }
 });
 
 dateFilter.addEventListener('change', () => {
