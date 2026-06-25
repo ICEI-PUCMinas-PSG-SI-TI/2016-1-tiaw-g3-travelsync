@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TravelSync</title>
+
+    <link rel="icon" href="logo.jpeg">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="topo">
+
+            <h1>TravelSync</h1>
+
+        </div>
+
+        <div class="formulario">
+
+            <input
+                type="text"
+                id="nome"
+                placeholder="Seu nome">
+
+            <textarea
+                id="comentario"
+                placeholder="Compartilhe sua experiência de viagem..."></textarea>
+
+            <button
+                class="btn-escrever"
+                onclick="adicionarComentario(event)">
+
+                + Publicar Comentário
+
+            </button>
+
+        </div>
+
+        <p id="mensagem"></p>
+
+        <div id="listaComentarios"></div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
