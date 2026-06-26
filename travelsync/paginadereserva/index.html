@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelSync</title>
+    <link rel="shortcut icon" href="imagens/favicontravelsync.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+          <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="imagens/logotravelsync.png" alt="logo" id="logo"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="pesquisa">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search"/>
+                <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+              </form>
+        </div>
+        <div class="menu">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Início</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Explorar destinos</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Categorias</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Destinos
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Mapa interativo</a></li>
+                    <li><a class="dropdown-item" href="#">Favoritos</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Sugestão dos locais</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Sobre</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Contato</a>
+                </li>
+              </ul>
+              </div>
+        </div>
+          </div>
+        </nav>
+    </header>
+<main class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-12">
+        <div id="destino" class="card mb-3"></div>
+        </div>
+          <section class="col-lg-7">
+               <form autocomplete="on" id="Reserva">
+            <fieldset>
+                <h3>Reserva</h3>
+                <div class="mb-3">
+                 <p>  <label for="idata">Data inicial:</label><input type="date" name="data" id="idata" required> <label for="idatafi">Data final:</label> <input type="date" name="datafi" id="idatafi" required>       <label for="ipessoa">Pessoas:</label> <input type="number" name="pessoa" id="ipessoa" min="0" max="40" step="1" value="0"></p>
+                 </div>
+                <p>  <label for="ino">Nome: </label> <input type="text" name="no" id="ino" required> </p>
+                <p>  <label for="iemail">E-mail: </label><input type="email" name="email" id="iemail" required></p>
+                <p>  <label for="idia">Dias:</label> <input type="number" name="dia" id="idia" min="0" max="40" step="1" value="0"> </p> 
+                <p>  <label for="iquartos">Quartos:</label> <input type="number" name="quarto" id="iquarto" min="0" max="5" step="1" value="0">     <label for="iquartos">Ingressos:</label> <input type="number" name="convite" id="iconvite" min="0" max="5" step="1" value="0"></p> 
+                <p>  <label for="iadultos">Adultos:</label> <input type="number" name="adulto" id="iadulto" min="0" max="30" step="1" value="0" required>    <label for="iquartos">Crianças:</label> <input type="number" name="crian" id="icrian" min="0" max="30" step="1" value="0" required></p>
+                <legend>Forma de pagamento</legend>
+                <input type="radio" name="pagamento" id="icredito" required value="C"><label for="icredito">Cartão de crédito</label><br>
+                <input type="radio" name="pagamento" id="idebito" value="D"><label for="idebito">Cartão de débito</label><br>
+                <input type="radio" name="pagamento" id="ipix" value="P"><label for="ipix">Pix</label><br>
+                <input type="radio" name="pagamento" id="idinheiro" value="Di"><label for="idinheiro">Dinheiro</label><br>
+                <input type="radio" name="pagamento" id="ioutros" value="O"><label for="ioutros">Outros</label><br>
+                 <br>
+          
+            </fieldset>
+            <input type="submit" value="Finalizar" id="fina">
+               </form>
+               <br>
+            </section>
+            <section class="col-lg-5">
+                <div class="card p-3">
+                    <h3>Dados da reserva:</h3>
+                    <p><strong>Nome:</strong> <span id="ReNome"></span></p>
+                    <p><strong>Email:</strong> <span id="ReEmail"></span></p>
+                    <p><strong>Adultos:</strong> <span id="ReAdulto"></span></p>
+                    <p><strong>Crianças:</strong> <span id="ReCrianca"></span></p>
+                    <p><strong>Quartos:</strong> <span id="ReQuarto"></span></p>
+                    <p><strong>Ingressos:</strong> <span id="ReIngresso"></span></p>
+                     <p><strong>Dias:</strong> <span id="ReDias"></span></p>
+                     <p><strong>Forma de pagamento:</strong> <span id="Repagamento"></span></p>
+                    <hr>
+                    <h5>Total: R$ <span id="ReTotal">0</span></h5>
+                </div>
+            </section>
+        <br>
+</main>
+</main>
+    <footer>
+    <img src="imagens/logotravelsync.png" alt="logo" style="width: 100px; ">
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="reserva.js"></script>
+</body>
+</html>

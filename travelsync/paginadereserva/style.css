@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+body{
+    background-color: rgb(226, 241, 254) !important;
+}
+#logo{
+    width: 150px;
+}
+.pesquisa{
+    width: 45%;
+}
+#Reserva{
+    font-size: 18px;
+    padding: 5px;
+}
+#destino img{
+    height: 300px;
+    object-fit: cover;
+}
+h1{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: 50px !important;
+    margin-left: 10%;
+    margin-top: 50px !important;
+    color: #363a6e !important;
+    font-weight: bold !important;
+}
+h2{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 19px !important;
+    margin-left: 10%;
+}
+footer{
+    margin-bottom: 0px !important;
+}
+#map{
+    width: 70%;
+    height: 500px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+#pesquisar{
+    margin: 30px !important;
+    width: 50%;
+}
+#botao{
+    margin-left: -20px;
+}
+#voltar{
+    margin-right: 20px;
+}
+#pontos{
+    width: 40% !important;
+    margin-left: 20%;
+    margin-bottom: 30px;
+}
+footer{
+    background-color: #4e538e;
+}
+h3{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: 50px !important;
+    margin-left: 10%;
+    margin-top: 50px !important;
+    color: #363a6e !important;
+    font-weight: bold !important;
+}
+#filtro{
+    margin-top: 00px;
+}
+#opcoes{
+    margin-bottom: 20px;
+}
