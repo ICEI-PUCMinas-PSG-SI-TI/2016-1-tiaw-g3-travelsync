@@ -1,0 +1,43 @@
+{
+  "comentarios": [
+    {
+      "nome": "Maria",
+      "texto": "Amei essa viagem! Recomendo muito o Travel Sync!",
+      "id": "xqFLTAKxiUs",
+      "favorito": false,
+      "respostas": []
+    },
+    {
+      "nome": "Júlia",
+      "texto": "Funcionários muito atenciosos, pretendo ir mais vezes. Uma das melhores viagens da minha vida!",
+      "id": "2-OTvCSPy_8",
+      "favortio": true,
+      "respostas": [
+        {
+          "texto": "Eu também! Com certeza vou viajar com eles novamente!"
+        }
+      ],
+      "favorito": false
+    },
+    {
+      "nome": "Ana",
+      "texto": "Amei a viagem. Tudo foi maravilhoso, os funcionários foram super educados, pude curtir a viagem sem preocupações, com certeza irei mais vezes! ",
+      "id": "VxNcvmiL0lM",
+      "favortio": true,
+      "respostas": [],
+      "favorito": true
+    },
+    {
+      "nome": "Tadeu",
+      "texto": "Muito boa a viagem!",
+      "favorito": true,
+      "respostas": [
+        {
+          "texto": "Eu também achei!"
+        }
+      ],
+      "id": "KR9eVhlLMVo"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

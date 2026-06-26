@@ -1,0 +1,60 @@
+{
+  "reserva": [
+    {
+      "nome": "isabela",
+      "email": "isabelaloscha8@gmail.com",
+      "adultos": "2",
+      "criancas": "2",
+      "quartos": "0",
+      "ingressos": "4",
+      "dias": "6",
+      "total": "6240.00",
+      "id": "G4IIPgqHoqo"
+    },
+    {
+      "nome": "isabela",
+      "email": "isabelaloscha8@gmail.com",
+      "adultos": "2",
+      "criancas": "2",
+      "quartos": "0",
+      "ingressos": "0",
+      "dias": "6",
+      "total": "6240.00",
+      "id": "w69TFnKz-xY"
+    },
+    {
+      "nome": "isabela",
+      "email": "isabelaloscha8@gmail.com",
+      "adultos": "2",
+      "criancas": "2",
+      "quartos": "0",
+      "ingressos": "4",
+      "dias": "6",
+      "total": "6240.00",
+      "id": "PF-KzxZgY_c"
+    },
+    {
+      "nome": "isabela",
+      "email": "isabelaloscha8@gmail.com",
+      "adultos": "1",
+      "criancas": "0",
+      "quartos": "0",
+      "ingressos": "1",
+      "dias": "7",
+      "total": "1855.00",
+      "id": "5PrA5uDyj0Y"
+    },
+    {
+      "nome": "isabela",
+      "email": "isabelaloscha8@gmail.com",
+      "adultos": "0",
+      "criancas": "0",
+      "quartos": "0",
+      "ingressos": "2",
+      "dias": "2",
+      "total": "0.00",
+      "id": "HgxYZloJVgA"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
