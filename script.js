@@ -132,6 +132,15 @@ function lerUsuarios() {
   return JSON.parse(localStorage.getItem("travelsync:usuarios") || "[]");
 }
 
+function normalizarEmail(email) {
+  return email.trim().toLowerCase();
+}
+
+function dadosAdmin(email, senha) {
+  const emailLimpo = normalizarEmail(email);
+  return (emailLimpo === "admin@gmail" || emailLimpo === "admin@gmail.com") && senha.trim() === "1234";
+}
+
 function salvarUsuarios(usuarios) {
   localStorage.setItem("travelsync:usuarios", JSON.stringify(usuarios));
 }
@@ -144,7 +153,8 @@ function atualizarUsuarioTopo() {
 function entrarUsuario(usuario) {
   usuarioAtual = {
     nome: usuario.nome,
-    email: usuario.email
+    email: usuario.email,
+    admin: Boolean(usuario.admin)
   };
   localStorage.setItem("travelsync:usuarioAtual", JSON.stringify(usuarioAtual));
   atualizarUsuarioTopo();
@@ -1102,9 +1112,48 @@ function mostrarFavoritos() {
   ligarCartoesDestino();
 }
 
-function mostrarLogin() {
+function mostrarConta() {
   pararGaleriaAutomatica();
-  destacarOpcaoMenu("login");
+  destacarOpcaoMenu("conta");
+  destinoEscolhido = null;
+
+  if (!usuarioAtual) {
+    mostrarLogin();
+    return;
+  }
+
+  if (usuarioAtual.admin) {
+    mostrarAdminLocais();
+    return;
+  }
+
+  areaConteudo.innerHTML = `
+    <section class="titulo-pagina titulo-menor">
+      <span class="rotulo-secao">Conta</span>
+      <h1>Minha conta</h1>
+      <p>Confira seus dados de acesso e continue navegando pelos destinos.</p>
+    </section>
+
+    <section class="tela-formulario">
+      <article class="formulario-conta painel-conta">
+        <p><strong>Nome:</strong> ${usuarioAtual.nome}</p>
+        <p><strong>E-mail:</strong> ${usuarioAtual.email}</p>
+        <button class="botao-planejar" type="button" data-voltar-destinos>Ver destinos</button>
+        <button class="botao-cancelar" type="button" data-sair-conta>Sair da conta</button>
+      </article>
+    </section>
+  `;
+
+  document.querySelector("[data-voltar-destinos]").addEventListener("click", () => abrirListagemDestinos("destinos"));
+  document.querySelector("[data-sair-conta]").addEventListener("click", () => {
+    sairUsuario();
+    mostrarLogin();
+  });
+}
+
+function mostrarLogin(mensagemInicial = "") {
+  pararGaleriaAutomatica();
+  destacarOpcaoMenu("conta");
   destinoEscolhido = null;
 
   areaConteudo.innerHTML = `
@@ -1126,19 +1175,27 @@ function mostrarLogin() {
         </label>
         <button class="botao-planejar" type="submit">Entrar</button>
         <button class="link-formulario" type="button" data-ir-cadastro>Ainda nao tenho cadastro</button>
-        <p class="mensagem-formulario" data-login-mensagem></p>
+        <button class="link-formulario" type="button" data-redefinir-senha>Esqueci minha senha</button>
+        <p class="mensagem-formulario ${mensagemInicial ? "erro" : ""}" data-login-mensagem>${mensagemInicial}</p>
       </form>
     </section>
   `;
 
   document.querySelector("[data-ir-cadastro]").addEventListener("click", mostrarCadastro);
+  document.querySelector("[data-redefinir-senha]").addEventListener("click", mostrarRedefinirSenha);
   document.querySelector("[data-form-login]").addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const email = document.querySelector("#loginEmail").value.trim().toLowerCase();
-    const senha = document.querySelector("#loginSenha").value;
-    const usuario = lerUsuarios().find((item) => item.email === email && item.senha === senha);
+    const email = normalizarEmail(document.querySelector("#loginEmail").value);
+    const senha = document.querySelector("#loginSenha").value.trim();
     const mensagem = document.querySelector("[data-login-mensagem]");
+    const usuario = lerUsuarios().find((item) => normalizarEmail(item.email) === email && item.senha === senha);
+
+    if (dadosAdmin(email, senha)) {
+      entrarUsuario({ nome: "Admin", email, admin: true });
+      mostrarAdminLocais();
+      return;
+    }
 
     if (!usuario) {
       mensagem.textContent = "E-mail ou senha incorretos.";
@@ -1149,13 +1206,13 @@ function mostrarLogin() {
     entrarUsuario(usuario);
     mensagem.textContent = "Login realizado com sucesso.";
     mensagem.classList.remove("erro");
-    abrirListagemDestinos("destinos");
+    mostrarConta();
   });
 }
 
 function mostrarCadastro() {
   pararGaleriaAutomatica();
-  destacarOpcaoMenu("cadastro");
+  destacarOpcaoMenu("conta");
   destinoEscolhido = null;
 
   areaConteudo.innerHTML = `
@@ -1192,11 +1249,11 @@ function mostrarCadastro() {
 
     const usuarios = lerUsuarios();
     const nome = document.querySelector("#cadastroNome").value.trim();
-    const email = document.querySelector("#cadastroEmail").value.trim().toLowerCase();
-    const senha = document.querySelector("#cadastroSenha").value;
+    const email = normalizarEmail(document.querySelector("#cadastroEmail").value);
+    const senha = document.querySelector("#cadastroSenha").value.trim();
     const mensagem = document.querySelector("[data-cadastro-mensagem]");
 
-    if (usuarios.some((usuario) => usuario.email === email)) {
+    if (usuarios.some((usuario) => normalizarEmail(usuario.email) === email) || email === "admin@gmail" || email === "admin@gmail.com") {
       mensagem.textContent = "Esse e-mail ja esta cadastrado.";
       mensagem.classList.add("erro");
       return;
@@ -1208,14 +1265,77 @@ function mostrarCadastro() {
     entrarUsuario(novoUsuario);
     mensagem.textContent = "Cadastro realizado com sucesso.";
     mensagem.classList.remove("erro");
-    abrirListagemDestinos("destinos");
+    mostrarConta();
+  });
+}
+
+function mostrarRedefinirSenha() {
+  pararGaleriaAutomatica();
+  destacarOpcaoMenu("conta");
+  destinoEscolhido = null;
+
+  areaConteudo.innerHTML = `
+    <section class="titulo-pagina titulo-menor">
+      <span class="rotulo-secao">Conta</span>
+      <h1>Redefinir senha</h1>
+      <p>Informe o e-mail cadastrado e escolha uma nova senha.</p>
+    </section>
+
+    <section class="tela-formulario">
+      <form class="formulario-conta" data-form-redefinir>
+        <label>
+          <span>E-mail</span>
+          <input type="email" id="redefinirEmail" required />
+        </label>
+        <label>
+          <span>Nova senha</span>
+          <input type="password" id="redefinirSenha" minlength="4" required />
+        </label>
+        <button class="botao-planejar" type="submit">Salvar nova senha</button>
+        <button class="link-formulario" type="button" data-voltar-login>Voltar para login</button>
+        <p class="mensagem-formulario" data-redefinir-mensagem></p>
+      </form>
+    </section>
+  `;
+
+  document.querySelector("[data-voltar-login]").addEventListener("click", () => mostrarLogin());
+  document.querySelector("[data-form-redefinir]").addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const email = normalizarEmail(document.querySelector("#redefinirEmail").value);
+    const novaSenha = document.querySelector("#redefinirSenha").value.trim();
+    const usuarios = lerUsuarios();
+    const indice = usuarios.findIndex((usuario) => normalizarEmail(usuario.email) === email);
+    const mensagem = document.querySelector("[data-redefinir-mensagem]");
+
+    if (email === "admin@gmail" || email === "admin@gmail.com") {
+      mensagem.textContent = "A senha do admin e fixa para o trabalho.";
+      mensagem.classList.add("erro");
+      return;
+    }
+
+    if (indice < 0) {
+      mensagem.textContent = "Nao encontrei uma conta com esse e-mail.";
+      mensagem.classList.add("erro");
+      return;
+    }
+
+    usuarios[indice].senha = novaSenha;
+    salvarUsuarios(usuarios);
+    mensagem.textContent = "Senha atualizada. Voce ja pode entrar.";
+    mensagem.classList.remove("erro");
   });
 }
 
 function mostrarAdminLocais() {
   pararGaleriaAutomatica();
-  destacarOpcaoMenu("admin");
+  destacarOpcaoMenu("conta");
   destinoEscolhido = null;
+
+  if (!usuarioAtual || !usuarioAtual.admin) {
+    mostrarLogin("Entre com o usuario admin para cadastrar destinos.");
+    return;
+  }
 
   const destinosAdmin = lerDestinosCadastrados();
 
@@ -1369,7 +1489,6 @@ function mostrarTelaSimples(tela) {
     grupo: ["Viagens em grupo", "Convide pessoas para viajar junto", "Monte grupos, compare destinos e acompanhe quem ja confirmou presenca.", ["Grupo Noronha 2026", "Amigos de inverno", "Familia no Nordeste"]],
     planejar: ["Planejamento", "Organize seu roteiro", "Defina datas, custos estimados, hospedagem e atividades principais.", ["Datas da viagem", "Orcamento diario", "Checklist de reservas"]],
     historico: ["Historico", "Ultimas buscas e visitas", "Acompanhe os destinos que voce visualizou recentemente.", vistos.length ? vistos : catalogoDestinos.slice(0, 3).map((destino) => destino.nome)],
-    perfil: ["Perfil", "Preferencias da Izadora", "Ajuste seus interesses para receber sugestoes mais alinhadas.", ["Praias tranquilas", "Natureza", "Viagens de 5 a 7 dias"]],
     configuracoes: ["Configuracoes", "Ajustes da conta", "Controle notificacoes, privacidade e preferencias da plataforma.", ["Notificacoes", "Privacidade", "Idioma e moeda"]],
     sair: ["Sessao", "Tudo certo por aqui", "Esta tela representa a acao de sair no prototipo.", ["Salvar favoritos", "Limpar filtros", "Voltar para destinos"]]
   };
@@ -1392,9 +1511,7 @@ function navegar(tela) {
   if (tela === "destinos") return abrirListagemDestinos("destinos");
   if (tela === "buscar") return abrirListagemDestinos("buscar");
   if (tela === "favoritos") return mostrarFavoritos();
-  if (tela === "login") return mostrarLogin();
-  if (tela === "cadastro") return mostrarCadastro();
-  if (tela === "admin") return mostrarAdminLocais();
+  if (tela === "conta") return mostrarConta();
   if (tela === "sair") {
     sairUsuario();
     return mostrarLogin();
