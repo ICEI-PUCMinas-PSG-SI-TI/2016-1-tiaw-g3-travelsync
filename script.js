@@ -109,6 +109,8 @@ function destinoAtual() {
 }
 
 function pegarCoordenadas(destino) {
+  if (destino.coordenadas && destino.coordenadas.length === 2) return destino.coordenadas;
+
   const mapa = {
     "Fernando de Noronha": [-3.8549, -32.4233],
     Bonito: [-21.1261, -56.4836],
@@ -932,15 +934,11 @@ function mostrarMapaDestino(destino = destinoAtual()) {
     <section class="tela-mapa-destino">
       <div class="mapa-area">
         <div class="mapa-busca">
-          <input type="text" id="pesquisaMapa" placeholder="Pesquisar ponto no destino" />
+          <input type="text" id="pesquisaMapa" placeholder="Pesquisar qualquer local" />
           <button class="botao-mapa" type="button" data-pesquisar-mapa>Pesquisar</button>
           <button class="botao-acao" type="button" data-limpar-pontos>Limpar pontos</button>
         </div>
-        <div class="mapa-visual" id="mapaDestino">
-          <span class="pino-mapa">⌖</span>
-          <strong>${destino.nome}</strong>
-          <small>${coordenadas[0].toFixed(4)}, ${coordenadas[1].toFixed(4)}</small>
-        </div>
+        <div class="mapa-visual" id="mapaDestino"></div>
         <p class="aviso-mapa" data-aviso-mapa>Carregando mapa de ${destino.nome}...</p>
       </div>
 
@@ -965,43 +963,61 @@ function mostrarMapaDestino(destino = destinoAtual()) {
 }
 
 function ligarMapaDestino(destino) {
-  document.querySelector("[data-pesquisar-mapa]").addEventListener("click", async () => {
-    const termo = document.querySelector("#pesquisaMapa").value.trim();
-    if (!termo) {
-      alert("Digite um local");
-      return;
-    }
+  document.querySelector("[data-pesquisar-mapa]").addEventListener("click", () => pesquisarPontoMapa(destino));
 
-    const pontos = JSON.parse(localStorage.getItem(chaveMapa(destino.id)) || "[]");
-    const coordenadasDestino = pegarCoordenadas(destino);
-    let coordenadas = criarCoordenadaProxima(coordenadasDestino, pontos.length);
-
-    try {
-      const busca = encodeURIComponent(`${termo}, ${destino.localizacao}, Brasil`);
-      const resposta = await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${busca}`);
-      const resultado = await resposta.json();
-
-      if (resultado.length) {
-        coordenadas = [Number(resultado[0].lat), Number(resultado[0].lon)];
-      }
-    } catch (erro) {
-      console.warn("Nao foi possivel buscar o ponto no mapa", erro);
-    }
-
-    pontos.unshift({
-      nome: termo,
-      localizacao: `Pesquisa relacionada a ${destino.nome}`,
-      coordenadas
-    });
-
-    localStorage.setItem(chaveMapa(destino.id), JSON.stringify(pontos.slice(0, 6)));
-    mostrarMapaDestino(destino);
+  document.querySelector("#pesquisaMapa").addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") return;
+    event.preventDefault();
+    pesquisarPontoMapa(destino);
   });
 
   document.querySelector("[data-limpar-pontos]").addEventListener("click", () => {
     localStorage.removeItem(chaveMapa(destino.id));
     mostrarMapaDestino(destino);
   });
+}
+
+async function pesquisarPontoMapa(destino) {
+  const campo = document.querySelector("#pesquisaMapa");
+  const aviso = document.querySelector("[data-aviso-mapa]");
+  const termo = campo.value.trim();
+
+  if (!termo) {
+    alert("Digite um local");
+    return;
+  }
+
+  const pontos = JSON.parse(localStorage.getItem(chaveMapa(destino.id)) || "[]");
+  const coordenadasDestino = pegarCoordenadas(destino);
+  let coordenadas = criarCoordenadaProxima(coordenadasDestino, pontos.length);
+  let localizacao = "Local pesquisado no mapa";
+
+  aviso.textContent = "Pesquisando local...";
+
+  try {
+    const busca = encodeURIComponent(termo);
+    const resposta = await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${busca}`);
+    const resultado = await resposta.json();
+
+    if (resultado.length) {
+      coordenadas = [Number(resultado[0].lat), Number(resultado[0].lon)];
+      localizacao = resultado[0].display_name || localizacao;
+    } else {
+      aviso.textContent = "Nao encontrei esse local online, entao salvei um ponto proximo ao destino.";
+    }
+  } catch (erro) {
+    console.warn("Nao foi possivel buscar o ponto no mapa", erro);
+    aviso.textContent = "Nao consegui consultar o mapa online, mas salvei o ponto na sua lista.";
+  }
+
+  pontos.unshift({
+    nome: termo,
+    localizacao,
+    coordenadas
+  });
+
+  localStorage.setItem(chaveMapa(destino.id), JSON.stringify(pontos.slice(0, 8)));
+  mostrarMapaDestino(destino);
 }
 
 function montarMapaDestino(destino, pontos) {
@@ -1043,13 +1059,21 @@ function montarMapaDestino(destino, pontos) {
     .bindPopup(`<strong>${destino.nome}</strong><br>${destino.localizacao}`)
     .openPopup();
 
+  const marcadores = [coordenadas];
+
   pontos.forEach((ponto) => {
     if (!ponto.coordenadas) return;
+
+    marcadores.push(ponto.coordenadas);
 
     L.marker(ponto.coordenadas)
       .addTo(mapaDestinoAberto)
       .bindPopup(`<strong>${ponto.nome}</strong><br>${ponto.localizacao || "Ponto pesquisado"}`);
   });
+
+  if (marcadores.length > 1) {
+    mapaDestinoAberto.fitBounds(marcadores, { padding: [35, 35] });
+  }
 
   aviso.textContent = "Use o zoom, arraste o mapa ou pesquise pontos para montar seu roteiro.";
   setTimeout(() => mapaDestinoAberto.invalidateSize(), 100);
