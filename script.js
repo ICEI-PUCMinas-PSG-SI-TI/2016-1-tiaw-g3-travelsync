@@ -893,7 +893,20 @@ function ligarReservaDestino(destino) {
     }));
 
     alert("Reserva salva com sucesso!");
+    mostrarReservaDestino(destino);
   });
+
+  const botaoCancelar = document.querySelector("[data-cancelar-reserva]");
+  if (botaoCancelar) {
+    botaoCancelar.addEventListener("click", () => {
+      const confirmar = confirm("Deseja cancelar esta reserva?");
+      if (!confirmar) return;
+
+      localStorage.removeItem(chaveReserva(destino.id));
+      alert("Reserva cancelada.");
+      mostrarReservaDestino(destino);
+    });
+  }
 
   atualizarResumoReserva(destino);
 }
