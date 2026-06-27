@@ -6,6 +6,7 @@ const abrirMenu = document.querySelector(".botao-menu");
 const menuLateral = document.querySelector(".menu-lateral");
 const fecharMenu = document.querySelector(".fechar-menu");
 const fundoMenu = document.querySelector(".fundo-menu");
+const nomeTopo = document.querySelector(".perfil-topo span:nth-child(2)");
 
 let catalogoDestinos = [];
 let paginaAtual = "destinos";
@@ -17,6 +18,7 @@ let mapaDestinoAberto = null;
 let filtrosVisiveis = false;
 let favoritos = lerFavoritosSalvos();
 let historico = JSON.parse(localStorage.getItem("travelsync:historico") || "[]");
+let usuarioAtual = JSON.parse(localStorage.getItem("travelsync:usuarioAtual") || "null");
 
 const filtrosIniciais = {
   busca: "",
@@ -1100,6 +1102,259 @@ function mostrarFavoritos() {
   ligarCartoesDestino();
 }
 
+function mostrarLogin() {
+  pararGaleriaAutomatica();
+  destacarOpcaoMenu("login");
+  destinoEscolhido = null;
+
+  areaConteudo.innerHTML = `
+    <section class="titulo-pagina titulo-menor">
+      <span class="rotulo-secao">Acesso</span>
+      <h1>Login</h1>
+      <p>Entre para manter suas reservas, favoritos e preferencias em um so lugar.</p>
+    </section>
+
+    <section class="tela-formulario">
+      <form class="formulario-conta" data-form-login>
+        <label>
+          <span>E-mail</span>
+          <input type="email" id="loginEmail" required />
+        </label>
+        <label>
+          <span>Senha</span>
+          <input type="password" id="loginSenha" required />
+        </label>
+        <button class="botao-planejar" type="submit">Entrar</button>
+        <button class="link-formulario" type="button" data-ir-cadastro>Ainda nao tenho cadastro</button>
+        <p class="mensagem-formulario" data-login-mensagem></p>
+      </form>
+    </section>
+  `;
+
+  document.querySelector("[data-ir-cadastro]").addEventListener("click", mostrarCadastro);
+  document.querySelector("[data-form-login]").addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const email = document.querySelector("#loginEmail").value.trim().toLowerCase();
+    const senha = document.querySelector("#loginSenha").value;
+    const usuario = lerUsuarios().find((item) => item.email === email && item.senha === senha);
+    const mensagem = document.querySelector("[data-login-mensagem]");
+
+    if (!usuario) {
+      mensagem.textContent = "E-mail ou senha incorretos.";
+      mensagem.classList.add("erro");
+      return;
+    }
+
+    entrarUsuario(usuario);
+    mensagem.textContent = "Login realizado com sucesso.";
+    mensagem.classList.remove("erro");
+    abrirListagemDestinos("destinos");
+  });
+}
+
+function mostrarCadastro() {
+  pararGaleriaAutomatica();
+  destacarOpcaoMenu("cadastro");
+  destinoEscolhido = null;
+
+  areaConteudo.innerHTML = `
+    <section class="titulo-pagina titulo-menor">
+      <span class="rotulo-secao">Conta</span>
+      <h1>Cadastro</h1>
+      <p>Crie uma conta simples para salvar sua experiencia no TravelSync.</p>
+    </section>
+
+    <section class="tela-formulario">
+      <form class="formulario-conta" data-form-cadastro>
+        <label>
+          <span>Nome</span>
+          <input type="text" id="cadastroNome" required />
+        </label>
+        <label>
+          <span>E-mail</span>
+          <input type="email" id="cadastroEmail" required />
+        </label>
+        <label>
+          <span>Senha</span>
+          <input type="password" id="cadastroSenha" minlength="4" required />
+        </label>
+        <button class="botao-planejar" type="submit">Cadastrar</button>
+        <button class="link-formulario" type="button" data-ir-login>Ja tenho login</button>
+        <p class="mensagem-formulario" data-cadastro-mensagem></p>
+      </form>
+    </section>
+  `;
+
+  document.querySelector("[data-ir-login]").addEventListener("click", mostrarLogin);
+  document.querySelector("[data-form-cadastro]").addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const usuarios = lerUsuarios();
+    const nome = document.querySelector("#cadastroNome").value.trim();
+    const email = document.querySelector("#cadastroEmail").value.trim().toLowerCase();
+    const senha = document.querySelector("#cadastroSenha").value;
+    const mensagem = document.querySelector("[data-cadastro-mensagem]");
+
+    if (usuarios.some((usuario) => usuario.email === email)) {
+      mensagem.textContent = "Esse e-mail ja esta cadastrado.";
+      mensagem.classList.add("erro");
+      return;
+    }
+
+    const novoUsuario = { nome, email, senha };
+    usuarios.push(novoUsuario);
+    salvarUsuarios(usuarios);
+    entrarUsuario(novoUsuario);
+    mensagem.textContent = "Cadastro realizado com sucesso.";
+    mensagem.classList.remove("erro");
+    abrirListagemDestinos("destinos");
+  });
+}
+
+function mostrarAdminLocais() {
+  pararGaleriaAutomatica();
+  destacarOpcaoMenu("admin");
+  destinoEscolhido = null;
+
+  const destinosAdmin = lerDestinosCadastrados();
+
+  areaConteudo.innerHTML = `
+    <section class="titulo-pagina titulo-menor">
+      <span class="rotulo-secao">Admin</span>
+      <h1>Adicionar locais</h1>
+      <p>Cadastre novos destinos para aparecerem na listagem principal.</p>
+    </section>
+
+    <section class="tela-admin">
+      <form class="form-admin" data-form-admin>
+        <label>
+          <span>Nome do local</span>
+          <input type="text" id="adminNome" required />
+        </label>
+        <label>
+          <span>Estado / Pais</span>
+          <input type="text" id="adminLocalizacao" placeholder="Minas Gerais, Brasil" required />
+        </label>
+        <label>
+          <span>Tipo</span>
+          <select id="adminTipo">
+            <option>Praia</option>
+            <option>Natureza</option>
+            <option>Aventura</option>
+            <option>Inverno</option>
+            <option>Familia</option>
+          </select>
+        </label>
+        <label>
+          <span>Regiao</span>
+          <select id="adminRegiao">
+            <option>Nordeste</option>
+            <option>Sul</option>
+            <option>Sudeste</option>
+            <option>Centro-Oeste</option>
+            <option>Norte</option>
+          </select>
+        </label>
+        <label>
+          <span>Preco minimo</span>
+          <input type="number" id="adminPrecoMin" min="0" value="150" required />
+        </label>
+        <label>
+          <span>Preco maximo</span>
+          <input type="number" id="adminPrecoMax" min="0" value="400" required />
+        </label>
+        <label class="campo-largo">
+          <span>URL da imagem</span>
+          <input type="url" id="adminImagem" placeholder="Opcional" />
+        </label>
+        <label class="campo-largo">
+          <span>Descricao</span>
+          <textarea id="adminDescricao" rows="4" required></textarea>
+        </label>
+        <button class="botao-planejar" type="submit">Adicionar local</button>
+        <p class="mensagem-formulario" data-admin-mensagem></p>
+      </form>
+
+      <aside class="lista-admin">
+        <h2>Locais cadastrados</h2>
+        ${
+          destinosAdmin.length
+            ? destinosAdmin.map((destino) => `
+                <article>
+                  <strong>${destino.nome}</strong>
+                  <span>${destino.localizacao}</span>
+                  <button type="button" data-remover-destino="${destino.id}">Remover</button>
+                </article>
+              `).join("")
+            : `<p>Nenhum local cadastrado pelo admin ainda.</p>`
+        }
+      </aside>
+    </section>
+  `;
+
+  ligarAdminLocais();
+}
+
+function ligarAdminLocais() {
+  document.querySelector("[data-form-admin]").addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const destinosAdmin = lerDestinosCadastrados();
+    const nome = document.querySelector("#adminNome").value.trim();
+    const localizacao = document.querySelector("#adminLocalizacao").value.trim();
+    const tipo = document.querySelector("#adminTipo").value;
+    const regiao = document.querySelector("#adminRegiao").value;
+    const precoMin = Number(document.querySelector("#adminPrecoMin").value || 0);
+    const precoMax = Number(document.querySelector("#adminPrecoMax").value || precoMin);
+    const descricao = document.querySelector("#adminDescricao").value.trim();
+    const imagem = document.querySelector("#adminImagem").value.trim() || "assets/destinos/noronha-1.jpg";
+
+    const novoDestino = {
+      id: Date.now(),
+      nome,
+      localizacao,
+      descricao,
+      avaliacao: 4.5,
+      totalAvaliacoes: 0,
+      precoMin,
+      precoMax,
+      tipo,
+      regiao,
+      duracao: "A definir",
+      tags: [tipo, regiao],
+      imagens: [imagem, imagem, imagem],
+      detalhes: {
+        localizacaoCurta: localizacao,
+        clima: "A consultar",
+        temperatura: "A consultar",
+        melhorEpoca: "A definir",
+        custoMedio: `R$ ${precoMin} - R$ ${precoMax} por dia`,
+        sobre: descricao,
+        comoChegar: "Consulte as melhores rotas antes da viagem."
+      },
+      atracoes: ["Ponto principal", "Roteiro local", "Experiencia recomendada"],
+      dicas: ["Confira disponibilidade antes de viajar.", "Compare custos e hospedagem.", "Salve o local nos favoritos."],
+      avaliacoes: []
+    };
+
+    destinosAdmin.push(novoDestino);
+    salvarDestinosCadastrados(destinosAdmin);
+    catalogoDestinos.push(novoDestino);
+    mostrarAdminLocais();
+  });
+
+  document.querySelectorAll("[data-remover-destino]").forEach((botao) => {
+    botao.addEventListener("click", () => {
+      const id = Number(botao.dataset.removerDestino);
+      const destinosAdmin = lerDestinosCadastrados().filter((destino) => destino.id !== id);
+      salvarDestinosCadastrados(destinosAdmin);
+      catalogoDestinos = catalogoDestinos.filter((destino) => destino.id !== id);
+      mostrarAdminLocais();
+    });
+  });
+}
+
 function mostrarTelaSimples(tela) {
   pararGaleriaAutomatica();
   destacarOpcaoMenu(tela);
@@ -1137,6 +1392,13 @@ function navegar(tela) {
   if (tela === "destinos") return abrirListagemDestinos("destinos");
   if (tela === "buscar") return abrirListagemDestinos("buscar");
   if (tela === "favoritos") return mostrarFavoritos();
+  if (tela === "login") return mostrarLogin();
+  if (tela === "cadastro") return mostrarCadastro();
+  if (tela === "admin") return mostrarAdminLocais();
+  if (tela === "sair") {
+    sairUsuario();
+    return mostrarLogin();
+  }
   return mostrarTelaSimples(tela);
 }
 
@@ -1144,7 +1406,8 @@ async function iniciar() {
   try {
     const resposta = await fetch("data.json");
     const dados = await resposta.json();
-    catalogoDestinos = dados.destinos;
+    catalogoDestinos = [...dados.destinos, ...lerDestinosCadastrados()];
+    atualizarUsuarioTopo();
     atualizarResumoFavoritos();
     abrirListagemDestinos("destinos");
   } catch (erro) {
