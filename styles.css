@@ -1160,6 +1160,28 @@ a {
   grid-column: 1 / -1;
 }
 
+.acoes-reserva {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.acoes-reserva .botao-planejar,
+.acoes-reserva .botao-cancelar {
+  flex: 1 1 190px;
+}
+
+.botao-cancelar {
+  min-height: 44px;
+  border: 1px solid rgba(255, 122, 26, 0.45);
+  border-radius: 8px;
+  background: #fff6ef;
+  color: #9a3f00;
+  font-weight: 800;
+  cursor: pointer;
+}
+
 .resumo-reserva h2,
 .dicas-mapa h2 {
   margin-top: 0;

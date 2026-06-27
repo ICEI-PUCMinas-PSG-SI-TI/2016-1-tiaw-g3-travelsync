@@ -124,6 +124,42 @@ function pegarCoordenadas(destino) {
   return mapa[destino.nome] || [-14.235, -51.9253];
 }
 
+function lerUsuarios() {
+  return JSON.parse(localStorage.getItem("travelsync:usuarios") || "[]");
+}
+
+function salvarUsuarios(usuarios) {
+  localStorage.setItem("travelsync:usuarios", JSON.stringify(usuarios));
+}
+
+function atualizarUsuarioTopo() {
+  if (!nomeTopo) return;
+  nomeTopo.textContent = usuarioAtual ? `Ola, ${usuarioAtual.nome}` : "Ola, Usuario!";
+}
+
+function entrarUsuario(usuario) {
+  usuarioAtual = {
+    nome: usuario.nome,
+    email: usuario.email
+  };
+  localStorage.setItem("travelsync:usuarioAtual", JSON.stringify(usuarioAtual));
+  atualizarUsuarioTopo();
+}
+
+function sairUsuario() {
+  usuarioAtual = null;
+  localStorage.removeItem("travelsync:usuarioAtual");
+  atualizarUsuarioTopo();
+}
+
+function lerDestinosCadastrados() {
+  return JSON.parse(localStorage.getItem("travelsync:destinosAdmin") || "[]");
+}
+
+function salvarDestinosCadastrados(destinos) {
+  localStorage.setItem("travelsync:destinosAdmin", JSON.stringify(destinos));
+}
+
 function chaveReserva(destinoId) {
   return `travelsync:reservas:${destinoId}`;
 }
@@ -706,6 +742,7 @@ function mostrarReservaDestino(destino = destinoAtual()) {
   destinoEscolhido = destino.id;
 
   const reservaSalva = JSON.parse(localStorage.getItem(chaveReserva(destino.id)) || "{}");
+  const reservaAtiva = Boolean(reservaSalva.destino);
 
   areaConteudo.innerHTML = `
     <button class="voltar" type="button" data-voltar-detalhes>← Voltar para detalhes</button>
@@ -713,7 +750,7 @@ function mostrarReservaDestino(destino = destinoAtual()) {
     <section class="titulo-pagina titulo-menor">
       <span class="rotulo-secao">Reserva</span>
       <h1>${destino.nome}</h1>
-      <p>Informe os dados principais para simular a reserva e conferir o valor estimado.</p>
+      <p>${reservaAtiva ? "Edite os dados da reserva ou cancele se seus planos mudaram." : "Informe os dados principais para simular a reserva e conferir o valor estimado."}</p>
     </section>
 
     <section class="tela-reserva">
@@ -763,7 +800,10 @@ function mostrarReservaDestino(destino = destinoAtual()) {
           </div>
         </fieldset>
 
-        <button class="botao-planejar" type="submit">Finalizar reserva</button>
+        <div class="acoes-reserva">
+          <button class="botao-planejar" type="submit">${reservaAtiva ? "Salvar alteracoes" : "Finalizar reserva"}</button>
+          ${reservaAtiva ? `<button class="botao-cancelar" type="button" data-cancelar-reserva>Cancelar reserva</button>` : ""}
+        </div>
       </form>
 
       <aside class="resumo-reserva">
