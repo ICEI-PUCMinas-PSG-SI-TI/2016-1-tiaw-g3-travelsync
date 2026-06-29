@@ -1,3 +1,13 @@
+
+
+
+
+
+
+// Código do Pedro
+
+
+
 const searchInput = document.getElementById('searchInput');
 const searchSuggestions = document.getElementById('searchSuggestions');
 const btnSearch = document.getElementById('btnSearch');
@@ -178,3 +188,4 @@ document.querySelectorAll('.btn-detalhes').forEach(btn => {
 });
 
 filterCards();
+

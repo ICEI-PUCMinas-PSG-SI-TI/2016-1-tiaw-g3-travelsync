@@ -1,0 +1,310 @@
+{
+  "destinos": [
+    {
+      "id": 1,
+      "nome": "Fernando de Noronha",
+      "localizacao": "Pernambuco, Brasil",
+      "descricao": "Um paraiso brasileiro com praias cristalinas, trilhas incriveis e natureza exuberante.",
+      "avaliacao": 4.8,
+      "totalAvaliacoes": 256,
+      "precoMin": 250,
+      "precoMax": 600,
+      "tipo": "Praia",
+      "regiao": "Nordeste",
+      "duracao": "5 a 7 dias",
+      "tags": ["Praia", "Natureza", "Aventura", "Ecoturismo"],
+      "imagens": [
+        "../assets/imagem/noronha-1.jpg",
+        "../assets/imagem/noronha-2.jpg",
+        "../assets/imagem/noronha-3.jpg"
+      ],
+      "detalhes": {
+        "localizacaoCurta": "Arquipelago de Fernando de Noronha",
+        "clima": "Tropical",
+        "temperatura": "25C - 30C",
+        "melhorEpoca": "Agosto a Dezembro",
+        "custoMedio": "R$ 250 - R$ 600 por dia",
+        "sobre": "Fernando de Noronha e um conjunto de ilhas vulcanicas localizado no oceano Atlantico. Suas praias estao entre as mais bonitas do Brasil, com mar cristalino e rica vida marinha.",
+        "comoChegar": "O acesso e feito por aviao, com voos saindo principalmente de Recife. E necessario pagar a taxa de preservacao ambiental."
+      },
+      "atracoes": ["Baia do Sancho", "Praia do Leao", "Mergulho com vida marinha", "Trilha do Atalaia"],
+      "dicas": ["Reserve os passeios com antecedencia.", "Confira a mare antes de visitar piscinas naturais.", "Leve protetor solar, snorkel e calcado para trilha."],
+      "avaliacoes": [
+        { "nome": "Marina Costa", "nota": 5, "texto": "Lugar perfeito para descansar e ver paisagens inesqueciveis." },
+        { "nome": "Rafael Lima", "nota": 4.8, "texto": "Otima estrutura e praias incriveis, mas exige planejamento." }
+      ]
+    },
+    {
+      "id": 2,
+      "nome": "Bonito",
+      "localizacao": "Mato Grosso do Sul, Brasil",
+      "descricao": "Rios transparentes, cavernas, cachoeiras e passeios de flutuacao em uma capital do ecoturismo.",
+      "avaliacao": 4.7,
+      "totalAvaliacoes": 189,
+      "precoMin": 180,
+      "precoMax": 480,
+      "tipo": "Natureza",
+      "regiao": "Centro-Oeste",
+      "duracao": "4 a 6 dias",
+      "tags": ["Natureza", "Aventura", "Ecoturismo"],
+      "imagens": [
+        "../assets/imagem/bonito-1.jpg",
+        "../assets/imagem/bonito-2.jpg",
+        "../assets/imagem/bonito-3.jpg"
+      ],
+      "detalhes": {
+        "localizacaoCurta": "Serra da Bodoquena",
+        "clima": "Tropical",
+        "temperatura": "20C - 31C",
+        "melhorEpoca": "Maio a Setembro",
+        "custoMedio": "R$ 180 - R$ 480 por dia",
+        "sobre": "Bonito combina agua cristalina, trilhas e grutas em roteiros de baixo impacto ambiental.",
+        "comoChegar": "O acesso pode ser feito por Campo Grande, seguido de traslado ou carro ate Bonito."
+      },
+      "atracoes": ["Rio da Prata", "Gruta do Lago Azul", "Abismo Anhumas", "Boca da Onca"],
+      "dicas": ["Agende flutuacoes antes da viagem.", "Use roupas leves e secagem rapida.", "Compare pacotes de agencias locais."],
+      "avaliacoes": [
+        { "nome": "Ana Paula", "nota": 4.7, "texto": "A flutuacao foi uma das melhores experiencias da viagem." },
+        { "nome": "Gustavo Reis", "nota": 4.6, "texto": "Destino organizado e excelente para natureza." }
+      ]
+    },
+    {
+      "id": 3,
+      "nome": "Gramado",
+      "localizacao": "Rio Grande do Sul, Brasil",
+      "descricao": "Destino serrano com arquitetura europeia, gastronomia, parques tematicos e clima frio.",
+      "avaliacao": 4.6,
+      "totalAvaliacoes": 312,
+      "precoMin": 220,
+      "precoMax": 650,
+      "tipo": "Inverno",
+      "regiao": "Sul",
+      "duracao": "3 a 5 dias",
+      "tags": ["Inverno", "Gastronomia", "Familia"],
+      "imagens": [
+        "../assets/imagem/gramado-1.jpg",
+        "../assets/imagem/gramado-2.jpg",
+        "../assets/imagem/gramado-3.jpg"
+      ],
+      "detalhes": {
+        "localizacaoCurta": "Serra Gaucha",
+        "clima": "Subtropical",
+        "temperatura": "8C - 24C",
+        "melhorEpoca": "Junho a Agosto",
+        "custoMedio": "R$ 220 - R$ 650 por dia",
+        "sobre": "Gramado e conhecida pelo charme da Serra Gaucha, eventos sazonais e estrutura turistica completa.",
+        "comoChegar": "O caminho mais comum e via Porto Alegre, seguindo de carro ou transfer ate a serra."
+      },
+      "atracoes": ["Lago Negro", "Rua Coberta", "Snowland", "Mini Mundo"],
+      "dicas": ["Reserve restaurantes no fim de semana.", "Leve casaco mesmo fora do inverno.", "Hospede-se perto do centro para caminhar mais."],
+      "avaliacoes": [
+        { "nome": "Clara Nunes", "nota": 4.5, "texto": "Muito charmosa e facil de visitar em familia." },
+        { "nome": "Pedro Alves", "nota": 4.7, "texto": "Otima gastronomia e clima romantico." }
+      ]
+    },
+    {
+      "id": 4,
+      "nome": "Jericoacoara",
+      "localizacao": "Ceara, Brasil",
+      "descricao": "Vila de praia com dunas, lagoas, por do sol marcante e atmosfera tranquila.",
+      "avaliacao": 4.6,
+      "totalAvaliacoes": 210,
+      "precoMin": 200,
+      "precoMax": 520,
+      "tipo": "Aventura",
+      "regiao": "Nordeste",
+      "duracao": "4 a 6 dias",
+      "tags": ["Praia", "Aventura"],
+      "imagens": [
+        "../assets/imagem/jeri-1.jpg",
+        "../assets/imagem/jeri-2.jpg",
+        "../assets/imagem/jeri-3.jpg"
+      ],
+      "detalhes": {
+        "localizacaoCurta": "Litoral oeste do Ceara",
+        "clima": "Tropical",
+        "temperatura": "24C - 33C",
+        "melhorEpoca": "Julho a Dezembro",
+        "custoMedio": "R$ 200 - R$ 520 por dia",
+        "sobre": "Jericoacoara une paisagens naturais, vento constante para esportes e vida noturna leve.",
+        "comoChegar": "A chegada costuma passar por Jijoca, seguida de veiculo credenciado ate a vila."
+      },
+      "atracoes": ["Pedra Furada", "Lagoa do Paraiso", "Duna do Por do Sol", "Passeio litoral leste"],
+      "dicas": ["Use dinheiro para pequenos gastos.", "Confira transportes autorizados.", "Leve oculos de sol para os passeios de buggy."],
+      "avaliacoes": [
+        { "nome": "Bianca Sales", "nota": 4.8, "texto": "O por do sol na duna vale a viagem." },
+        { "nome": "Felipe Rocha", "nota": 4.4, "texto": "Passeios lindos e clima muito leve." }
+      ]
+    },
+    {
+      "id": 5,
+      "nome": "Foz do Iguacu",
+      "localizacao": "Parana, Brasil",
+      "descricao": "Cataratas, natureza e cultura em um destino de fronteira trinacional.",
+      "avaliacao": 4.8,
+      "totalAvaliacoes": 278,
+      "precoMin": 180,
+      "precoMax": 500,
+      "tipo": "Natureza",
+      "regiao": "Sul",
+      "duracao": "3 a 4 dias",
+      "tags": ["Natureza", "Familia"],
+      "imagens": [
+        "../assets/imagem/foz-1.jpg",
+        "../assets/imagem/foz-2.jpg",
+        "../assets/imagem/foz-3.jpg"
+      ],
+      "detalhes": {
+        "localizacaoCurta": "Oeste do Parana",
+        "clima": "Subtropical",
+        "temperatura": "15C - 30C",
+        "melhorEpoca": "Marco a Maio",
+        "custoMedio": "R$ 180 - R$ 500 por dia",
+        "sobre": "Foz do Iguacu oferece uma das paisagens naturais mais impressionantes do pais.",
+        "comoChegar": "Ha voos diretos para Foz e boa oferta de transporte local para os atrativos."
+      },
+      "atracoes": ["Cataratas do Iguacu", "Parque das Aves", "Itaipu Binacional", "Marco das Tres Fronteiras"],
+      "dicas": ["Leve capa de chuva para as cataratas.", "Separe um dia inteiro para o parque.", "Verifique documentos se visitar paises vizinhos."],
+      "avaliacoes": [
+        { "nome": "Sofia Barros", "nota": 4.9, "texto": "As cataratas impressionam muito ao vivo." },
+        { "nome": "Leo Martins", "nota": 4.6, "texto": "Destino facil, bem sinalizado e cheio de opcoes." }
+      ]
+    },
+    {
+      "id": 6,
+      "nome": "Maragogi",
+      "localizacao": "Alagoas, Brasil",
+      "descricao": "Piscinas naturais, mar claro e passeios de barco no litoral alagoano.",
+      "avaliacao": 4.7,
+      "totalAvaliacoes": 165,
+      "precoMin": 160,
+      "precoMax": 430,
+      "tipo": "Praia",
+      "regiao": "Nordeste",
+      "duracao": "3 a 5 dias",
+      "tags": ["Praia", "Natureza"],
+      "imagens": [
+        "../assets/imagem/maragogi-1.jpg",
+        "../assets/imagem/maragogi-2.jpg",
+        "../assets/imagem/maragogi-3.jpg"
+      ],
+      "detalhes": {
+        "localizacaoCurta": "Costa dos Corais",
+        "clima": "Tropical",
+        "temperatura": "24C - 31C",
+        "melhorEpoca": "Setembro a Janeiro",
+        "custoMedio": "R$ 160 - R$ 430 por dia",
+        "sobre": "Maragogi se destaca pelas gales, piscinas naturais acessadas durante a mare baixa.",
+        "comoChegar": "O destino fica entre Recife e Maceio, com acesso por estrada a partir dos aeroportos."
+      },
+      "atracoes": ["Gales de Maragogi", "Praia de Antunes", "Barra Grande", "Passeio de catamara"],
+      "dicas": ["Escolha passeios de acordo com a tabua de mare.", "Evite pisar nos corais.", "Hospede-se perto da praia se quiser descansar."],
+      "avaliacoes": [
+        { "nome": "Nina Melo", "nota": 4.7, "texto": "Mar muito bonito e passeios tranquilos." },
+        { "nome": "Caio Torres", "nota": 4.5, "texto": "Excelente custo-beneficio para praia." }
+      ]
+    },
+    {
+      "id": 7,
+      "nome": "Lencois Maranhenses",
+      "localizacao": "Maranhao, Brasil",
+      "descricao": "Dunas brancas e lagoas sazonais formam uma paisagem unica no Brasil.",
+      "avaliacao": 4.9,
+      "totalAvaliacoes": 198,
+      "precoMin": 170,
+      "precoMax": 460,
+      "tipo": "Natureza",
+      "regiao": "Nordeste",
+      "duracao": "4 a 7 dias",
+      "tags": ["Natureza", "Aventura"],
+      "imagens": [
+        "../assets/imagem/lencois-1.jpg",
+        "../assets/imagem/lencois-2.jpg",
+        "../assets/imagem/lencois-3.jpg"
+      ],
+      "detalhes": {
+        "localizacaoCurta": "Parque Nacional dos Lencois Maranhenses",
+        "clima": "Tropical",
+        "temperatura": "24C - 32C",
+        "melhorEpoca": "Junho a Setembro",
+        "custoMedio": "R$ 170 - R$ 460 por dia",
+        "sobre": "Os Lencois Maranhenses combinam dunas, lagoas de agua doce e travessias guiadas.",
+        "comoChegar": "Barreirinhas e uma das bases mais usadas, com acesso a partir de Sao Luis."
+      },
+      "atracoes": ["Lagoa Bonita", "Lagoa Azul", "Atins", "Travessia dos Lencois"],
+      "dicas": ["Va no periodo das lagoas cheias.", "Contrate guias credenciados.", "Leve pouca bagagem para deslocamentos."],
+      "avaliacoes": [
+        { "nome": "Laura Dias", "nota": 5, "texto": "Um dos cenarios mais diferentes que ja vi." },
+        { "nome": "Mateus Viana", "nota": 4.8, "texto": "A logistica exige cuidado, mas compensa muito." }
+      ]
+    },
+    {
+      "id": 8,
+      "nome": "Porto de Galinhas",
+      "localizacao": "Pernambuco, Brasil",
+      "descricao": "Praias, jangadas e piscinas naturais em um destino pratico para familias e casais.",
+      "avaliacao": 4.7,
+      "totalAvaliacoes": 241,
+      "precoMin": 180,
+      "precoMax": 520,
+      "tipo": "Praia",
+      "regiao": "Nordeste",
+      "duracao": "3 a 5 dias",
+      "tags": ["Praia", "Familia"],
+      "imagens": [
+        "../assets/imagem/porto-1.jpg",
+        "../assets/imagem/porto-2.jpg",
+        "../assets/imagem/porto-3.jpg"
+      ],
+      "detalhes": {
+        "localizacaoCurta": "Ipojuca",
+        "clima": "Tropical",
+        "temperatura": "24C - 31C",
+        "melhorEpoca": "Setembro a Fevereiro",
+        "custoMedio": "R$ 180 - R$ 520 por dia",
+        "sobre": "Porto de Galinhas e famoso por suas piscinas naturais e boa estrutura de hospedagem.",
+        "comoChegar": "Fica a cerca de uma hora do Recife, com acesso facil por estrada."
+      },
+      "atracoes": ["Piscinas naturais", "Praia de Muro Alto", "Pontal de Maracaipe", "Passeio de jangada"],
+      "dicas": ["Confira horarios de mare baixa.", "Reserve hospedagem perto do centro se quiser praticidade.", "Use sapatilha aquatica nas piscinas."],
+      "avaliacoes": [
+        { "nome": "Helena Prado", "nota": 4.6, "texto": "Muito pratico e bonito para viajar em familia." },
+        { "nome": "Igor Mendes", "nota": 4.7, "texto": "Passeios bons e boa estrutura de restaurantes." }
+      ]
+    },
+    {
+      "id": 9,
+      "nome": "Campos do Jordao",
+      "localizacao": "Sao Paulo, Brasil",
+      "descricao": "Cidade serrana com clima frio, restaurantes, trilhas e arquitetura inspirada nos Alpes.",
+      "avaliacao": 4.6,
+      "totalAvaliacoes": 143,
+      "precoMin": 220,
+      "precoMax": 620,
+      "tipo": "Inverno",
+      "regiao": "Sudeste",
+      "duracao": "2 a 4 dias",
+      "tags": ["Inverno", "Gastronomia"],
+      "imagens": [
+        "../assets/imagem/campos-1.jpg",
+        "../assets/imagem/campos-2.jpg",
+        "../assets/imagem/campos-3.jpg"
+      ],
+      "detalhes": {
+        "localizacaoCurta": "Serra da Mantiqueira",
+        "clima": "Subtropical de altitude",
+        "temperatura": "7C - 22C",
+        "melhorEpoca": "Maio a Agosto",
+        "custoMedio": "R$ 220 - R$ 620 por dia",
+        "sobre": "Campos do Jordao combina hospedagens charmosas, restaurantes e passeios na montanha.",
+        "comoChegar": "O acesso mais comum e por carro a partir de Sao Paulo ou Vale do Paraiba."
+      },
+      "atracoes": ["Morro do Elefante", "Capivari", "Parque Amantikir", "Horto Florestal"],
+      "dicas": ["Reserve com antecedencia no inverno.", "Compare hospedagens fora do centro.", "Leve roupas para frio e caminhada."],
+      "avaliacoes": [
+        { "nome": "Renata Luz", "nota": 4.5, "texto": "Boa comida, clima frio e muitos passeios leves." },
+        { "nome": "Thiago Cunha", "nota": 4.6, "texto": "Perfeito para fim de semana romantico." }
+      ]
+    }
+  ]
+}

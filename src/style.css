@@ -257,6 +257,18 @@ header{
   color: var(--text2);
   background: transparent;
 }
+.search-suggestions {
+  position: absolute;
+  background: #fff;
+  border: 1px solid var(--line);
+  width: 100%;
+  display: none;
+  z-index: 10;
+}
+
+.search-suggestions.open {
+  display: block;
+}
 
 .search-box input::placeholder { color: var(--text-muted); }
 
