@@ -17,14 +17,13 @@
 
         <nav class="menu" aria-label="Menu principal">
           <a href="index.html"><button class="item-menu" type="button" data-view="inicio"><span class="icone">⌂</span>Inicio</button></a>
-          <a href="sugestoes.html"><button class="item-menu" type="button" data-view="buscar"><span class="icone">⌕</span>Sugestões</button></a>
           <a href="destinos.html"><button class="item-menu ativo" type="button" data-view="destinos"><span class="icone">⌖</span>Destinos</button></a>
           <a href="minimapa.html"><button class="item-menu" type="button" data-view="grupo"><span class="icone">♙</span>Mini mapa</button></a>
-          <a href="avaliacao.html"><button class="item-menu" type="button" data-view="planejar"><span class="icone">□</span>Avaliações</button></a>
-          <button class="item-menu" type="button" data-view="favoritos"><span class="icone">♡</span>Favoritos <b id="totalFavoritos">0</b></button>
+          <a href="cadastro_locais.html"><button class="item-menu" type="button" data-view="planejar"><span class="icone">□</span>Cadastro de locais</button></a>
+          <a href="#" onclick="mostrarFavoritos(event)" ><button class="item-menu" type="button" data-view="favoritos"><span class="icone">♡</span>Favoritos <b id="totalFavoritos">0</b></button></a>
           <a href="historico.html"><button class="item-menu" type="button" data-view="historico"><span class="icone">◷</span>Historico</button></a>
           <a href="perfil.html"><button class="item-menu" type="button" data-view="perfil"><span class="icone">♙</span>Meu perfil</button></a>
-          <button class="item-menu" type="button" data-view="sair"><span class="icone">↪</span>Sair</button>
+          <button class="item-menu" type="button" data-view="sair" id="btnSair"><span class="icone">↪</span>Sair</button>
         </nav>
       </aside>
       <div class="fundo-menu" aria-hidden="true"></div>
@@ -44,7 +43,7 @@
             <button class="botao-icone" aria-label="Mensagens">✉</button>
               <div class="perfil-topo">
                 <span class="foto-perfil"></span>
-                <span><a href="./login.html">Olá, Usuário!</a></span>
+                <span><a href="login.html">Olá, Usuário!</a></span>
                 <span></span>
               </div>
           </div>
@@ -231,7 +230,6 @@
   </div>
 </section>
 
-        <main class="conteudo" id="areaConteudo" tabindex="-1"></main>
 
         <footer class="rodape">
           <span>© 2024 Travel Sync</span>
@@ -251,5 +249,6 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="../js/script.js"></script>
     <script src="../js/inicio.js"></script>
+    <script src="../js/destinos.js"></script>
   </body>
 </html>

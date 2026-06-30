@@ -1,6 +1,4 @@
 
-
-
 const filtrosIniciais = {
   busca: "",
   tipo: "Todos",
@@ -12,17 +10,155 @@ const filtrosIniciais = {
 
 let filtrosAplicados = { ...filtrosIniciais };
 let rascunhoFiltros = { ...filtrosIniciais };
+const lista = document.getElementById("listaFavoritos");
+
+
+const novosDestinos = [
+  { id: 1, nome: "Praia do Forte", localizacao: "Bahia, Brasil", descricao: "Uma praia paradisíaca com águas cristalinas.", tipo: "Praia", regiao: "Nordeste", imagens: ["url_imagem1", "url_imagem2"], avaliacao: 4.8, totalAvaliacoes: 150, precoMin: 200, precoMax: 600, tags: ["relaxamento", "família", "natureza"] },
+  { id: 2, nome: "Chapada Diamantina", localizacao: "Bahia, Brasil", descricao: "Parque nacional com trilhas e cachoeiras.", tipo: "Natureza", regiao: "Nordeste", imagens: ["url_imagem3", "url_imagem4"], avaliacao: 4.9, totalAvaliacoes: 200, precoMin: 150, precoMax: 400, tags: ["aventura", "trilhas"] },
+  { id: 3, nome: "Fernando de Noronha", localizacao: "Pernambuco, Brasil", descricao: "Ilha famosa por suas belezas naturais e mergulho.", tipo: "Praia", regiao: "Nordeste", imagens: ["url_imagem5", "url_imagem6"], avaliacao: 5.0, totalAvaliacoes: 300, precoMin: 500, precoMax: 1200, tags: ["ecoturismo", "mergulhos"] },
+  { id: 4, nome: "Gramado", localizacao: "Rio Grande do Sul, Brasil", descricao: "Cidade charmosa com clima europeu.", tipo: "Inverno", regiao: "Sul", imagens: ["url_imagem7", "url_imagem8"], avaliacao: 4.7, totalAvaliacoes: 180, precoMin: 250, precoMax: 700, tags: ["família", "romântico"] },
+  { id: 5, nome: "Aparecida", localizacao: "São Paulo, Brasil", descricao: "Famosa pela Basílica de Aparecida.", tipo: "Cultural", regiao: "Sudeste", imagens: ["url_imagem9", "url_imagem10"], avaliacao: 4.6, totalAvaliacoes: 90, precoMin: 100, precoMax: 300, tags: ["religioso", "histórico"] },
+  { id: 6, nome: "Jericoacoara", localizacao: "Ceará, Brasil", descricao: "Praia famosa por suas dunas e lagoas.", tipo: "Praia", regiao: "Nordeste", imagens: ["url_imagem11", "url_imagem12"], avaliacao: 4.8, totalAvaliacoes: 220, precoMin: 300, precoMax: 800, tags: ["aventura", "natureza"] },
+  { id: 7, nome: "Bonito", localizacao: "Mato Grosso do Sul, Brasil", descricao: "Destino ecoturístico com rios de água cristalina.", tipo: "Natureza", regiao: "Centro-Oeste", imagens: ["url_imagem13", "url_imagem14"], avaliacao: 5.0, totalAvaliacoes: 250, precoMin: 400, precoMax: 900, tags: ["mergulhos", "natureza"] },
+  { id: 8, nome: "Foz do Iguaçu", localizacao: "Paraná, Brasil", descricao: "Famosa pelas Cataratas do Iguaçu.", tipo: "Natureza", regiao: "Sul", imagens: ["url_imagem15", "url_imagem16"], avaliacao: 4.9, totalAvaliacoes: 300, precoMin: 250, precoMax: 700, tags: ["aventura", "natureza"] },
+  { id: 9, nome: "Porto de Galinhas", localizacao: "Pernambuco, Brasil", descricao: "Praia com piscinas naturais e coqueirais.", tipo: "Praia", regiao: "Nordeste", imagens: ["url_imagem17", "url_imagem18"], avaliacao: 4.8, totalAvaliacoes: 270, precoMin: 220, precoMax: 650, tags: ["família", "relaxamento"] },
+  { id: 10, nome: "Campos do Jordão", localizacao: "São Paulo, Brasil", descricao: "Cidade montanhosa conhecida como a Suíça Brasileira.", tipo: "Inverno", regiao: "Sudeste", imagens: ["url_imagem19", "url_imagem20"], avaliacao: 4.7, totalAvaliacoes: 150, precoMin: 300, precoMax: 800, tags: ["romântico", "família"] },
+  { id: 11, nome: "Olinda", localizacao: "Pernambuco, Brasil", descricao: "Cidade histórica com arquitetura colonial.", tipo: "Cultural", regiao: "Nordeste", imagens: ["url_imagem21", "url_imagem22"], avaliacao: 4.6, totalAvaliacoes: 130, precoMin: 100, precoMax: 250, tags: ["histórico", "cultural"] },
+  { id: 12, nome: "Natal", localizacao: "Rio Grande do Norte, Brasil", descricao: "Famosa pelas suas dunas e praias.", tipo: "Praia", regiao: "Nordeste", imagens: ["url_imagem23", "url_imagem24"], avaliacao: 4.5, totalAvaliacoes: 180, precoMin: 200, precoMax: 600, tags: ["aventura", "natureza"] },
+  { id: 13, nome: "Petrópolis", localizacao: "Rio de Janeiro, Brasil", descricao: "Cidade histórica com palácios e museus.", tipo: "Cultural", regiao: "Sudeste", imagens: ["url_imagem25", "url_imagem26"], avaliacao: 4.5, totalAvaliacoes: 150, precoMin: 150, precoMax: 350, tags: ["histórico", "cultural"] },
+  { id: 14, nome: "Tiradentes", localizacao: "Minas Gerais, Brasil", descricao: "Cidade colonial charmosa com ruas de paralelepípedo.", tipo: "Cultural", regiao: "Sudeste", imagens: ["url_imagem27", "url_imagem28"], avaliacao: 4.6, totalAvaliacoes: 120, precoMin: 100, precoMax: 300, tags: ["histórico", "gastronomia"] },
+  { id: 15, nome: "São Miguel dos Milagres", localizacao: "Alagoas, Brasil", descricao: "Praias tranquilas e natureza exuberante.", tipo: "Praia", regiao: "Nordeste", imagens: ["url_imagem29", "url_imagem30"], avaliacao: 4.8, totalAvaliacoes: 140, precoMin: 250, precoMax: 550, tags: ["relaxamento", "natureza"] },
+  { id: 16, nome: "Jericoacoara", localizacao: "Ceará, Brasil", descricao: "Praia famosa por suas dunas e lagoas.", tipo: "Praia", regiao: "Nordeste", imagens: ["url_imagem31", "url_imagem32"], avaliacao: 4.9, totalAvaliacoes: 200, precoMin: 300, precoMax: 800, tags: ["aventura", "natureza"] },
+  { id: 17, nome: "Arraial do Cabo", localizacao: "Rio de Janeiro, Brasil", descricao: "Praias de águas cristalinas e natureza exuberante.", tipo: "Praia", regiao: "Sudeste", imagens: ["url_imagem33", "url_imagem34"], avaliacao: 4.6, totalAvaliacoes: 160, precoMin: 200, precoMax: 500, tags: ["mergulhos", "natureza"] },
+  { id: 18, nome: "Ilhabela", localizacao: "São Paulo, Brasil", descricao: "Ilha com praias e trilhas em meio à natureza.", tipo: "Praia", regiao: "Sudeste", imagens: ["url_imagem35", "url_imagem36"], avaliacao: 4.7, totalAvaliacoes: 180, precoMin: 250, precoMax: 600, tags: ["aventura", "natureza"] },
+  { id: 19, nome: "Buzios", localizacao: "Rio de Janeiro, Brasil", descricao: "Famosa por suas praias e vida noturna.", tipo: "Praia", regiao: "Sudeste", imagens: ["url_imagem37", "url_imagem38"], avaliacao: 4.5, totalAvaliacoes: 200, precoMin: 300, precoMax: 700, tags: ["vida noturna", "relaxamento"] },
+  { id: 20, nome: "Caldas Novas", localizacao: "Goiás, Brasil", descricao: "Cidade famosa por suas águas termais.", tipo: "Relaxamento", regiao: "Centro-Oeste", imagens: ["url_imagem39", "url_imagem40"], avaliacao: 4.5, totalAvaliacoes: 170, precoMin: 150, precoMax: 400, tags: ["relaxamento", "família"] },
+  { id: 21, nome: "Maragogi", localizacao: "Alagoas, Brasil", descricao: "Praia com águas cristalinas e recifes de corais.", tipo: "Praia", regiao: "Nordeste", imagens: ["url_imagem41", "url_imagem42"], avaliacao: 4.8, totalAvaliacoes: 220, precoMin: 300, precoMax: 800, tags: ["mergulhos", "natureza"] },
+  { id: 22, nome: "Morretes", localizacao: "Paraná, Brasil", descricao: "Cidade histórica com belas paisagens naturais.", tipo: "Cultural", regiao: "Sul", imagens: ["url_imagem43", "url_imagem44"], avaliacao: 4.5, totalAvaliacoes: 130, precoMin: 100, precoMax: 250, tags: ["histórico", "gastronomia"] },
+  { id: 23, nome: "Cunha", localizacao: "São Paulo, Brasil", descricao: "Cidade conhecida por suas cerâmicas e natureza.", tipo: "Natureza", regiao: "Sudeste", imagens: ["url_imagem45", "url_imagem46"], avaliacao: 4.5, totalAvaliacoes: 110, precoMin: 150, precoMax: 300, tags: ["natureza", "cultural"] },
+  { id: 24, nome: "Punta del Este", localizacao: "Uruguai", descricao: "Praia famosa com vida noturna vibrante.", tipo: "Praia", regiao: "Internacional", imagens: ["url_imagem47", "url_imagem48"], avaliacao: 4.6, totalAvaliacoes: 200, precoMin: 400, precoMax: 900, tags: ["vida noturna", "luxo"] },
+  { id: 25, nome: "Buenos Aires", localizacao: "Argentina", descricao: "Capital argentina conhecida por sua cultura vibrante.", tipo: "Cultural", regiao: "Internacional", imagens: ["url_imagem49", "url_imagem50"], avaliacao: 4.7, totalAvaliacoes: 250, precoMin: 300, precoMax: 700, tags: ["cultura", "gastronomia"] },
+  { id: 26, nome: "Cartagena", localizacao: "Colômbia", descricao: "Cidade histórica com belos centros culturais.", tipo: "Cultural", regiao: "Internacional", imagens: ["url_imagem51", "url_imagem52"], avaliacao: 4.8, totalAvaliacoes: 300, precoMin: 350, precoMax: 800, tags: ["histórico", "cultura"] },
+  { id: 27, nome: "Cancún", localizacao: "México", descricao: "Destino turístico famoso por suas praias e resorts.", tipo: "Praia", regiao: "Internacional", imagens: ["url_imagem53", "url_imagem54"], avaliacao: 4.5, totalAvaliacoes: 400, precoMin: 500, precoMax: 1000, tags: ["luxo", "relaxamento"] },
+  { id: 28, nome: "Machu Picchu", localizacao: "Peru", descricao: "Antiga cidade inca localizada nas montanhas.", tipo: "Cultural", regiao: "Internacional", imagens: ["url_imagem55", "url_imagem56"], avaliacao: 5.0, totalAvaliacoes: 500, precoMin: 700, precoMax: 1500, tags: ["histórico", "aventura"] },
+  { id: 29, nome: "Tulum", localizacao: "México", descricao: "Praia e ruínas maias em um só lugar.", tipo: "Praia", regiao: "Internacional", imagens: ["url_imagem57", "url_imagem58"], avaliacao: 4.8, totalAvaliacoes: 220, precoMin: 400, precoMax: 800, tags: ["histórico", "natureza"] },
+  { id: 30, nome: "Rio de Janeiro", localizacao: "Brasil", descricao: "Cidade famosa por suas praias e o Cristo Redentor.", tipo: "Cultural", regiao: "Sudeste", imagens: ["url_imagem59", "url_imagem60"], avaliacao: 4.7, totalAvaliacoes: 500, precoMin: 200, precoMax: 700, tags: ["cultura", "natureza"] },
+  { id: 31, nome: "São Paulo", localizacao: "Brasil", descricao: "Maior cidade do Brasil, conhecida por sua vida cultural.", tipo: "Cultural", regiao: "Sudeste", imagens: ["url_imagem61", "url_imagem62"], avaliacao: 4.6, totalAvaliacoes: 400, precoMin: 150, precoMax: 500, tags: ["cultura", "gastronomia"] },
+  { id: 32, nome: "Florianópolis", localizacao: "Santa Catarina, Brasil", descricao: "Ilha conhecida por suas belas praias.", tipo: "Praia", regiao: "Sul", imagens: ["url_imagem63", "url_imagem64"], avaliacao: 4.8, totalAvaliacoes: 300, precoMin: 250, precoMax: 600, tags: ["natureza", "aventura"] },
+  { id: 33, nome: "Cataratas do Iguaçu", localizacao: "Paraná, Brasil", descricao: "Uma das maiores quedas d'água do mundo.", tipo: "Natureza", regiao: "Sul", imagens: ["url_imagem65", "url_imagem66"], avaliacao: 4.9, totalAvaliacoes: 400, precoMin: 200, precoMax: 500, tags: ["aventura", "natureza"] },
+  { id: 34, nome: "Serra Gaúcha", localizacao: "Rio Grande do Sul, Brasil", descricao: "Região montanhosa com clima europeu.", tipo: "Inverno", regiao: "Sul", imagens: ["url_imagem67", "url_imagem68"], avaliacao: 4.7, totalAvaliacoes: 250, precoMin: 300, precoMax: 700, tags: ["família", "gastronomia"] },
+  { id: 35, nome: "Lençóis Maranhenses", localizacao: "Maranhão, Brasil", descricao: "Parque nacional com dunas e lagoas.", tipo: "Natureza", regiao: "Nordeste", imagens: ["url_imagem69", "url_imagem70"], avaliacao: 4.8, totalAvaliacoes: 180, precoMin: 300, precoMax: 800, tags: ["aventura", "natureza"] },
+  { id: 36, nome: "Paraty", localizacao: "Rio de Janeiro, Brasil", descricao: "Cidade colonial com belas praias e cultura rica.", tipo: "Cultural", regiao: "Sudeste", imagens: ["url_imagem71", "url_imagem72"], avaliacao: 4.6, totalAvaliacoes: 160, precoMin: 150, precoMax: 400, tags: ["histórico", "gastronomia"] },
+  { id: 37, nome: "Belo Horizonte", localizacao: "Minas Gerais, Brasil", descricao: "Cidade conhecida por sua culinária e cultura.", tipo: "Cultural", regiao: "Sudeste", imagens: ["url_imagem73", "url_imagem74"], avaliacao: 4.5, totalAvaliacoes: 150, precoMin: 100, precoMax: 300, tags: ["gastronomia", "cultura"] },
+  { id: 38, nome: "Natal", localizacao: "Rio Grande do Norte, Brasil", descricao: "Famosa por suas dunas e praias.", tipo: "Praia", regiao: "Nordeste", imagens: ["url_imagem75", "url_imagem76"], avaliacao: 4.6, totalAvaliacoes: 200, precoMin: 200, precoMax: 600, tags: ["aventura", "natureza"] },
+  { id: 39, nome: "Cabo Frio", localizacao: "Rio de Janeiro, Brasil", descricao: "Praia famosa por suas águas cristalinas.", tipo: "Praia", regiao: "Sudeste", imagens: ["url_imagem77", "url_imagem78"], avaliacao: 4.6, totalAvaliacoes: 160, precoMin: 200, precoMax: 500, tags: ["relaxamento", "natureza"] },
+  { id: 40, nome: "Ilha Grande", localizacao: "Rio de Janeiro, Brasil", descricao: "Ilha com praias e trilhas em meio à natureza.", tipo: "Praia", regiao: "Sudeste", imagens: ["url_imagem79", "url_imagem80"], avaliacao: 4.8, totalAvaliacoes: 220, precoMin: 300, precoMax: 700, tags: ["aventura", "natureza"] },
+  { id: 41, nome: "Vitória", localizacao: "Espírito Santo, Brasil", descricao: "Cidade com belas praias e cultura rica.", tipo: "Cultural", regiao: "Sudeste", imagens: ["url_imagem81", "url_imagem82"], avaliacao: 4.5, totalAvaliacoes: 140, precoMin: 150, precoMax: 350, tags: ["cultura", "gastronomia"] },
+  { id: 42, nome: "Petrópolis", localizacao: "Rio de Janeiro, Brasil", descricao: "Cidade histórica com palácios e museus.", tipo: "Cultural", regiao: "Sudeste", imagens: ["url_imagem83", "url_imagem84"], avaliacao: 4.7, totalAvaliacoes: 160, precoMin: 100, precoMax: 300, tags: ["histórico", "cultural"] },
+  { id: 43, nome: "Maceió", localizacao: "Alagoas, Brasil", descricao: "Praia com águas claras e coqueirais.", tipo: "Praia", regiao: "Nordeste", imagens: ["url_imagem85", "url_imagem86"], avaliacao: 4.7, totalAvaliacoes: 250, precoMin: 200, precoMax: 600, tags: ["natureza", "relaxamento"] },
+  { id: 44, nome: "Cabo de Santo Agostinho", localizacao: "Pernambuco, Brasil", descricao: "Praias com belezas naturais e história.", tipo: "Praia", regiao: "Nordeste", imagens: ["url_imagem87", "url_imagem88"], avaliacao: 4.4, totalAvaliacoes: 120, precoMin: 150, precoMax: 400, tags: ["histórico", "natureza"] },
+  { id: 45, nome: "Santa Teresa", localizacao: "Rio de Janeiro, Brasil", descricao: "Bairro boêmio com arte e cultura.", tipo: "Cultural", regiao: "Sudeste", imagens: ["url_imagem89", "url_imagem90"], avaliacao: 4.6, totalAvaliacoes: 110, precoMin: 100, precoMax: 250, tags: ["cultura", "gastronomia"] },
+  { id: 46, nome: "Serra do Cipó", localizacao: "Minas Gerais, Brasil", descricao: "Parque nacional com cachoeiras e trilhas.", tipo: "Natureza", regiao: "Sudeste", imagens: ["url_imagem91", "url_imagem92"], avaliacao: 4.8, totalAvaliacoes: 130, precoMin: 150, precoMax: 350, tags: ["aventura", "natureza"] },
+  { id: 47, nome: "Ilha do Cardoso", localizacao: "São Paulo, Brasil", descricao: "Ilha com praias e natureza preservada.", tipo: "Praia", regiao: "Sudeste", imagens: ["url_imagem93", "url_imagem94"], avaliacao: 4.5, totalAvaliacoes: 120, precoMin: 200, precoMax: 500, tags: ["natureza", "relaxamento"] },
+  { id: 48, nome: "Caminho dos Nativos", localizacao: "Bahia, Brasil", descricao: "Caminho histórico com natureza exuberante.", tipo: "Cultural", regiao: "Nordeste", imagens: ["url_imagem95", "url_imagem96"], avaliacao: 4.6, totalAvaliacoes: 130, precoMin: 150, precoMax: 350, tags: ["histórico", "natureza"] },
+  { id: 49, nome: "Trancoso", localizacao: "Bahia, Brasil", descricao: "Praia famosa pela tranquilidade e beleza.", tipo: "Praia", regiao: "Nordeste", imagens: ["url_imagem97", "url_imagem98"], avaliacao: 4.7, totalAvaliacoes: 200, precoMin: 300, precoMax: 600, tags: ["relaxamento", "natureza"] },
+  { id: 50, nome: "Jericoacoara", localizacao: "Ceará, Brasil", descricao: "Praia famosa por suas dunas e lagoas.", tipo: "Praia", regiao: "Nordeste", imagens: ["url_imagem99", "url_imagem100"], avaliacao: 4.9, totalAvaliacoes: 220, precoMin: 300, precoMax: 800, tags: ["aventura", "natureza"] },
+  { id: 51, nome: "Teresópolis", localizacao: "Rio de Janeiro, Brasil", descricao: "Cidade montanhosa com natureza exuberante.", tipo: "Natureza", regiao: "Sudeste", imagens: ["url_imagem101", "url_imagem102"], avaliacao: 4.6, totalAvaliacoes: 120, precoMin: 150, precoMax: 350, tags: ["natureza", "aventura"] },
+  { id: 52, nome: "Petrópolis", localizacao: "Rio de Janeiro, Brasil", descricao: "Cidade histórica com palácios e museus.", tipo: "Cultural", regiao: "Sudeste", imagens: ["url_imagem103", "url_imagem104"], avaliacao: 4.7, totalAvaliacoes: 160, precoMin: 100, precoMax: 300, tags: ["histórico", "cultural"] },
+  { id: 53, nome: "Caconde", localizacao: "São Paulo, Brasil", descricao: "Cidade conhecida por suas cachoeiras e natureza.", tipo: "Natureza", regiao: "Sudeste", imagens: ["url_imagem105", "url_imagem106"], avaliacao: 4.5, totalAvaliacoes: 110, precoMin: 100, precoMax: 250, tags: ["natureza", "aventura"] },
+  { id: 54, nome: "Brotas", localizacao: "São Paulo, Brasil", descricao: "Destino de ecoturismo com atividades de aventura.", tipo: "Aventura", regiao: "Sudeste", imagens: ["url_imagem107", "url_imagem108"], avaliacao: 4.8, totalAvaliacoes: 180, precoMin: 200, precoMax: 450, tags: ["aventura", "natureza"] },
+  { id: 55, nome: "São João del Rei", localizacao: "Minas Gerais, Brasil", descricao: "Cidade histórica com belas igrejas e cultura rica.", tipo: "Cultural", regiao: "Sudeste", imagens: ["url_imagem109", "url_imagem110"], avaliacao: 4.6, totalAvaliacoes: 130, precoMin: 100, precoMax: 300, tags: ["histórico", "cultural"] },
+  { id: 56, nome: "Caldas Novas", localizacao: "Goiás, Brasil", descricao: "Cidade famosa por suas águas termais.", tipo: "Relaxamento", regiao: "Centro-Oeste", imagens: ["url_imagem111", "url_imagem112"], avaliacao: 4.5, totalAvaliacoes: 170, precoMin: 150, precoMax: 400, tags: ["relaxamento", "família"] },
+  { id: 57, nome: "Chapada dos Veadeiros", localizacao: "Goiás, Brasil", descricao: "Parque nacional com cachoeiras e trilhas.", tipo: "Natureza", regiao: "Centro-Oeste", imagens: ["url_imagem113", "url_imagem114"], avaliacao: 4.9, totalAvaliacoes: 200, precoMin: 200, precoMax: 500, tags: ["aventura", "natureza"] },
+  { id: 58, nome: "Cuiabá", localizacao: "Mato Grosso, Brasil", descricao: "Cidade que serve como porta de entrada para o Pantanal.", tipo: "Cultural", regiao: "Centro-Oeste", imagens: ["url_imagem115", "url_imagem116"], avaliacao: 4.4, totalAvaliacoes: 120, precoMin: 100, precoMax: 250, tags: ["cultura", "gastronomia"] },
+  { id: 59, nome: "Lencóis Maranhenses", localizacao: "Maranhão, Brasil", descricao: "Parque nacional com dunas e lagoas de água doce.", tipo: "Natureza", regiao: "Nordeste", imagens: ["url_imagem117", "url_imagem118"], avaliacao: 5.0, totalAvaliacoes: 300, precoMin: 400, precoMax: 900, tags: ["aventura", "natureza"] },
+  { id: 60, nome: "Ilha do Cardoso", localizacao: "São Paulo, Brasil", descricao: "Ilha com natureza preservada e praias tranquilas.", tipo: "Praia", regiao: "Sudeste", imagens: ["url_imagem119", "url_imagem120"], avaliacao: 4.5, totalAvaliacoes: 110, precoMin: 150, precoMax: 350, tags: ["natureza", "relaxamento"] },
+  { id: 61, nome: "Petrópolis", localizacao: "Rio de Janeiro, Brasil", descricao: "Cidade histórica com palácios e museus.", tipo: "Cultural", regiao: "Sudeste", imagens: ["url_imagem121", "url_imagem122"], avaliacao: 4.7, totalAvaliacoes: 160, precoMin: 100, precoMax: 300, tags: ["histórico", "cultural"] },
+  { id: 62, nome: "Ubatuba", localizacao: "São Paulo, Brasil", descricao: "Praias com natureza exuberante e opções de esportes.", tipo: "Praia", regiao: "Sudeste", imagens: ["url_imagem123", "url_imagem124"], avaliacao: 4.6, totalAvaliacoes: 180, precoMin: 200, precoMax: 500, tags: ["aventura", "natureza"] },
+  { id: 63, nome: "Guarapari", localizacao: "Espírito Santo, Brasil", descricao: "Praia famosa por suas águas quentes e curativas.", tipo: "Praia", regiao: "Sudeste", imagens: ["url_imagem125", "url_imagem126"], avaliacao: 4.5, totalAvaliacoes: 150, precoMin: 200, precoMax: 450, tags: ["relaxamento", "natureza"] },
+  { id: 64, nome: "Belo Horizonte", localizacao: "Minas Gerais, Brasil", descricao: "Cidade conhecida por sua culinária e cultura.", tipo: "Cultural", regiao: "Sudeste", imagens: ["url_imagem127", "url_imagem128"], avaliacao: 4.5, totalAvaliacoes: 140, precoMin: 100, precoMax: 250, tags: ["gastronomia", "cultura"] },
+  { id: 65, nome: "Arraial do Cabo", localizacao: "Rio de Janeiro, Brasil", descricao: "Praias de águas cristalinas e natureza exuberante.", tipo: "Praia", regiao: "Sudeste", imagens: ["url_imagem129", "url_imagem130"], avaliacao: 4.6, totalAvaliacoes: 160, precoMin: 200, precoMax: 500, tags: ["mergulhos", "natureza"] },
+  { id: 66, nome: "Jericoacoara", localizacao: "Ceará, Brasil", descricao: "Praia famosa por suas dunas e lagoas.", tipo: "Praia", regiao: "Nordeste", imagens: ["url_imagem131", "url_imagem132"], avaliacao: 4.9, totalAvaliacoes: 220, precoMin: 300, precoMax: 800, tags: ["aventura", "natureza"] },
+  { id: 67, nome: "São Miguel dos Milagres", localizacao: "Alagoas, Brasil", descricao: "Praia tranquila e preservada.", tipo: "Praia", regiao: "Nordeste", imagens: ["url_imagem133", "url_imagem134"], avaliacao: 4.8, totalAvaliacoes: 200, precoMin: 250, precoMax: 600, tags: ["relaxamento", "natureza"] },
+  { id: 68, nome: "Praia do Leste", localizacao: "Paraná, Brasil", descricao: "Praia com águas claras e natureza preservada.", tipo: "Praia", regiao: "Sul", imagens: ["url_imagem135", "url_imagem136"], avaliacao: 4.5, totalAvaliacoes: 120, precoMin: 100, precoMax: 250, tags: ["natureza", "relaxamento"] },
+  { id: 69, nome: "Ilhéus", localizacao: "Bahia, Brasil", descricao: "Cidade com praias e rica história.", tipo: "Cultural", regiao: "Nordeste", imagens: ["url_imagem137", "url_imagem138"], avaliacao: 4.6, totalAvaliacoes: 130, precoMin: 150, precoMax: 350, tags: ["histórico", "gastronomia"] },
+  { id: 70, nome: "Cabo Frio", localizacao: "Rio de Janeiro, Brasil", descricao: "Praia famosa por suas águas claras e tranquilas.", tipo: "Praia", regiao: "Sudeste", imagens: ["url_imagem139", "url_imagem140"], avaliacao: 4.7, totalAvaliacoes: 180, precoMin: 200, precoMax: 500, tags: ["relaxamento", "natureza"] },
+  { id: 71, nome: "São Sebastião", localizacao: "São Paulo, Brasil", descricao: "Praias e natureza exuberante.", tipo: "Praia", regiao: "Sudeste", imagens: ["url_imagem141", "url_imagem142"], avaliacao: 4.5, totalAvaliacoes: 150, precoMin: 200, precoMax: 400, tags: ["natureza", "relaxamento"] },
+  { id: 72, nome: "Cabo Verde", localizacao: "África", descricao: "Ilhas tropicais com belas praias.", tipo: "Praia", regiao: "Internacional", imagens: ["url_imagem143", "url_imagem144"], avaliacao: 4.7, totalAvaliacoes: 250, precoMin: 400, precoMax: 900, tags: ["relaxamento", "natureza"] },
+  { id: 73, nome: "Bariloche", localizacao: "Argentina", descricao: "Cidade famosa por suas montanhas e lagos.", tipo: "Inverno", regiao: "Internacional", imagens: ["url_imagem145", "url_imagem146"], avaliacao: 4.8, totalAvaliacoes: 300, precoMin: 500, precoMax: 1000, tags: ["aventura", "natureza"] },
+  { id: 74, nome: "Salvador", localizacao: "Bahia, Brasil", descricao: "Cidade com rica cultura e belas praias.", tipo: "Cultural", regiao: "Nordeste", imagens: ["url_imagem147", "url_imagem148"], avaliacao: 4.5, totalAvaliacoes: 200, precoMin: 200, precoMax: 500, tags: ["cultura", "gastronomia"] },
+  { id: 75, nome: "Porto Alegre", localizacao: "Rio Grande do Sul, Brasil", descricao: "Capital do estado com vida cultural intensa.", tipo: "Cultural", regiao: "Sul", imagens: ["url_imagem149", "url_imagem150"], avaliacao: 4.4, totalAvaliacoes: 130, precoMin: 100, precoMax: 300, tags: ["cultura", "gastronomia"] },
+  { id: 76, nome: "Passo Fundo", localizacao: "Rio Grande do Sul, Brasil", descricao: "Cidade conhecida por sua cultura e gastronomia.", tipo: "Cultural", regiao: "Sul", imagens: ["url_imagem151", "url_imagem152"], avaliacao: 4.5, totalAvaliacoes: 120, precoMin: 100, precoMax: 250, tags: ["cultura", "gastronomia"] },
+  { id: 77, nome: "Santos", localizacao: "São Paulo, Brasil", descricao: "Cidade portuária com rica história e praias.", tipo: "Cultural", regiao: "Sudeste", imagens: ["url_imagem153", "url_imagem154"], avaliacao: 4.6, totalAvaliacoes: 150, precoMin: 150, precoMax: 350, tags: ["natureza", "relaxamento"]}
+
+]
+catalogoDestinos = [...catalogoDestinos, ...novosDestinos];
+
+function usuarioLogado() {
+  return JSON.parse(sessionStorage.getItem("usuarioLogado"));
+}
 
 function lerFavoritosSalvos() {
   const favoritosAtuais = localStorage.getItem("travelsync:favoritos");
   const favoritosAntigos = localStorage.getItem("travelsync:favoritosSalvos");
   return JSON.parse(favoritosAtuais || favoritosAntigos || "[]");
 }
-let favoritos = lerFavoritosSalvos();
+
+favoritos = lerFavoritosSalvos();
+
+if (lista) {
+  const usuario = usuarioLogado();
+
+  if (!usuario) {
+    lista.innerHTML = `
+      <h3>Você precisa fazer o login para ver seus favoritos</h3>
+    `;
+  } else {
+    renderizarFavoritos();
+  }
+}
+
+function renderizarFavoritos() {
+  const lista = document.getElementById("listaFavoritos");
+  const usuario = usuarioLogado();
+
+  if (!lista) return;
+
+  if (!usuario) {
+    lista.innerHTML = `
+      <h3>Você precisa fazer o login para ver seus favoritos</h3>
+    `;
+    return;
+  }
+
+  if (favoritos.length === 0) {
+    lista.innerHTML = `
+      <h3>Você ainda não salvou nenhum favorito</h3>
+    `;
+    return;
+  }
+
+  lista.innerHTML = favoritos
+    .map((id) => {
+      return `
+        <div class="favorito-item">
+          <p>Destino ID: ${id}</p>
+          <button onclick="alternarDestinoFavorito('${id}')">
+            Remover
+          </button>
+        </div>
+      `;
+    })
+    .join("");
+}
 
 function atualizarResumoFavoritos() {
   localStorage.setItem("travelsync:favoritos", JSON.stringify(favoritos));
-  totalFavoritos.textContent = String(favoritos.length);
+
+  if (typeof totalFavoritos !== "undefined" && totalFavoritos) {
+    totalFavoritos.textContent = String(favoritos.length);
+  }
 }
 
 function destinoFoiCurtido(id) {
@@ -38,15 +174,31 @@ function alternarDestinoFavorito(id) {
 
   atualizarResumoFavoritos();
 
-  if (destinoEscolhido === id) {
+  if (typeof destinoEscolhido !== "undefined" && destinoEscolhido === id) {
     desenharDetalhesDestino();
     return;
   }
 
-  if (paginaAtual === "favoritos") mostrarFavoritos();
-  if (paginaAtual === "destinos" || paginaAtual === "buscar") abrirListagemDestinos(paginaAtual);
+  if (typeof paginaAtual !== "undefined") {
+    if (paginaAtual === "favoritos") renderizarFavoritos();
+    if (paginaAtual === "destinos" || paginaAtual === "buscar") {
+      abrirListagemDestinos(paginaAtual);
+    }
+  }
 }
 
+function mostrarFavoritos(event) {
+  if (event) event.preventDefault();
+
+ paginaAtual = "favoritos";
+
+  const home = document.querySelector(".home");
+  const fav = document.querySelector(".favoritos");
+
+  if (home) home.style.display = "none";
+  if (fav) fav.style.display = "block";
+  renderizarFavoritos();
+}
 function guardarNoHistorico(id) {
   historico = [id, ...historico.filter((item) => item !== id)].slice(0, 5);
   localStorage.setItem("travelsync:historico", JSON.stringify(historico));

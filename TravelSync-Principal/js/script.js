@@ -16,6 +16,7 @@ let timerGaleria = null;
 let mapaDestinoAberto = null;
 let filtrosVisiveis = false;
 let historico = JSON.parse(localStorage.getItem("travelsync:historico") || "[]");
+let favoritos = [] ;
 
 
 function destacarOpcaoMenu(tela) {
@@ -47,3 +48,18 @@ if (fecharMenu) {
 if (fundoMenu) {
   fundoMenu.addEventListener("click", fecharMenuLateral);
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const btnSair = document.getElementById("btnSair");
+
+  if (!btnSair) return;
+
+  btnSair.addEventListener("click", () => {
+    sessionStorage.removeItem("usuarioLogado");
+
+    sessionStorage.clear();
+
+    window.location.href = "login.html";
+  });
+});

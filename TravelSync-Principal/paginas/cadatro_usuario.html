@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TravelSync - Destinos</title>
+    <title>TravelSync - Início</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="../css/style.css" />
   </head>
@@ -41,16 +41,33 @@
           <div class="acoes-topo">
             <button class="botao-icone" aria-label="Notificacoes">♢</button>
             <button class="botao-icone" aria-label="Mensagens">✉</button>
-            <div class="perfil-topo">
+            
+              <div class="perfil-topo">
                 <span class="foto-perfil"></span>
                 <span><a href="login.html">Olá, Usuário!</a></span>
                 <span></span>
               </div>
           </div>
         </header>
-         
-
-        <main class="conteudo" id="areaConteudo" tabindex="-1"></main>
+       
+<main class="container mt-4">
+<h1 class="mt-4 mb-3">Cadastro de usuário</h1>
+    <hr>
+     <div class="row">
+      <section class="col-lg-9" >
+           <div class="card p-3">
+             
+            <form autocomplete="on" id="cadastrousu">
+                    <p>  <label for="ino">Nome: </label> <input type="text" name="no" id="ino" required> </p>
+                    <p>  <label for="iemail">E-mail: </label><input type="email" name="email" id="iemail" required></p>
+                    <p>  <label for="isenha">Senha:</label><input type="password" name="senha" id="isenha"></p>
+                    <p>  <label for="inousu">Nome de usuário: </label><input type="text" name="nousu" id="inousu"></p>
+                <input type="submit" value="Cadastrar" id="cada">
+                   </form>
+           </div>
+      </section>
+    </div>
+</main>
 
         <footer class="rodape">
           <span>© 2024 Travel Sync</span>
@@ -69,6 +86,6 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="../js/script.js"></script>
-    <script src="../js/destinos.js"></script>
+    <script src="../js/cadastro_usuario.js"></script>
   </body>
 </html>

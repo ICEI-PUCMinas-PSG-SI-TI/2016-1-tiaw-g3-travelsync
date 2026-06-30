@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TravelSync - Destinos</title>
+    <title>TravelSync - Início</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="../css/style.css" />
   </head>
@@ -41,16 +41,43 @@
           <div class="acoes-topo">
             <button class="botao-icone" aria-label="Notificacoes">♢</button>
             <button class="botao-icone" aria-label="Mensagens">✉</button>
-            <div class="perfil-topo">
+              <div class="perfil-topo">
                 <span class="foto-perfil"></span>
                 <span><a href="login.html">Olá, Usuário!</a></span>
                 <span></span>
               </div>
           </div>
         </header>
-         
+    <div class="perfil-container">
 
-        <main class="conteudo" id="areaConteudo" tabindex="-1"></main>
+    <h1>Editar Perfil</h1>
+
+    <div class="foto-preview">
+      <img id="fotoPreview" src="https://via.placeholder.com/120" alt="Foto do perfil">
+    </div>
+
+    <form id="formPerfil">
+
+      <label>Nome</label>
+      <input type="text" id="nome" placeholder="Seu nome">
+
+      <label>Email</label>
+      <input type="email" id="email" placeholder="Seu email">
+
+      <label>URL da Foto</label>
+      <input type="text" id="foto" placeholder="https://...">
+
+      <label>Bio</label>
+      <textarea id="bio" placeholder="Fale sobre você..."></textarea>
+
+      <button type="submit">Salvar alterações</button>
+
+    </form>
+
+    <p id="msg"></p>
+
+  </div>
+
 
         <footer class="rodape">
           <span>© 2024 Travel Sync</span>
@@ -69,6 +96,6 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="../js/script.js"></script>
-    <script src="../js/destinos.js"></script>
+    <script src="../js/perfil.js"></script>
   </body>
 </html>
