@@ -1,188 +1,132 @@
-
-const map = L.map('map').setView([-14.2350, -51.9253], 4); //Aqui tem as coodernadas iniciais do mapa, começa no Brasil
-
-// Essa parte vai fazer o mapa visual, que foi feito através de link de outro site 
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: 'OpenStreetMap'
-}).addTo(map);
-
-// array de marcadores
-let marcador = [];
-
-// dos locais que vão ser pesquisados
-let locaisPesquisados = [];
-
-// a posição inicial 
+const mapa = L.map("map").setView([-14.2350, -51.9253], 4);
+const campoPesquisa = document.getElementById("pesquisar");
+const listaPontos = document.getElementById("listaPontos");
 const posicaoInicial = [-14.2350, -51.9253];
 const zoomInicial = 4;
 
+let marcadores = [];
+let locaisPesquisados = JSON.parse(localStorage.getItem("travelsync:pontosMapa") || "[]");
 
-// vai buscar o local onde está guardado as informações
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: "OpenStreetMap"
+}).addTo(mapa);
+
+function salvarPontos() {
+  localStorage.setItem("travelsync:pontosMapa", JSON.stringify(locaisPesquisados.slice(0, 12)));
+}
+
+function limparMarcadores() {
+  marcadores.forEach((marker) => mapa.removeLayer(marker));
+  marcadores = [];
+}
+
+function adicionarMarcador(local, abrirPopup = false) {
+  const marker = L.marker([Number(local.latitude), Number(local.longitude)])
+    .addTo(mapa)
+    .bindPopup(`<strong>${local.nome}</strong><br>${local.descricao || ""}`);
+
+  if (abrirPopup) marker.openPopup();
+  marcadores.push(marker);
+}
+
+function mostrarListaPontos() {
+  if (!listaPontos) return;
+
+  if (!locaisPesquisados.length) {
+    listaPontos.innerHTML = `<p>Nenhum ponto pesquisado ainda.</p>`;
+    return;
+  }
+
+  listaPontos.innerHTML = locaisPesquisados.map((local, index) => `
+    <article class="ponto-mapa">
+      <strong>${local.nome}</strong>
+      <span>${Number(local.latitude).toFixed(4)}, ${Number(local.longitude).toFixed(4)}</span>
+      <button type="button" data-ver-ponto="${index}">Ver no mapa</button>
+    </article>
+  `).join("");
+
+  listaPontos.querySelectorAll("[data-ver-ponto]").forEach((botao) => {
+    botao.addEventListener("click", () => {
+      const local = locaisPesquisados[Number(botao.dataset.verPonto)];
+      mapa.setView([Number(local.latitude), Number(local.longitude)], 14);
+      limparMarcadores();
+      adicionarMarcador(local, true);
+    });
+  });
+}
+
 async function carregarLocais() {
+  const locaisBase = [
+    { nome: "Fernando de Noronha", descricao: "Destino de praia em Pernambuco", latitude: -3.8549, longitude: -32.4233 },
+    { nome: "Gramado", descricao: "Destino serrano no Rio Grande do Sul", latitude: -29.3788, longitude: -50.8738 },
+    { nome: "Foz do Iguacu", descricao: "Cataratas e natureza no Parana", latitude: -25.5163, longitude: -54.5854 }
+  ];
 
-    const resposta = await fetch("http://localhost:3000/locais");
+  const destinosAdmin = JSON.parse(localStorage.getItem("travelsync:destinosAdmin") || "[]");
+  const locaisAdmin = destinosAdmin
+    .filter((destino) => destino.coordenadas)
+    .map((destino) => ({
+      nome: destino.nome,
+      descricao: destino.descricao,
+      latitude: destino.coordenadas[0],
+      longitude: destino.coordenadas[1]
+    }));
 
+  limparMarcadores();
+  [...locaisBase, ...locaisAdmin, ...locaisPesquisados].forEach((local) => adicionarMarcador(local));
+  mostrarListaPontos();
+}
+
+async function pesquisarLocal() {
+  const termo = campoPesquisa.value.trim();
+
+  if (!termo) {
+    alert("Digite um local para pesquisar.");
+    return;
+  }
+
+  try {
+    const resposta = await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(termo)}`);
     const locais = await resposta.json();
 
-    mostrarLocais(locais);
+    if (!locais.length) {
+      alert("Local nao encontrado.");
+      return;
+    }
+
+    const local = {
+      nome: locais[0].display_name,
+      descricao: "Ponto pesquisado no mapa",
+      latitude: Number(locais[0].lat),
+      longitude: Number(locais[0].lon)
+    };
+
+    locaisPesquisados.unshift(local);
+    locaisPesquisados = locaisPesquisados.slice(0, 12);
+    salvarPontos();
+
+    limparMarcadores();
+    adicionarMarcador(local, true);
+    mapa.setView([local.latitude, local.longitude], 14);
+    mostrarListaPontos();
+  } catch (erro) {
+    alert("Nao foi possivel pesquisar agora. Verifique sua internet e tente novamente.");
+  }
 }
 
-
-// vai mostrar marcadores no inicio do mapa, se clicar no marcador vai aparecer o nome e a descrição, só funciona com os do inicio
-function mostrarLocais(locais) {
-
-    locais.forEach(local => {
-
-        const marker = L.marker([
-            local.latitude,
-            local.longitude
-        ])
-        .addTo(map)
-        .bindPopup(`
-            <h3>${local.nome}</h3>
-            <p>${local.descricao}</p>
-        `);
-
-        marcador.push(marker);
-    });
-}
-
-
-// botão da pesquisa
-const botao = document.getElementById("botao");
-
-botao.addEventListener("click", async () => {
-
-    const termo = document
-        .getElementById("pesquisar")
-        .value;
-
-    if (!termo) {
-        alert("Digite um local");
-        return;
-    }
-
-
-    const resposta = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${termo}` //pega uma API de um site de fora que quando o local for pesquisado, ele aparece no mapa
-    );
-
-    const locais = await resposta.json();
-
-    // caso não seja encontrado vai soar o alerta
-    if (locais.length === 0) {
-
-        alert("Local não encontrado");
-
-        return;
-    }
-
-    // pega o primeiro resultado que aparecer
-    const local = locais[0];
-
-    const latitude = local.lat;
-    const longitude = local.lon;
-
-    // vai dar um zoom no mapa e coloca-lo na latitude e longitude do local pesquisado
-    map.setView(
-        [latitude, longitude],
-        15
-    );
-
-    // criação do marcador encima 
-    const marker = L.marker([
-        latitude,
-        longitude
-    ])
-    .addTo(map)
-    .bindPopup(local.display_name)
-    .openPopup();
-
-    marcador.push(marker);
-
-    locaisPesquisados.push({
-    nome: local.display_name,
-    latitude: latitude,
-    longitude: longitude
-});
+document.getElementById("botao").addEventListener("click", pesquisarLocal);
+campoPesquisa.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") pesquisarLocal();
 });
 
-
-// atualizar o mapa de acordo com a pesquisa
-function atualizarMapa(locais) {
-
-    // vai tirar a marcação que tinha antes
-    marcador.forEach(marker => {
-        map.removeLayer(marker);
-    });
-
-    marcador = [];
-
-     if (locais.length === 0) {
-        return;
-    }
-
-    locais.forEach(local => {
-
-        const marker = L.marker([
-            local.latitude,
-            local.longitude
-        ])
-        .addTo(map)
-        .bindPopup(`
-            <h3>${local.nome}</h3>
-            <p>${local.descricao}</p>
-        `);
-        
-        marcador.push(marker);
-
-         const primeiroLocal = locais[0]
-
-        map.setView(
-            [primeiroLocal.latitude, primeiroLocal.longitude],
-            12
-        );
-
-        marcador[0].openPopup();
-        locaisPesquisados.push(local);
-    });
-}
-
-
-// botão voltar
-const voltar = document.getElementById("voltar");
-
-voltar.addEventListener("click", () => {
-
-    map.setView(posicaoInicial, zoomInicial);
-
+document.getElementById("voltar").addEventListener("click", () => {
+  mapa.setView(posicaoInicial, zoomInicial);
+  carregarLocais();
 });
 
-
-// coloca os pontos que aparecem no mapa embaixo, quando o botão for clicado
-const pontos = document.getElementById("pontos");
-
-pontos.addEventListener("click", () => {
-
-    if (locaisPesquisados.length === 0) {
-
-        alert("Nenhum local pesquisado");
-
-        return;
-    }
-
-    let mensagem = "PONTOS NO MAPA:\n\n";
-
-    locaisPesquisados.forEach(local => {
-
-        mensagem += `📍 ${local.nome}\n`;
-
-    });
-
-    alert(mensagem);
-
+document.getElementById("pontos").addEventListener("click", () => {
+  mostrarListaPontos();
+  listaPontos?.scrollIntoView({ behavior: "smooth", block: "nearest" });
 });
 
-
-// iniciar
 carregarLocais();

@@ -1160,6 +1160,31 @@ a {
   grid-column: 1 / -1;
 }
 
+<<<<<<< HEAD
+=======
+.acoes-reserva {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.acoes-reserva .botao-planejar,
+.acoes-reserva .botao-cancelar {
+  flex: 1 1 190px;
+}
+
+.botao-cancelar {
+  min-height: 44px;
+  border: 1px solid rgba(255, 122, 26, 0.45);
+  border-radius: 8px;
+  background: #fff6ef;
+  color: #9a3f00;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
 .resumo-reserva h2,
 .dicas-mapa h2 {
   margin-top: 0;
@@ -1248,6 +1273,118 @@ a {
   font-weight: 700;
 }
 
+<<<<<<< HEAD
+=======
+.tela-formulario {
+  max-width: 560px;
+}
+
+.formulario-conta,
+.form-admin,
+.lista-admin {
+  display: grid;
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+
+.formulario-conta label,
+.form-admin label {
+  display: grid;
+  gap: 7px;
+}
+
+.formulario-conta span,
+.form-admin span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.formulario-conta input,
+.form-admin input,
+.form-admin select,
+.form-admin textarea {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 12px;
+  outline: 0;
+}
+
+.form-admin textarea {
+  padding-top: 10px;
+  resize: vertical;
+}
+
+.link-formulario {
+  border: 0;
+  background: transparent;
+  color: var(--blue-700);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.mensagem-formulario {
+  min-height: 18px;
+  margin: 0;
+  color: var(--blue-700);
+  font-weight: 700;
+}
+
+.mensagem-formulario.erro {
+  color: #a43a00;
+}
+
+.tela-admin {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 24px;
+  align-items: start;
+}
+
+.form-admin {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.form-admin .campo-largo,
+.form-admin .botao-planejar,
+.form-admin .mensagem-formulario {
+  grid-column: 1 / -1;
+}
+
+.lista-admin h2 {
+  margin: 0;
+}
+
+.lista-admin article {
+  display: grid;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--soft);
+  padding: 12px;
+}
+
+.lista-admin article span {
+  color: var(--muted);
+}
+
+.lista-admin article button {
+  justify-self: start;
+  border: 0;
+  background: transparent;
+  color: #9a3f00;
+  padding: 0;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
 .painel-lateral {
   display: grid;
   gap: 18px;
@@ -1322,7 +1459,12 @@ a {
   .destaque-detalhe,
   .conteudo-detalhe,
   .tela-reserva,
+<<<<<<< HEAD
   .tela-mapa-destino {
+=======
+  .tela-mapa-destino,
+  .tela-admin {
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
     grid-template-columns: 1fr;
   }
 
@@ -1375,10 +1517,23 @@ a {
   .avaliacoes-lista,
   .grade-fotos,
   .form-reserva,
+<<<<<<< HEAD
+=======
+  .form-admin,
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
   .mapa-busca {
     grid-template-columns: 1fr;
   }
 
+<<<<<<< HEAD
+=======
+  .form-admin .campo-largo,
+  .form-admin .botao-planejar,
+  .form-admin .mensagem-formulario {
+    grid-column: auto;
+  }
+
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
   .botoes-filtro {
     justify-content: stretch;
   }

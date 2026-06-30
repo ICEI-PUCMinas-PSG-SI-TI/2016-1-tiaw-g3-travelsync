@@ -1,53 +1,34 @@
+const formCadastro = document.getElementById("cadastrousu");
 
-const form = document.getElementById("cadastrousu")
-form.addEventListener("submit", function(event){
-    event.preventDefault()
-    
-    console.log("entrado no submit")
+formCadastro.addEventListener("submit", function (event) {
+  event.preventDefault();
 
-    const nome = document.getElementById("ino").value
-    const email = document.getElementById("iemail").value
-    const senha = document.getElementById("isenha").value
-    const usuario = document.getElementById("inousu").value
+  const nome = document.getElementById("ino").value.trim();
+  const email = document.getElementById("iemail").value.trim().toLowerCase();
+  const senha = document.getElementById("isenha").value;
+  const usuario = document.getElementById("inousu").value.trim();
+  const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
 
-    console.log("dados pegos")
+  const emailJaExiste = usuarios.some((item) => item.email.toLowerCase() === email);
+  if (emailJaExiste) {
+    alert("Esse email ja esta cadastrado. Tente entrar ou redefinir a senha.");
+    return;
+  }
 
-    const usuarios =
-       JSON.parse(localStorage.getItem("usuarios")) || []
+  const novoUsuario = {
+    id: Date.now(),
+    nome,
+    email,
+    senha,
+    usuario,
+    admin: false,
+    favoritos: []
+  };
 
-    console.log(" localStorage lido")
+  usuarios.push(novoUsuario);
+  localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  sessionStorage.setItem("ultimoCadastro", JSON.stringify({ email, senha }));
 
-    const novoUsuario = {
-        id: Date.now(),
-        nome: nome,
-        email: email,
-        senha: senha,
-        usuario: usuario,
-        admin: false,
-        favoritos: []
-    }
-
-    usuarios.push(novoUsuario)
-
-     console.log("usuário adicionado")
-
-    localStorage.setItem(
-        "usuarios",
-        JSON.stringify(usuarios)
-    )
-
-    console.log("salvo no localstorage")
-
-    sessionStorage.setItem(
-        "ultimoCadastro",
-        JSON.stringify({
-            email: email, 
-            senha: senha
-        })
-    )
-    alert("Usuário cadastrado com sucesso!")
-    
-    setTimeout(() => {
-    window.location.href = "login.html"
-}, 2000)
-})
+  alert("Usuario cadastrado com sucesso!");
+  window.location.href = "login.html";
+});

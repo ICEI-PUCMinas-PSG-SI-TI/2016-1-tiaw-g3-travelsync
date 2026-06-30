@@ -1247,7 +1247,7 @@ function mostrarInicio(){
   <div class="hero-bg"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Descubra o mundo</p>
-    <h1 class="hero-title">Encontre eventos<br>& destinos incríveis</h1>
+    <h1 class="hero-title">Encontre eventos <br>e destinos incríveis</h1>
     <p class="hero-sub">Pesquise por nome, categoria ou localização</p>
     <div class="search-box">
       <svg class="search-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>

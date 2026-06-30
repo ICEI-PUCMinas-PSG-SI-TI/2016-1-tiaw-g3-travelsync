@@ -6,6 +6,10 @@ const abrirMenu = document.querySelector(".botao-menu");
 const menuLateral = document.querySelector(".menu-lateral");
 const fecharMenu = document.querySelector(".fechar-menu");
 const fundoMenu = document.querySelector(".fundo-menu");
+<<<<<<< HEAD
+=======
+const nomeTopo = document.querySelector(".perfil-topo span:nth-child(2)");
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
 
 let catalogoDestinos = [];
 let paginaAtual = "destinos";
@@ -17,6 +21,10 @@ let mapaDestinoAberto = null;
 let filtrosVisiveis = false;
 let favoritos = lerFavoritosSalvos();
 let historico = JSON.parse(localStorage.getItem("travelsync:historico") || "[]");
+<<<<<<< HEAD
+=======
+let usuarioAtual = JSON.parse(localStorage.getItem("travelsync:usuarioAtual") || "null");
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
 
 const filtrosIniciais = {
   busca: "",
@@ -109,6 +117,11 @@ function destinoAtual() {
 }
 
 function pegarCoordenadas(destino) {
+<<<<<<< HEAD
+=======
+  if (destino.coordenadas && destino.coordenadas.length === 2) return destino.coordenadas;
+
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
   const mapa = {
     "Fernando de Noronha": [-3.8549, -32.4233],
     Bonito: [-21.1261, -56.4836],
@@ -124,6 +137,55 @@ function pegarCoordenadas(destino) {
   return mapa[destino.nome] || [-14.235, -51.9253];
 }
 
+<<<<<<< HEAD
+=======
+function lerUsuarios() {
+  return JSON.parse(localStorage.getItem("travelsync:usuarios") || "[]");
+}
+
+function normalizarEmail(email) {
+  return email.trim().toLowerCase();
+}
+
+function dadosAdmin(email, senha) {
+  const emailLimpo = normalizarEmail(email);
+  return (emailLimpo === "admin@gmail" || emailLimpo === "admin@gmail.com") && senha.trim() === "1234";
+}
+
+function salvarUsuarios(usuarios) {
+  localStorage.setItem("travelsync:usuarios", JSON.stringify(usuarios));
+}
+
+function atualizarUsuarioTopo() {
+  if (!nomeTopo) return;
+  nomeTopo.textContent = usuarioAtual ? `Ola, ${usuarioAtual.nome}` : "Ola, Usuario!";
+}
+
+function entrarUsuario(usuario) {
+  usuarioAtual = {
+    nome: usuario.nome,
+    email: usuario.email,
+    admin: Boolean(usuario.admin)
+  };
+  localStorage.setItem("travelsync:usuarioAtual", JSON.stringify(usuarioAtual));
+  atualizarUsuarioTopo();
+}
+
+function sairUsuario() {
+  usuarioAtual = null;
+  localStorage.removeItem("travelsync:usuarioAtual");
+  atualizarUsuarioTopo();
+}
+
+function lerDestinosCadastrados() {
+  return JSON.parse(localStorage.getItem("travelsync:destinosAdmin") || "[]");
+}
+
+function salvarDestinosCadastrados(destinos) {
+  localStorage.setItem("travelsync:destinosAdmin", JSON.stringify(destinos));
+}
+
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
 function chaveReserva(destinoId) {
   return `travelsync:reservas:${destinoId}`;
 }
@@ -706,6 +768,10 @@ function mostrarReservaDestino(destino = destinoAtual()) {
   destinoEscolhido = destino.id;
 
   const reservaSalva = JSON.parse(localStorage.getItem(chaveReserva(destino.id)) || "{}");
+<<<<<<< HEAD
+=======
+  const reservaAtiva = Boolean(reservaSalva.destino);
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
 
   areaConteudo.innerHTML = `
     <button class="voltar" type="button" data-voltar-detalhes>← Voltar para detalhes</button>
@@ -713,7 +779,11 @@ function mostrarReservaDestino(destino = destinoAtual()) {
     <section class="titulo-pagina titulo-menor">
       <span class="rotulo-secao">Reserva</span>
       <h1>${destino.nome}</h1>
+<<<<<<< HEAD
       <p>Informe os dados principais para simular a reserva e conferir o valor estimado.</p>
+=======
+      <p>${reservaAtiva ? "Edite os dados da reserva ou cancele se seus planos mudaram." : "Informe os dados principais para simular a reserva e conferir o valor estimado."}</p>
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
     </section>
 
     <section class="tela-reserva">
@@ -763,7 +833,14 @@ function mostrarReservaDestino(destino = destinoAtual()) {
           </div>
         </fieldset>
 
+<<<<<<< HEAD
         <button class="botao-planejar" type="submit">Finalizar reserva</button>
+=======
+        <div class="acoes-reserva">
+          <button class="botao-planejar" type="submit">${reservaAtiva ? "Salvar alteracoes" : "Finalizar reserva"}</button>
+          ${reservaAtiva ? `<button class="botao-cancelar" type="button" data-cancelar-reserva>Cancelar reserva</button>` : ""}
+        </div>
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
       </form>
 
       <aside class="resumo-reserva">
@@ -853,8 +930,26 @@ function ligarReservaDestino(destino) {
     }));
 
     alert("Reserva salva com sucesso!");
+<<<<<<< HEAD
   });
 
+=======
+    mostrarReservaDestino(destino);
+  });
+
+  const botaoCancelar = document.querySelector("[data-cancelar-reserva]");
+  if (botaoCancelar) {
+    botaoCancelar.addEventListener("click", () => {
+      const confirmar = confirm("Deseja cancelar esta reserva?");
+      if (!confirmar) return;
+
+      localStorage.removeItem(chaveReserva(destino.id));
+      alert("Reserva cancelada.");
+      mostrarReservaDestino(destino);
+    });
+  }
+
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
   atualizarResumoReserva(destino);
 }
 
@@ -879,6 +974,7 @@ function mostrarMapaDestino(destino = destinoAtual()) {
     <section class="tela-mapa-destino">
       <div class="mapa-area">
         <div class="mapa-busca">
+<<<<<<< HEAD
           <input type="text" id="pesquisaMapa" placeholder="Pesquisar ponto no destino" />
           <button class="botao-mapa" type="button" data-pesquisar-mapa>Pesquisar</button>
           <button class="botao-acao" type="button" data-limpar-pontos>Limpar pontos</button>
@@ -888,6 +984,13 @@ function mostrarMapaDestino(destino = destinoAtual()) {
           <strong>${destino.nome}</strong>
           <small>${coordenadas[0].toFixed(4)}, ${coordenadas[1].toFixed(4)}</small>
         </div>
+=======
+          <input type="text" id="pesquisaMapa" placeholder="Pesquisar qualquer local" />
+          <button class="botao-mapa" type="button" data-pesquisar-mapa>Pesquisar</button>
+          <button class="botao-acao" type="button" data-limpar-pontos>Limpar pontos</button>
+        </div>
+        <div class="mapa-visual" id="mapaDestino"></div>
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
         <p class="aviso-mapa" data-aviso-mapa>Carregando mapa de ${destino.nome}...</p>
       </div>
 
@@ -912,6 +1015,7 @@ function mostrarMapaDestino(destino = destinoAtual()) {
 }
 
 function ligarMapaDestino(destino) {
+<<<<<<< HEAD
   document.querySelector("[data-pesquisar-mapa]").addEventListener("click", async () => {
     const termo = document.querySelector("#pesquisaMapa").value.trim();
     if (!termo) {
@@ -943,6 +1047,14 @@ function ligarMapaDestino(destino) {
 
     localStorage.setItem(chaveMapa(destino.id), JSON.stringify(pontos.slice(0, 6)));
     mostrarMapaDestino(destino);
+=======
+  document.querySelector("[data-pesquisar-mapa]").addEventListener("click", () => pesquisarPontoMapa(destino));
+
+  document.querySelector("#pesquisaMapa").addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") return;
+    event.preventDefault();
+    pesquisarPontoMapa(destino);
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
   });
 
   document.querySelector("[data-limpar-pontos]").addEventListener("click", () => {
@@ -951,6 +1063,52 @@ function ligarMapaDestino(destino) {
   });
 }
 
+<<<<<<< HEAD
+=======
+async function pesquisarPontoMapa(destino) {
+  const campo = document.querySelector("#pesquisaMapa");
+  const aviso = document.querySelector("[data-aviso-mapa]");
+  const termo = campo.value.trim();
+
+  if (!termo) {
+    alert("Digite um local");
+    return;
+  }
+
+  const pontos = JSON.parse(localStorage.getItem(chaveMapa(destino.id)) || "[]");
+  const coordenadasDestino = pegarCoordenadas(destino);
+  let coordenadas = criarCoordenadaProxima(coordenadasDestino, pontos.length);
+  let localizacao = "Local pesquisado no mapa";
+
+  aviso.textContent = "Pesquisando local...";
+
+  try {
+    const busca = encodeURIComponent(termo);
+    const resposta = await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${busca}`);
+    const resultado = await resposta.json();
+
+    if (resultado.length) {
+      coordenadas = [Number(resultado[0].lat), Number(resultado[0].lon)];
+      localizacao = resultado[0].display_name || localizacao;
+    } else {
+      aviso.textContent = "Nao encontrei esse local online, entao salvei um ponto proximo ao destino.";
+    }
+  } catch (erro) {
+    console.warn("Nao foi possivel buscar o ponto no mapa", erro);
+    aviso.textContent = "Nao consegui consultar o mapa online, mas salvei o ponto na sua lista.";
+  }
+
+  pontos.unshift({
+    nome: termo,
+    localizacao,
+    coordenadas
+  });
+
+  localStorage.setItem(chaveMapa(destino.id), JSON.stringify(pontos.slice(0, 8)));
+  mostrarMapaDestino(destino);
+}
+
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
 function montarMapaDestino(destino, pontos) {
   const aviso = document.querySelector("[data-aviso-mapa]");
   const elementoMapa = document.querySelector("#mapaDestino");
@@ -990,14 +1148,31 @@ function montarMapaDestino(destino, pontos) {
     .bindPopup(`<strong>${destino.nome}</strong><br>${destino.localizacao}`)
     .openPopup();
 
+<<<<<<< HEAD
   pontos.forEach((ponto) => {
     if (!ponto.coordenadas) return;
 
+=======
+  const marcadores = [coordenadas];
+
+  pontos.forEach((ponto) => {
+    if (!ponto.coordenadas) return;
+
+    marcadores.push(ponto.coordenadas);
+
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
     L.marker(ponto.coordenadas)
       .addTo(mapaDestinoAberto)
       .bindPopup(`<strong>${ponto.nome}</strong><br>${ponto.localizacao || "Ponto pesquisado"}`);
   });
 
+<<<<<<< HEAD
+=======
+  if (marcadores.length > 1) {
+    mapaDestinoAberto.fitBounds(marcadores, { padding: [35, 35] });
+  }
+
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
   aviso.textContent = "Use o zoom, arraste o mapa ou pesquise pontos para montar seu roteiro.";
   setTimeout(() => mapaDestinoAberto.invalidateSize(), 100);
 }
@@ -1023,10 +1198,377 @@ function mostrarFavoritos() {
   ligarCartoesDestino();
 }
 
+<<<<<<< HEAD
 function mostrarTelaSimples(tela) {
   if(tela === "inicio"){
     return mostrarInicio();
   }
+=======
+function mostrarConta() {
+  pararGaleriaAutomatica();
+  destacarOpcaoMenu("conta");
+  destinoEscolhido = null;
+
+  if (!usuarioAtual) {
+    mostrarLogin();
+    return;
+  }
+
+  if (usuarioAtual.admin) {
+    mostrarAdminLocais();
+    return;
+  }
+
+  areaConteudo.innerHTML = `
+    <section class="titulo-pagina titulo-menor">
+      <span class="rotulo-secao">Conta</span>
+      <h1>Minha conta</h1>
+      <p>Confira seus dados de acesso e continue navegando pelos destinos.</p>
+    </section>
+
+    <section class="tela-formulario">
+      <article class="formulario-conta painel-conta">
+        <p><strong>Nome:</strong> ${usuarioAtual.nome}</p>
+        <p><strong>E-mail:</strong> ${usuarioAtual.email}</p>
+        <button class="botao-planejar" type="button" data-voltar-destinos>Ver destinos</button>
+        <button class="botao-cancelar" type="button" data-sair-conta>Sair da conta</button>
+      </article>
+    </section>
+  `;
+
+  document.querySelector("[data-voltar-destinos]").addEventListener("click", () => abrirListagemDestinos("destinos"));
+  document.querySelector("[data-sair-conta]").addEventListener("click", () => {
+    sairUsuario();
+    mostrarLogin();
+  });
+}
+
+function mostrarLogin(mensagemInicial = "") {
+  pararGaleriaAutomatica();
+  destacarOpcaoMenu("conta");
+  destinoEscolhido = null;
+
+  areaConteudo.innerHTML = `
+    <section class="titulo-pagina titulo-menor">
+      <span class="rotulo-secao">Acesso</span>
+      <h1>Login</h1>
+      <p>Entre para manter suas reservas, favoritos e preferencias em um so lugar.</p>
+    </section>
+
+    <section class="tela-formulario">
+      <form class="formulario-conta" data-form-login>
+        <label>
+          <span>E-mail</span>
+          <input type="email" id="loginEmail" required />
+        </label>
+        <label>
+          <span>Senha</span>
+          <input type="password" id="loginSenha" required />
+        </label>
+        <button class="botao-planejar" type="submit">Entrar</button>
+        <button class="link-formulario" type="button" data-ir-cadastro>Ainda nao tenho cadastro</button>
+        <button class="link-formulario" type="button" data-redefinir-senha>Esqueci minha senha</button>
+        <p class="mensagem-formulario ${mensagemInicial ? "erro" : ""}" data-login-mensagem>${mensagemInicial}</p>
+      </form>
+    </section>
+  `;
+
+  document.querySelector("[data-ir-cadastro]").addEventListener("click", mostrarCadastro);
+  document.querySelector("[data-redefinir-senha]").addEventListener("click", mostrarRedefinirSenha);
+  document.querySelector("[data-form-login]").addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const email = normalizarEmail(document.querySelector("#loginEmail").value);
+    const senha = document.querySelector("#loginSenha").value.trim();
+    const mensagem = document.querySelector("[data-login-mensagem]");
+    const usuario = lerUsuarios().find((item) => normalizarEmail(item.email) === email && item.senha === senha);
+
+    if (dadosAdmin(email, senha)) {
+      entrarUsuario({ nome: "Admin", email, admin: true });
+      mostrarAdminLocais();
+      return;
+    }
+
+    if (!usuario) {
+      mensagem.textContent = "E-mail ou senha incorretos.";
+      mensagem.classList.add("erro");
+      return;
+    }
+
+    entrarUsuario(usuario);
+    mensagem.textContent = "Login realizado com sucesso.";
+    mensagem.classList.remove("erro");
+    mostrarConta();
+  });
+}
+
+function mostrarCadastro() {
+  pararGaleriaAutomatica();
+  destacarOpcaoMenu("conta");
+  destinoEscolhido = null;
+
+  areaConteudo.innerHTML = `
+    <section class="titulo-pagina titulo-menor">
+      <span class="rotulo-secao">Conta</span>
+      <h1>Cadastro</h1>
+      <p>Crie uma conta simples para salvar sua experiencia no TravelSync.</p>
+    </section>
+
+    <section class="tela-formulario">
+      <form class="formulario-conta" data-form-cadastro>
+        <label>
+          <span>Nome</span>
+          <input type="text" id="cadastroNome" required />
+        </label>
+        <label>
+          <span>E-mail</span>
+          <input type="email" id="cadastroEmail" required />
+        </label>
+        <label>
+          <span>Senha</span>
+          <input type="password" id="cadastroSenha" minlength="4" required />
+        </label>
+        <button class="botao-planejar" type="submit">Cadastrar</button>
+        <button class="link-formulario" type="button" data-ir-login>Ja tenho login</button>
+        <p class="mensagem-formulario" data-cadastro-mensagem></p>
+      </form>
+    </section>
+  `;
+
+  document.querySelector("[data-ir-login]").addEventListener("click", mostrarLogin);
+  document.querySelector("[data-form-cadastro]").addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const usuarios = lerUsuarios();
+    const nome = document.querySelector("#cadastroNome").value.trim();
+    const email = normalizarEmail(document.querySelector("#cadastroEmail").value);
+    const senha = document.querySelector("#cadastroSenha").value.trim();
+    const mensagem = document.querySelector("[data-cadastro-mensagem]");
+
+    if (usuarios.some((usuario) => normalizarEmail(usuario.email) === email) || email === "admin@gmail" || email === "admin@gmail.com") {
+      mensagem.textContent = "Esse e-mail ja esta cadastrado.";
+      mensagem.classList.add("erro");
+      return;
+    }
+
+    const novoUsuario = { nome, email, senha };
+    usuarios.push(novoUsuario);
+    salvarUsuarios(usuarios);
+    entrarUsuario(novoUsuario);
+    mensagem.textContent = "Cadastro realizado com sucesso.";
+    mensagem.classList.remove("erro");
+    mostrarConta();
+  });
+}
+
+function mostrarRedefinirSenha() {
+  pararGaleriaAutomatica();
+  destacarOpcaoMenu("conta");
+  destinoEscolhido = null;
+
+  areaConteudo.innerHTML = `
+    <section class="titulo-pagina titulo-menor">
+      <span class="rotulo-secao">Conta</span>
+      <h1>Redefinir senha</h1>
+      <p>Informe o e-mail cadastrado e escolha uma nova senha.</p>
+    </section>
+
+    <section class="tela-formulario">
+      <form class="formulario-conta" data-form-redefinir>
+        <label>
+          <span>E-mail</span>
+          <input type="email" id="redefinirEmail" required />
+        </label>
+        <label>
+          <span>Nova senha</span>
+          <input type="password" id="redefinirSenha" minlength="4" required />
+        </label>
+        <button class="botao-planejar" type="submit">Salvar nova senha</button>
+        <button class="link-formulario" type="button" data-voltar-login>Voltar para login</button>
+        <p class="mensagem-formulario" data-redefinir-mensagem></p>
+      </form>
+    </section>
+  `;
+
+  document.querySelector("[data-voltar-login]").addEventListener("click", () => mostrarLogin());
+  document.querySelector("[data-form-redefinir]").addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const email = normalizarEmail(document.querySelector("#redefinirEmail").value);
+    const novaSenha = document.querySelector("#redefinirSenha").value.trim();
+    const usuarios = lerUsuarios();
+    const indice = usuarios.findIndex((usuario) => normalizarEmail(usuario.email) === email);
+    const mensagem = document.querySelector("[data-redefinir-mensagem]");
+
+    if (email === "admin@gmail" || email === "admin@gmail.com") {
+      mensagem.textContent = "A senha do admin e fixa para o trabalho.";
+      mensagem.classList.add("erro");
+      return;
+    }
+
+    if (indice < 0) {
+      mensagem.textContent = "Nao encontrei uma conta com esse e-mail.";
+      mensagem.classList.add("erro");
+      return;
+    }
+
+    usuarios[indice].senha = novaSenha;
+    salvarUsuarios(usuarios);
+    mensagem.textContent = "Senha atualizada. Voce ja pode entrar.";
+    mensagem.classList.remove("erro");
+  });
+}
+
+function mostrarAdminLocais() {
+  pararGaleriaAutomatica();
+  destacarOpcaoMenu("conta");
+  destinoEscolhido = null;
+
+  if (!usuarioAtual || !usuarioAtual.admin) {
+    mostrarLogin("Entre com o usuario admin para cadastrar destinos.");
+    return;
+  }
+
+  const destinosAdmin = lerDestinosCadastrados();
+
+  areaConteudo.innerHTML = `
+    <section class="titulo-pagina titulo-menor">
+      <span class="rotulo-secao">Admin</span>
+      <h1>Adicionar locais</h1>
+      <p>Cadastre novos destinos para aparecerem na listagem principal.</p>
+    </section>
+
+    <section class="tela-admin">
+      <form class="form-admin" data-form-admin>
+        <label>
+          <span>Nome do local</span>
+          <input type="text" id="adminNome" required />
+        </label>
+        <label>
+          <span>Estado / Pais</span>
+          <input type="text" id="adminLocalizacao" placeholder="Minas Gerais, Brasil" required />
+        </label>
+        <label>
+          <span>Tipo</span>
+          <select id="adminTipo">
+            <option>Praia</option>
+            <option>Natureza</option>
+            <option>Aventura</option>
+            <option>Inverno</option>
+            <option>Familia</option>
+          </select>
+        </label>
+        <label>
+          <span>Regiao</span>
+          <select id="adminRegiao">
+            <option>Nordeste</option>
+            <option>Sul</option>
+            <option>Sudeste</option>
+            <option>Centro-Oeste</option>
+            <option>Norte</option>
+          </select>
+        </label>
+        <label>
+          <span>Preco minimo</span>
+          <input type="number" id="adminPrecoMin" min="0" value="150" required />
+        </label>
+        <label>
+          <span>Preco maximo</span>
+          <input type="number" id="adminPrecoMax" min="0" value="400" required />
+        </label>
+        <label class="campo-largo">
+          <span>URL da imagem</span>
+          <input type="url" id="adminImagem" placeholder="Opcional" />
+        </label>
+        <label class="campo-largo">
+          <span>Descricao</span>
+          <textarea id="adminDescricao" rows="4" required></textarea>
+        </label>
+        <button class="botao-planejar" type="submit">Adicionar local</button>
+        <p class="mensagem-formulario" data-admin-mensagem></p>
+      </form>
+
+      <aside class="lista-admin">
+        <h2>Locais cadastrados</h2>
+        ${
+          destinosAdmin.length
+            ? destinosAdmin.map((destino) => `
+                <article>
+                  <strong>${destino.nome}</strong>
+                  <span>${destino.localizacao}</span>
+                  <button type="button" data-remover-destino="${destino.id}">Remover</button>
+                </article>
+              `).join("")
+            : `<p>Nenhum local cadastrado pelo admin ainda.</p>`
+        }
+      </aside>
+    </section>
+  `;
+
+  ligarAdminLocais();
+}
+
+function ligarAdminLocais() {
+  document.querySelector("[data-form-admin]").addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const destinosAdmin = lerDestinosCadastrados();
+    const nome = document.querySelector("#adminNome").value.trim();
+    const localizacao = document.querySelector("#adminLocalizacao").value.trim();
+    const tipo = document.querySelector("#adminTipo").value;
+    const regiao = document.querySelector("#adminRegiao").value;
+    const precoMin = Number(document.querySelector("#adminPrecoMin").value || 0);
+    const precoMax = Number(document.querySelector("#adminPrecoMax").value || precoMin);
+    const descricao = document.querySelector("#adminDescricao").value.trim();
+    const imagem = document.querySelector("#adminImagem").value.trim() || "assets/destinos/noronha-1.jpg";
+
+    const novoDestino = {
+      id: Date.now(),
+      nome,
+      localizacao,
+      descricao,
+      avaliacao: 4.5,
+      totalAvaliacoes: 0,
+      precoMin,
+      precoMax,
+      tipo,
+      regiao,
+      duracao: "A definir",
+      tags: [tipo, regiao],
+      imagens: [imagem, imagem, imagem],
+      detalhes: {
+        localizacaoCurta: localizacao,
+        clima: "A consultar",
+        temperatura: "A consultar",
+        melhorEpoca: "A definir",
+        custoMedio: `R$ ${precoMin} - R$ ${precoMax} por dia`,
+        sobre: descricao,
+        comoChegar: "Consulte as melhores rotas antes da viagem."
+      },
+      atracoes: ["Ponto principal", "Roteiro local", "Experiencia recomendada"],
+      dicas: ["Confira disponibilidade antes de viajar.", "Compare custos e hospedagem.", "Salve o local nos favoritos."],
+      avaliacoes: []
+    };
+
+    destinosAdmin.push(novoDestino);
+    salvarDestinosCadastrados(destinosAdmin);
+    catalogoDestinos.push(novoDestino);
+    mostrarAdminLocais();
+  });
+
+  document.querySelectorAll("[data-remover-destino]").forEach((botao) => {
+    botao.addEventListener("click", () => {
+      const id = Number(botao.dataset.removerDestino);
+      const destinosAdmin = lerDestinosCadastrados().filter((destino) => destino.id !== id);
+      salvarDestinosCadastrados(destinosAdmin);
+      catalogoDestinos = catalogoDestinos.filter((destino) => destino.id !== id);
+      mostrarAdminLocais();
+    });
+  });
+}
+
+function mostrarTelaSimples(tela) {
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
   pararGaleriaAutomatica();
   destacarOpcaoMenu(tela);
   destinoEscolhido = null;
@@ -1040,13 +1582,17 @@ function mostrarTelaSimples(tela) {
     grupo: ["Viagens em grupo", "Convide pessoas para viajar junto", "Monte grupos, compare destinos e acompanhe quem ja confirmou presenca.", ["Grupo Noronha 2026", "Amigos de inverno", "Familia no Nordeste"]],
     planejar: ["Planejamento", "Organize seu roteiro", "Defina datas, custos estimados, hospedagem e atividades principais.", ["Datas da viagem", "Orcamento diario", "Checklist de reservas"]],
     historico: ["Historico", "Ultimas buscas e visitas", "Acompanhe os destinos que voce visualizou recentemente.", vistos.length ? vistos : catalogoDestinos.slice(0, 3).map((destino) => destino.nome)],
+<<<<<<< HEAD
     perfil: ["Perfil", "Preferencias da Izadora", "Ajuste seus interesses para receber sugestoes mais alinhadas.", ["Praias tranquilas", "Natureza", "Viagens de 5 a 7 dias"]],
+=======
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
     configuracoes: ["Configuracoes", "Ajustes da conta", "Controle notificacoes, privacidade e preferencias da plataforma.", ["Notificacoes", "Privacidade", "Idioma e moeda"]],
     sair: ["Sessao", "Tudo certo por aqui", "Esta tela representa a acao de sair no prototipo.", ["Salvar favoritos", "Limpar filtros", "Voltar para destinos"]]
   };
 
   const [rotulo, titulo, texto, cards] = paginas[tela] || paginas.inicio;
 
+<<<<<<< HEAD
 
 }
 function mostrarInicio(){
@@ -1249,11 +1795,42 @@ function navegar(tela) {
 }
 
 
+=======
+  areaConteudo.innerHTML = `
+    <section class="titulo-pagina titulo-menor">
+      <span class="rotulo-secao">${rotulo}</span>
+      <h1>${titulo}</h1>
+      <p>${texto}</p>
+    </section>
+    <section class="grade-painel">
+      ${cards.map((card, index) => `<article class="cartao-painel"><span>0${index + 1}</span><strong>${card}</strong><p>Conteudo preenchido para navegacao do prototipo.</p></article>`).join("")}
+    </section>
+  `;
+}
+
+function navegar(tela) {
+  if (tela === "destinos") return abrirListagemDestinos("destinos");
+  if (tela === "buscar") return abrirListagemDestinos("buscar");
+  if (tela === "favoritos") return mostrarFavoritos();
+  if (tela === "conta") return mostrarConta();
+  if (tela === "sair") {
+    sairUsuario();
+    return mostrarLogin();
+  }
+  return mostrarTelaSimples(tela);
+}
+
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
 async function iniciar() {
   try {
     const resposta = await fetch("data.json");
     const dados = await resposta.json();
+<<<<<<< HEAD
     catalogoDestinos = dados.destinos;
+=======
+    catalogoDestinos = [...dados.destinos, ...lerDestinosCadastrados()];
+    atualizarUsuarioTopo();
+>>>>>>> b1e20e751433f0ba6757c2e73b566d353baf71fb
     atualizarResumoFavoritos();
     abrirListagemDestinos("destinos");
   } catch (erro) {

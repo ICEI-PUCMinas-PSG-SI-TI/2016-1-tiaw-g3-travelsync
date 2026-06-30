@@ -10,40 +10,39 @@
   <body>
     <div class="layout-geral">
       <aside class="menu-lateral">
-        <button class="fechar-menu" type="button" aria-label="Fechar menu">×</button>
+        <button class="fechar-menu" type="button" aria-label="Fechar menu">&times;</button>
         <button class="logo-menu" type="button" data-view="destinos" aria-label="TravelSync">
           <img src="../assets/imagem/logotravelsync.png" alt="TravelSync" />
         </button>
 
         <nav class="menu" aria-label="Menu principal">
-          <a href="index.html"><button class="item-menu" type="button" data-view="inicio"><span class="icone">⌂</span>Inicio</button></a>
-          <a href="destinos.html"><button class="item-menu ativo" type="button" data-view="destinos"><span class="icone">⌖</span>Destinos</button></a>
-          <a href="minimapa.html"><button class="item-menu" type="button" data-view="grupo"><span class="icone">♙</span>Mini mapa</button></a>
-          <a href="cadastro_locais.html"><button class="item-menu" type="button" data-view="planejar"><span class="icone">□</span>Cadastro de locais</button></a>
-          <a href="#" onclick="mostrarFavoritos(event)" ><button class="item-menu" type="button" data-view="favoritos"><span class="icone">♡</span>Favoritos <b id="totalFavoritos">0</b></button></a>
-          <a href="historico.html"><button class="item-menu" type="button" data-view="historico"><span class="icone">◷</span>Historico</button></a>
-          <a href="perfil.html"><button class="item-menu" type="button" data-view="perfil"><span class="icone">♙</span>Meu perfil</button></a>
-          <button class="item-menu" type="button" data-view="sair" id="btnSair"><span class="icone">↪</span>Sair</button>
+          <a href="index.html"><button class="item-menu" type="button" data-view="inicio"><span class="icone">I</span>Inicio</button></a>
+          <a href="destinos.html"><button class="item-menu ativo" type="button" data-view="destinos"><span class="icone">D</span>Destinos</button></a>
+          <a href="minimapa.html"><button class="item-menu" type="button" data-view="grupo"><span class="icone">M</span>Mini mapa</button></a>
+          <a href="cadastro_locais.html" data-admin-link><button class="item-menu" type="button" data-view="planejar"><span class="icone">+</span>Cadastro de destinos</button></a>
+          <a href="destinos.html#favoritos" data-favoritos-menu><button class="item-menu" type="button" data-view="favoritos"><span class="icone">F</span>Favoritos <b id="totalFavoritos">0</b></button></a>
+          <a href="login.html"><button class="item-menu" type="button" data-view="perfil"><span class="icone">C</span>Minha conta</button></a>
+          <button class="item-menu" type="button" data-view="sair" id="btnSair"><span class="icone">S</span>Sair</button>
         </nav>
       </aside>
       <div class="fundo-menu" aria-hidden="true"></div>
 
       <div class="area-pagina">
         <header class="cabecalho">
-          <button class="botao-menu" type="button" aria-label="Abrir menu">☰</button>
+          <button class="botao-menu" type="button" aria-label="Abrir menu">&#9776;</button>
           <button class="logo-cabecalho" type="button" data-view="destinos" aria-label="TravelSync">
             <img src="../assets/imagem/logotravelsync.png" alt="TravelSync" />
           </button>
           <label class="busca-topo">
-            <span>⌕</span>
-            <input id="buscaTopo" type="search" placeholder="Buscar destinos, atracoes, dicas..." />
+            <span>&#8981;</span>
+            <input id="buscaTopo" type="search" placeholder="Buscar destinos, atrações, dicas..." />
           </label>
           <div class="acoes-topo">
-            <button class="botao-icone" aria-label="Notificacoes">♢</button>
-            <button class="botao-icone" aria-label="Mensagens">✉</button>
+            <button class="botao-icone" aria-label="Notificações">&#9671;</button>
+            <button class="botao-icone" aria-label="Mensagens">&#9993;</button>
               <div class="perfil-topo">
                 <span class="foto-perfil"></span>
-                <span><a href="login.html">Olá, Usuário!</a></span>
+                <span><a href="login.html">Minha conta</a></span>
                 <span></span>
               </div>
           </div>
@@ -52,7 +51,7 @@
   <div class="hero-bg"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Descubra o mundo</p>
-    <h1 class="hero-title">Encontre eventos<br>& destinos incríveis</h1>
+    <h1 class="hero-title">Encontre eventos <br>e destinos incríveis</h1>
     <p class="hero-sub">Pesquise por nome, categoria ou localização</p>
     <div class="search-box">
       <svg class="search-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -90,10 +89,10 @@
         <div class="dropdown" id="cidDropdown">
           <div class="dropdown-item" data-value="">Todas as cidades</div>
           <div class="dropdown-item" data-value="Belo Horizonte - MG">Belo Horizonte - MG</div>
-          <div class="dropdown-item" data-value="Fernando de Noronha - PE">Fernando de Noronha - PE</div>
+          <div class="dropdown-item" data-value="Recife - PE">Recife - PE</div>
           <div class="dropdown-item" data-value="Salvador - BA">Salvador - BA</div>
           <div class="dropdown-item" data-value="Chapada Diamantina - BA">Chapada Diamantina - BA</div>
-          <div class="dropdown-item" data-value="Florianópolis - SC">Florianópolis - SC</div>
+          <div class="dropdown-item" data-value="Ouro Preto - MG">Ouro Preto - MG</div>
         </div>
       </div>
       <div class="filter-block">
@@ -132,19 +131,19 @@
         </div>
       </div>
 
-      <div class="card" data-name="Fernando de Noronha" data-categoria="Praia" data-cidade="Fernando de Noronha - PE" data-data="2026-07-15">
+      <div class="card" data-name="Feira Gastronômica de Recife" data-categoria="Cultura" data-cidade="Recife - PE" data-data="2026-07-15">
         <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80" alt="Fernando de Noronha" loading="lazy">
-          <span class="card-badge">Praia</span>
+          <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600&q=80" alt="Feira Gastronômica de Recife" loading="lazy">
+          <span class="card-badge">Cultura</span>
         </div>
         <div class="card-body">
-          <h3>Fernando de Noronha</h3>
+          <h3>Feira Gastronômica de Recife</h3>
           <div class="card-meta">
-            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Fernando de Noronha - PE</span>
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Recife - PE</span>
             <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>15/07/2026</span>
-            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>06:30</span>
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>18:30</span>
           </div>
-          <p class="card-desc">O paraíso brasileiro com águas cristalinas, mergulhos inesquecíveis e pôr do sol deslumbrante.</p>
+          <p class="card-desc">Barracas de comida regional, música ao vivo e degustações para conhecer os sabores de Pernambuco.</p>
           <button class="btn-detalhes">Ver detalhes</button>
         </div>
       </div>
@@ -183,19 +182,19 @@
         </div>
       </div>
 
-      <div class="card" data-name="Praias de Florianópolis" data-categoria="Praia" data-cidade="Florianópolis - SC" data-data="2026-08-05">
+      <div class="card" data-name="Mostra de Cinema de Ouro Preto" data-categoria="Cultura" data-cidade="Ouro Preto - MG" data-data="2026-08-05">
         <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=600&q=80" alt="Florianópolis" loading="lazy">
-          <span class="card-badge">Praia</span>
+          <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&q=80" alt="Mostra de Cinema de Ouro Preto" loading="lazy">
+          <span class="card-badge">Cultura</span>
         </div>
         <div class="card-body">
-          <h3>Praias de Florianópolis</h3>
+          <h3>Mostra de Cinema de Ouro Preto</h3>
           <div class="card-meta">
-            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Florianópolis - SC</span>
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Ouro Preto - MG</span>
             <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>05/08/2026</span>
-            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>07:00</span>
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>19:00</span>
           </div>
-          <p class="card-desc">Explore as mais de 40 praias da Ilha da Magia, cada uma com um charme e atmosfera únicos.</p>
+          <p class="card-desc">Sessões de curtas, debates com convidados e programação cultural no centro histórico da cidade.</p>
           <button class="btn-detalhes">Ver detalhes</button>
         </div>
       </div>
@@ -232,15 +231,15 @@
 
 
         <footer class="rodape">
-          <span>© 2024 Travel Sync</span>
+          <span>&copy; 2024 Travel Sync</span>
           <a href="#">Sobre</a>
           <a href="#">Contato</a>
           <a href="#">Termos de uso</a>
           <a href="#">Privacidade</a>
           <div class="redes-sociais" aria-label="Redes sociais">
-            <span>◎</span>
-            <span>●</span>
-            <span>◆</span>
+            <span>&#9678;</span>
+            <span>&#9679;</span>
+            <span>&#9670;</span>
           </div>
         </footer>
       </div>
@@ -249,6 +248,6 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="../js/script.js"></script>
     <script src="../js/inicio.js"></script>
-    <script src="../js/destinos.js"></script>
   </body>
 </html>
+

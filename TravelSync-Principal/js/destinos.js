@@ -1,4 +1,3 @@
-
 const filtrosIniciais = {
   busca: "",
   tipo: "Todos",
@@ -10,8 +9,6 @@ const filtrosIniciais = {
 
 let filtrosAplicados = { ...filtrosIniciais };
 let rascunhoFiltros = { ...filtrosIniciais };
-const lista = document.getElementById("listaFavoritos");
-
 
 const novosDestinos = [
   { id: 1, nome: "Praia do Forte", localizacao: "Bahia, Brasil", descricao: "Uma praia paradisíaca com águas cristalinas.", tipo: "Praia", regiao: "Nordeste", imagens: ["url_imagem1", "url_imagem2"], avaliacao: 4.8, totalAvaliacoes: 150, precoMin: 200, precoMax: 600, tags: ["relaxamento", "família", "natureza"] },
@@ -93,7 +90,250 @@ const novosDestinos = [
   { id: 77, nome: "Santos", localizacao: "São Paulo, Brasil", descricao: "Cidade portuária com rica história e praias.", tipo: "Cultural", regiao: "Sudeste", imagens: ["url_imagem153", "url_imagem154"], avaliacao: 4.6, totalAvaliacoes: 150, precoMin: 150, precoMax: 350, tags: ["natureza", "relaxamento"]}
 
 ]
-catalogoDestinos = [...catalogoDestinos, ...novosDestinos];
+
+const imagensPadraoDestinos = [
+  ["../assets/imagem/noronha-1.jpg", "../assets/imagem/noronha-2.jpg", "../assets/imagem/noronha-3.jpg"],
+  ["../assets/imagem/bonito-1.jpg", "../assets/imagem/bonito-2.jpg", "../assets/imagem/bonito-3.jpg"],
+  ["../assets/imagem/gramado-1.jpg", "../assets/imagem/gramado-2.jpg", "../assets/imagem/gramado-3.jpg"],
+  ["../assets/imagem/jeri-1.jpg", "../assets/imagem/jeri-2.jpg", "../assets/imagem/jeri-3.jpg"],
+  ["../assets/imagem/foz-1.jpg", "../assets/imagem/foz-2.jpg", "../assets/imagem/foz-3.jpg"],
+  ["../assets/imagem/maragogi-1.jpg", "../assets/imagem/maragogi-2.jpg", "../assets/imagem/maragogi-3.jpg"],
+  ["../assets/imagem/lencois-1.jpg", "../assets/imagem/lencois-2.jpg", "../assets/imagem/lencois-3.jpg"],
+  ["../assets/imagem/porto-1.jpg", "../assets/imagem/porto-2.jpg", "../assets/imagem/porto-3.jpg"],
+  ["../assets/imagem/campos-1.jpg", "../assets/imagem/campos-2.jpg", "../assets/imagem/campos-3.jpg"]
+];
+
+function prepararDestinoExtra(destino, index) {
+  const imagensDoCadastro = destino.imagens || [];
+  const imagensValidas = imagensDoCadastro.filter((imagem) => imagem && !imagem.startsWith("url_imagem"));
+  const imagens = imagensValidas.length ? imagensValidas : imagensPadraoDestinos[index % imagensPadraoDestinos.length];
+  const precoMin = Number(destino.precoMin || 120);
+  const precoMax = Number(destino.precoMax || precoMin + 280);
+  const avaliacao = Number(destino.avaliacao || 4.5);
+
+  return {
+    ...destino,
+    id: 1000 + Number(destino.id || index + 1),
+    imagens,
+    tags: destino.tags && destino.tags.length ? destino.tags : [destino.tipo || "Destino"],
+    totalAvaliacoes: Number(destino.totalAvaliacoes || 80),
+    avaliacao,
+    precoMin,
+    precoMax,
+    duracao: destino.duracao || "3 a 5 dias",
+    detalhes: destino.detalhes || {
+      localizacaoCurta: destino.localizacao,
+      clima: destino.tipo === "Inverno" ? "Frio" : "Tropical",
+      temperatura: destino.tipo === "Inverno" ? "8C - 22C" : "22C - 31C",
+      melhorEpoca: "Durante o ano",
+      custoMedio: `R$ ${precoMin} - R$ ${precoMax} por dia`,
+      sobre: destino.descricao,
+      comoChegar: "Consulte rotas, voos e traslados disponiveis para montar o melhor roteiro."
+    },
+    atracoes: destino.atracoes || ["Pontos turisticos locais", "Passeios guiados", "Gastronomia regional"],
+    dicas: destino.dicas || ["Pesquise a melhor epoca antes da viagem.", "Compare hospedagens e passeios.", "Salve o destino nos favoritos para consultar depois."],
+    avaliacoes: destino.avaliacoes || [
+      { nome: "Visitante TravelSync", nota: avaliacao, texto: "Destino interessante para incluir no planejamento." }
+    ]
+  };
+}
+
+function chaveImagemDestino(destino) {
+  return `destino-v5-${destino.id}-${destino.nome}`.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+function lerCacheImagens() {
+  return JSON.parse(localStorage.getItem("travelsync:imagensCommons") || "{}");
+}
+
+function salvarCacheImagens(cache) {
+  localStorage.setItem("travelsync:imagensCommons", JSON.stringify(cache));
+}
+
+function textoParaComparar(texto) {
+  return String(texto || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+function montarTermoImagem(destino) {
+  const lugar = destino.localizacao.replace(", Brasil", "").replace("Brasil", "").trim();
+  return `${destino.nome} ${lugar} turismo`;
+}
+
+function imagemPreferidaDestino(destino) {
+  const imagens = {
+    "bonito": "../assets/imagem/bonito-1.jpg",
+    "campos do jordao": "../assets/imagem/campos-1.jpg",
+    "cancun": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80",
+    "cabo verde": "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=900&q=80",
+    "cataratas do iguacu": "../assets/imagem/foz-2.jpg",
+    "fernando de noronha": "../assets/imagem/noronha-1.jpg",
+    "foz do iguacu": "../assets/imagem/foz-1.jpg",
+    "gramado": "../assets/imagem/gramado-1.jpg",
+    "jericoacoara": "../assets/imagem/jeri-1.jpg",
+    "lencois maranhenses": "../assets/imagem/lencois-1.jpg",
+    "maragogi": "../assets/imagem/maragogi-1.jpg",
+    "porto de galinhas": "../assets/imagem/porto-1.jpg",
+    "tiradentes": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Tiradentes_MG.jpg/640px-Tiradentes_MG.jpg"
+  };
+
+  return imagens[textoParaComparar(destino.nome)] || null;
+}
+
+function nomeParaWikipedia(destino) {
+  const nomes = {
+    "Buzios": "Armação dos Búzios",
+    "Cartagena": "Cartagena, Colombia",
+    "Foz do Iguacu": "Foz do Iguaçu",
+    "Cataratas do Iguacu": "Cataratas do Iguaçu",
+    "Lencois Maranhenses": "Lençóis Maranhenses",
+    "Campos do Jordao": "Campos do Jordão",
+    "Sao Paulo": "São Paulo",
+    "Maceio": "Maceió",
+    "Vitoria": "Vitória"
+  };
+
+  return nomes[destino.nome] || destino.nome;
+}
+
+async function buscarImagemWikipedia(destino) {
+  if (textoParaComparar(destino.nome) === "cancun") return null;
+
+  const titulo = encodeURIComponent(nomeParaWikipedia(destino).replaceAll(" ", "_"));
+
+  for (const idioma of ["pt", "en"]) {
+    try {
+      const resposta = await fetch(`https://${idioma}.wikipedia.org/api/rest_v1/page/summary/${titulo}`);
+      if (!resposta.ok) continue;
+
+      const dados = await resposta.json();
+      const imagem = dados.thumbnail?.source || dados.originalimage?.source;
+      if (imagemEhBoa(imagem)) return imagem;
+    } catch (erro) {
+      continue;
+    }
+  }
+
+  return null;
+}
+
+async function buscarImagemLivre(destino, cache) {
+  const chave = chaveImagemDestino(destino);
+  if (cache[chave]) return cache[chave];
+
+  const imagemPreferida = imagemPreferidaDestino(destino);
+  if (imagemPreferida) {
+    cache[chave] = imagemPreferida;
+    salvarCacheImagens(cache);
+    return imagemPreferida;
+  }
+
+  const imagemWikipedia = await buscarImagemWikipedia(destino);
+
+  if (imagemWikipedia) {
+    cache[chave] = imagemWikipedia;
+    salvarCacheImagens(cache);
+    return imagemWikipedia;
+  }
+
+  const parametros = new URLSearchParams({
+    action: "query",
+    generator: "search",
+    gsrnamespace: "6",
+    gsrlimit: "4",
+    gsrsearch: montarTermoImagem(destino),
+    prop: "imageinfo",
+    iiprop: "url",
+    format: "json",
+    origin: "*"
+  });
+
+  try {
+    const resposta = await fetch(`https://commons.wikimedia.org/w/api.php?${parametros.toString()}`);
+    const dados = await resposta.json();
+    const paginas = Object.values(dados.query?.pages || {});
+    const arquivo = paginas
+      .map((pagina) => pagina.imageinfo?.[0]?.url)
+      .find((url) => imagemEhBoa(url));
+
+    if (arquivo) {
+      cache[chave] = arquivo;
+      salvarCacheImagens(cache);
+      return arquivo;
+    }
+  } catch (erro) {
+    return null;
+  }
+
+  return null;
+}
+
+function imagemEhBoa(url) {
+  if (!url) return false;
+
+  const caminho = decodeURIComponent(url).toLowerCase();
+  const termosRuins = ["flag", "bandeira", "brasao", "brasão", "coat_of_arms", "map", "municip", "satellite", "orthographic", ".svg"];
+
+  return /\.(jpg|jpeg|png|webp)$/i.test(url.split("?")[0]) && !termosRuins.some((termo) => caminho.includes(termo));
+}
+
+function trocarImagemDestino(destino, url) {
+  if (!url) return;
+  destino.imagens = [url, ...destino.imagens.filter((imagem) => imagem !== url)].slice(0, 3);
+
+  document.querySelectorAll(`[data-destino-id="${destino.id}"] .imagem-cartao`).forEach((imagem) => {
+    imagem.src = url;
+  });
+}
+
+function tirarDestinosRepetidos(destinos) {
+  const vistos = new Set();
+
+  return destinos.filter((destino) => {
+    const chave = `${textoParaComparar(destino.nome)}-${textoParaComparar(destino.localizacao)}`;
+    if (vistos.has(chave)) return false;
+    vistos.add(chave);
+    return true;
+  });
+}
+
+function tirarDestinosForaDaEntrega(destinos) {
+  const removidos = new Set([
+    "natal",
+    "sao sebastiao",
+    "tiradentes",
+    "cabo de santo agostinho",
+    "cunha"
+  ]);
+
+  return destinos.filter((destino) => !removidos.has(textoParaComparar(destino.nome)));
+}
+
+function prepararCatalogoDestinos(destinos) {
+  return tirarDestinosForaDaEntrega(tirarDestinosRepetidos(destinos));
+}
+
+async function atualizarImagensDosDestinos() {
+  const cache = lerCacheImagens();
+  const bloco = 10;
+  const imagensUsadas = new Map();
+
+  for (let inicio = 0; inicio < catalogoDestinos.length; inicio += bloco) {
+    const destinosDoBloco = catalogoDestinos.slice(inicio, inicio + bloco);
+    const resultados = await Promise.all(destinosDoBloco.map(async (destino) => {
+      const url = await buscarImagemLivre(destino, cache);
+      return { destino, url };
+    }));
+
+    resultados.forEach(({ destino, url }) => {
+      let imagem = url;
+      if (imagem && imagensUsadas.has(imagem) && imagensUsadas.get(imagem) !== textoParaComparar(destino.nome)) {
+        imagem = destino.imagens.find((foto) => !imagensUsadas.has(foto)) || imagem;
+      }
+      if (imagem) imagensUsadas.set(imagem, textoParaComparar(destino.nome));
+      trocarImagemDestino(destino, imagem);
+    });
+  }
+}
 
 function usuarioLogado() {
   return JSON.parse(sessionStorage.getItem("usuarioLogado"));
@@ -102,56 +342,10 @@ function usuarioLogado() {
 function lerFavoritosSalvos() {
   const favoritosAtuais = localStorage.getItem("travelsync:favoritos");
   const favoritosAntigos = localStorage.getItem("travelsync:favoritosSalvos");
-  return JSON.parse(favoritosAtuais || favoritosAntigos || "[]");
+  return JSON.parse(favoritosAtuais || favoritosAntigos || "[]").map(String);
 }
 
 favoritos = lerFavoritosSalvos();
-
-if (lista) {
-  const usuario = usuarioLogado();
-
-  if (!usuario) {
-    lista.innerHTML = `
-      <h3>Você precisa fazer o login para ver seus favoritos</h3>
-    `;
-  } else {
-    renderizarFavoritos();
-  }
-}
-
-function renderizarFavoritos() {
-  const lista = document.getElementById("listaFavoritos");
-  const usuario = usuarioLogado();
-
-  if (!lista) return;
-
-  if (!usuario) {
-    lista.innerHTML = `
-      <h3>Você precisa fazer o login para ver seus favoritos</h3>
-    `;
-    return;
-  }
-
-  if (favoritos.length === 0) {
-    lista.innerHTML = `
-      <h3>Você ainda não salvou nenhum favorito</h3>
-    `;
-    return;
-  }
-
-  lista.innerHTML = favoritos
-    .map((id) => {
-      return `
-        <div class="favorito-item">
-          <p>Destino ID: ${id}</p>
-          <button onclick="alternarDestinoFavorito('${id}')">
-            Remover
-          </button>
-        </div>
-      `;
-    })
-    .join("");
-}
 
 function atualizarResumoFavoritos() {
   localStorage.setItem("travelsync:favoritos", JSON.stringify(favoritos));
@@ -162,43 +356,33 @@ function atualizarResumoFavoritos() {
 }
 
 function destinoFoiCurtido(id) {
-  return favoritos.includes(id);
+  return favoritos.includes(String(id));
 }
 
 function alternarDestinoFavorito(id) {
+  const idFavorito = String(id);
+
   if (destinoFoiCurtido(id)) {
-    favoritos = favoritos.filter((item) => item !== id);
+    favoritos = favoritos.filter((item) => item !== idFavorito);
   } else {
-    favoritos.push(id);
+    favoritos.push(idFavorito);
   }
 
   atualizarResumoFavoritos();
 
-  if (typeof destinoEscolhido !== "undefined" && destinoEscolhido === id) {
+  if (typeof destinoEscolhido !== "undefined" && Number(destinoEscolhido) === Number(id)) {
     desenharDetalhesDestino();
     return;
   }
 
   if (typeof paginaAtual !== "undefined") {
-    if (paginaAtual === "favoritos") renderizarFavoritos();
+    if (paginaAtual === "favoritos") mostrarFavoritos();
     if (paginaAtual === "destinos" || paginaAtual === "buscar") {
       abrirListagemDestinos(paginaAtual);
     }
   }
 }
 
-function mostrarFavoritos(event) {
-  if (event) event.preventDefault();
-
- paginaAtual = "favoritos";
-
-  const home = document.querySelector(".home");
-  const fav = document.querySelector(".favoritos");
-
-  if (home) home.style.display = "none";
-  if (fav) fav.style.display = "block";
-  renderizarFavoritos();
-}
 function guardarNoHistorico(id) {
   historico = [id, ...historico.filter((item) => item !== id)].slice(0, 5);
   localStorage.setItem("travelsync:historico", JSON.stringify(historico));
@@ -242,8 +426,18 @@ function pegarCoordenadas(destino) {
   return mapa[destino.nome] || [-14.235, -51.9253];
 }
 
-function chaveReserva(destinoId) {
-  return `travelsync:reservas:${destinoId}`;
+function lerReservas() {
+  return JSON.parse(localStorage.getItem("travelsync:reservas") || "[]");
+}
+
+function salvarReservas(reservas) {
+  localStorage.setItem("travelsync:reservas", JSON.stringify(reservas));
+}
+
+function buscarReservaUsuario(destinoId) {
+  const usuario = usuarioLogado();
+  if (!usuario) return null;
+  return lerReservas().find((r) => r.destinoId === destinoId && r.usuarioId === usuario.id) || null;
 }
 
 function chaveMapa(destinoId) {
@@ -479,7 +673,11 @@ function abrirListagemDestinos(tela = "destinos") {
     abrirListagemDestinos(paginaAtual);
   });
 
+  const elementoAtivo = document.activeElement;
+const estaDigitando = elementoAtivo && ["INPUT", "TEXTAREA", "SELECT"].includes(elementoAtivo.tagName);
+if (!estaDigitando) {
   areaConteudo.focus();
+}
 }
 
 function montarPainelFiltros() {
@@ -823,7 +1021,12 @@ function mostrarReservaDestino(destino = destinoAtual()) {
   destacarOpcaoMenu("planejar");
   destinoEscolhido = destino.id;
 
-  const reservaSalva = JSON.parse(localStorage.getItem(chaveReserva(destino.id)) || "{}");
+ const usuario = usuarioLogado();
+if (!usuario) {
+  alert("Entre na sua conta para fazer uma reserva.");
+  return;
+}
+const reservaSalva = buscarReservaUsuario(destino.id) || {};
 
   areaConteudo.innerHTML = `
     <button class="voltar" type="button" data-voltar-detalhes>← Voltar para detalhes</button>
@@ -950,31 +1153,53 @@ function ligarReservaDestino(destino) {
     input.addEventListener("input", () => atualizarResumoReserva(destino));
     input.addEventListener("change", () => atualizarResumoReserva(destino));
   });
+ form.addEventListener("submit", (event) => {
+  event.preventDefault();
 
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const pagamento = document.querySelector("input[name='pagamentoReserva']:checked");
-    const calculo = calcularReserva(destino);
+  const usuario = usuarioLogado();
+  if (!usuario) {
+    alert("Entre na sua conta para reservar.");
+    return;
+  }
 
-    localStorage.setItem(chaveReserva(destino.id), JSON.stringify({
-      destino: destino.nome,
-      inicio: document.querySelector("#reservaInicio").value,
-      fim: document.querySelector("#reservaFim").value,
-      nome: document.querySelector("#reservaNome").value,
-      email: document.querySelector("#reservaEmail").value,
-      adultos: document.querySelector("#reservaAdultos").value,
-      criancas: document.querySelector("#reservaCriancas").value,
-      quartos: document.querySelector("#reservaQuartos").value,
-      ingressos: document.querySelector("#reservaIngressos").value,
-      pagamento: pagamento ? pagamento.value : "",
-      total: calculo.total.toFixed(2)
-    }));
+  const pagamento = document.querySelector("input[name='pagamentoReserva']:checked");
+  const calculo = calcularReserva(destino);
+  const reservas = lerReservas();
+  const existente = reservas.find((r) => r.destinoId === destino.id && r.usuarioId === usuario.id);
 
-    alert("Reserva salva com sucesso!");
-  });
+  const dadosReserva = {
+    id: existente ? existente.id : Date.now(),
+    usuarioId: usuario.id,
+    destinoId: destino.id,
+    destinoNome: destino.nome,
+    destinoImagem: destino.imagens[0],
+    inicio: document.querySelector("#reservaInicio").value,
+    fim: document.querySelector("#reservaFim").value,
+    nome: document.querySelector("#reservaNome").value,
+    email: document.querySelector("#reservaEmail").value,
+    adultos: document.querySelector("#reservaAdultos").value,
+    criancas: document.querySelector("#reservaCriancas").value,
+    quartos: document.querySelector("#reservaQuartos").value,
+    ingressos: document.querySelector("#reservaIngressos").value,
+    pagamento: pagamento ? pagamento.value : "",
+    dias: calculo.dias,
+    total: calculo.total.toFixed(2),
+    criadaEm: existente ? existente.criadaEm : new Date().toISOString()
+  };
 
-  atualizarResumoReserva(destino);
+  const novasReservas = existente
+    ? reservas.map((r) => (r.id === existente.id ? dadosReserva : r))
+    : [...reservas, dadosReserva];
+
+  salvarReservas(novasReservas);
+  alert(existente ? "Reserva atualizada com sucesso!" : "Reserva salva com sucesso!");
+});
+
+atualizarResumoReserva(destino);
 }
+
+   
+
 
 function mostrarMapaDestino(destino = destinoAtual()) {
   pararGaleriaAutomatica();
@@ -1123,6 +1348,7 @@ function montarMapaDestino(destino, pontos) {
 function mostrarFavoritos() {
   pararGaleriaAutomatica();
   destacarOpcaoMenu("favoritos");
+  paginaAtual = "favoritos";
   destinoEscolhido = null;
   const listaFavoritos = catalogoDestinos.filter((destino) => destinoFoiCurtido(destino.id));
 
@@ -1165,7 +1391,16 @@ function mostrarTelaSimples(tela) {
 
   const [rotulo, titulo, texto, cards] = paginas[tela] || paginas.inicio;
 
-
+  areaConteudo.innerHTML = `
+    <section class="titulo-pagina titulo-menor">
+      <span class="rotulo-secao">${rotulo}</span>
+      <h1>${titulo}</h1>
+      <p>${texto}</p>
+    </section>
+    <section class="grade-info">
+      ${cards.map((item) => `<article><strong>${item}</strong></article>`).join("")}
+    </section>
+  `;
 }
 
 function iniciarInicioEventos() {
@@ -1369,9 +1604,13 @@ async function iniciar() {
   try {
     const resposta = await fetch("data.json");
     const dados = await resposta.json();
-    catalogoDestinos = dados.destinos;
+    const cadastradosPeloAdmin = JSON.parse(localStorage.getItem("travelsync:destinosAdmin") || "[]");
+    const extrasDaEquipe = novosDestinos.map(prepararDestinoExtra);
+
+    catalogoDestinos = prepararCatalogoDestinos([...dados.destinos, ...extrasDaEquipe, ...cadastradosPeloAdmin]);
     atualizarResumoFavoritos();
     abrirListagemDestinos("destinos");
+    atualizarImagensDosDestinos();
   } catch (erro) {
     areaConteudo.innerHTML = `<section class="mensagem-vazia">Nao foi possivel carregar os dados dos destinos.</section>`;
   }
@@ -1392,4 +1631,49 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") fecharCamadasAbertas();
 });
 
-iniciar();
+async function iniciar() {
+  try {
+    const resposta = await fetch("data.json");
+    const dados = await resposta.json();
+    const cadastradosPeloAdmin = JSON.parse(localStorage.getItem("travelsync:destinosAdmin") || "[]");
+    const extrasDaEquipe = novosDestinos.map(prepararDestinoExtra);
+
+    catalogoDestinos = prepararCatalogoDestinos([...dados.destinos, ...extrasDaEquipe, ...cadastradosPeloAdmin]);
+    atualizarResumoFavoritos();
+
+    const params = new URLSearchParams(window.location.search);
+    const destinoParaReservar = params.get("reservar");
+
+    if (destinoParaReservar) {
+      const destino = catalogoDestinos.find((d) => d.id === Number(destinoParaReservar));
+      if (destino) mostrarReservaDestino(destino);
+    } else if (window.location.hash === "#favoritos") {
+      mostrarFavoritos();
+    } else {
+      abrirListagemDestinos("destinos");
+    }
+
+    atualizarImagensDosDestinos();
+  } catch (erro) {
+    areaConteudo.innerHTML = `<section class="mensagem-vazia">Nao foi possivel carregar os dados dos destinos.</section>`;
+  }
+}
+iniciar()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
