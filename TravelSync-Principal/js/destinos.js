@@ -345,7 +345,7 @@ function usuarioLogado() {
 function lerFavoritosSalvos() {
   const favoritosAtuais = localStorage.getItem("travelsync:favoritos");
   const favoritosAntigos = localStorage.getItem("travelsync:favoritosSalvos");
-  return JSON.parse(favoritosAtuais || favoritosAntigos || "[]");
+  return JSON.parse(favoritosAtuais || favoritosAntigos || "[]").map(String);
 }
 
 favoritos = lerFavoritosSalvos();
@@ -405,19 +405,21 @@ function atualizarResumoFavoritos() {
 }
 
 function destinoFoiCurtido(id) {
-  return favoritos.includes(id);
+  return favoritos.includes(String(id));
 }
 
 function alternarDestinoFavorito(id) {
+  const idFavorito = String(id);
+
   if (destinoFoiCurtido(id)) {
-    favoritos = favoritos.filter((item) => item !== id);
+    favoritos = favoritos.filter((item) => item !== idFavorito);
   } else {
-    favoritos.push(id);
+    favoritos.push(idFavorito);
   }
 
   atualizarResumoFavoritos();
 
-  if (typeof destinoEscolhido !== "undefined" && destinoEscolhido === id) {
+  if (typeof destinoEscolhido !== "undefined" && Number(destinoEscolhido) === Number(id)) {
     desenharDetalhesDestino();
     return;
   }

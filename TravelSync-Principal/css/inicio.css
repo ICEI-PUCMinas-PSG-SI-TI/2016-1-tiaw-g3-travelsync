@@ -76,7 +76,7 @@ a {
   border-right: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.94);
   padding: 20px 18px;
-  z-index: 30;
+  z-index: 3000;
   transform: translateX(-105%);
   transition: transform 180ms ease;
   box-shadow: var(--shadow);
@@ -89,7 +89,7 @@ a {
 .fundo-menu {
   position: fixed;
   inset: 0;
-  z-index: 20;
+  z-index: 2900;
   background: rgba(16, 32, 51, 0.28);
   opacity: 0;
   pointer-events: none;
