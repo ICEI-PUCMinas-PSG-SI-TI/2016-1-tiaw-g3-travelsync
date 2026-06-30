@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TravelSync - Cadastro de destinos</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <div class="layout-geral">
+      <aside class="menu-lateral">
+        <button class="fechar-menu" type="button" aria-label="Fechar menu">x</button>
+        <button class="logo-menu" type="button" data-view="destinos" aria-label="TravelSync">
+          <img src="../assets/imagem/logotravelsync.png" alt="TravelSync" />
+        </button>
+
+        <nav class="menu" aria-label="Menu principal">
+          <a href="index.html"><button class="item-menu" type="button" data-view="inicio"><span class="icone">I</span>Inicio</button></a>
+          <a href="destinos.html"><button class="item-menu" type="button" data-view="destinos"><span class="icone">D</span>Destinos</button></a>
+          <a href="minimapa.html"><button class="item-menu" type="button" data-view="grupo"><span class="icone">M</span>Mini mapa</button></a>
+          <a href="cadastro_locais.html" data-admin-link><button class="item-menu ativo" type="button" data-view="planejar"><span class="icone">+</span>Cadastro de destinos</button></a>
+          <a href="destinos.html#favoritos" data-favoritos-menu><button class="item-menu" type="button" data-view="favoritos"><span class="icone">F</span>Favoritos <b id="totalFavoritos">0</b></button></a>
+          <a href="login.html"><button class="item-menu" type="button" data-view="perfil"><span class="icone">C</span>Minha conta</button></a>
+          <button class="item-menu" type="button" data-view="sair" id="btnSair"><span class="icone">S</span>Sair</button>
+        </nav>
+      </aside>
+      <div class="fundo-menu" aria-hidden="true"></div>
+
+      <div class="area-pagina">
+        <header class="cabecalho">
+          <button class="botao-menu" type="button" aria-label="Abrir menu">☰</button>
+          <button class="logo-cabecalho" type="button" data-view="destinos" aria-label="TravelSync">
+            <img src="../assets/imagem/logotravelsync.png" alt="TravelSync" />
+          </button>
+          <label class="busca-topo">
+            <span>⌕</span>
+            <input id="buscaTopo" type="search" placeholder="Buscar destinos, atrações, dicas..." />
+          </label>
+          <div class="acoes-topo">
+            <button class="botao-icone" aria-label="Notificações">♢</button>
+            <button class="botao-icone" aria-label="Mensagens">✉</button>
+            <div class="perfil-topo">
+              <span class="foto-perfil"></span>
+              <span><a href="login.html">Minha conta</a></span>
+            </div>
+          </div>
+        </header>
+
+        <main class="conteudo-admin">
+          <section class="titulo-pagina titulo-menor">
+            <span class="rotulo-secao">Admin</span>
+            <h1>Cadastro de destinos</h1>
+            <p>Os destinos cadastrados aqui aparecem junto com a listagem principal e podem ser editados depois.</p>
+          </section>
+
+          <section class="admin-grid">
+            <form id="formDestino" class="form-admin">
+              <label>Nome do destino<input type="text" id="nome" required></label>
+              <label>Localizacao<input type="text" id="localizacao" placeholder="Cidade, estado ou pais" required></label>
+              <label>Tipo<input type="text" id="tipo" placeholder="Praia, Natureza, Inverno..." required></label>
+              <label>Regiao<input type="text" id="regiao" placeholder="Nordeste, Sul, Internacional..." required></label>
+              <label>Preco minimo<input type="number" id="precoMin" min="0" required></label>
+              <label>Preco maximo<input type="number" id="precoMax" min="0" required></label>
+              <label>Avaliacao<input type="number" step="0.1" min="0" max="5" id="avaliacao" value="4.5"></label>
+              <label>Total de avaliacoes<input type="number" min="0" id="totalAvaliacoes" value="1"></label>
+              <label>Duracao<input type="text" id="duracao" placeholder="3 a 5 dias"></label>
+              <label>Tags<input type="text" id="tags" placeholder="Praia, Natureza, Familia"></label>
+
+              <label class="campo-grande">Descricao<textarea id="descricao" required></textarea></label>
+              <label class="campo-grande">Sobre o destino<textarea id="sobre"></textarea></label>
+              <label class="campo-grande">Como chegar<textarea id="comoChegar"></textarea></label>
+
+              <label>Imagem 1<input type="text" id="imagem1" placeholder="../assets/imagem/noronha-1.jpg ou URL"></label>
+              <label>Imagem 2<input type="text" id="imagem2"></label>
+              <label>Imagem 3<input type="text" id="imagem3"></label>
+              <label>Localizacao curta<input type="text" id="localizacaoCurta"></label>
+              <label>Clima<input type="text" id="clima"></label>
+              <label>Temperatura<input type="text" id="temperatura"></label>
+              <label>Melhor epoca<input type="text" id="melhorEpoca"></label>
+              <label class="campo-grande">Atracoes<textarea id="atrações" placeholder="Separe por virgula"></textarea></label>
+              <label class="campo-grande">Dicas<textarea id="dicas" placeholder="Separe por virgula"></textarea></label>
+
+              <div class="botoes-admin">
+                <button type="submit">Salvar destino</button>
+                <button type="button" id="limparForm">Limpar</button>
+              </div>
+            </form>
+
+            <aside class="lista-admin">
+              <h2>Destinos cadastrados</h2>
+              <div id="listaCrud"></div>
+            </aside>
+          </section>
+        </main>
+
+        <footer class="rodape">
+          <span>© 2024 Travel Sync</span>
+          <a href="#">Sobre</a>
+          <a href="#">Contato</a>
+          <a href="#">Termos de uso</a>
+          <a href="#">Privacidade</a>
+          <div class="redes-sociais" aria-label="Redes sociais">
+            <span>◎</span>
+            <span>●</span>
+            <span>◆</span>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/cadastro_locais.js"></script>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TravelSync - Início</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <div class="layout-geral">
+      <aside class="menu-lateral">
+        <button class="fechar-menu" type="button" aria-label="Fechar menu">&times;</button>
+        <button class="logo-menu" type="button" data-view="destinos" aria-label="TravelSync">
+          <img src="../assets/imagem/logotravelsync.png" alt="TravelSync" />
+        </button>
+
+         <nav class="menu" aria-label="Menu principal">
+          <a href="index.html"><button class="item-menu" type="button" data-view="inicio"><span class="icone">I</span>Inicio</button></a>
+          <a href="destinos.html"><button class="item-menu ativo" type="button" data-view="destinos"><span class="icone">D</span>Destinos</button></a>
+          <a href="minimapa.html"><button class="item-menu" type="button" data-view="grupo"><span class="icone">M</span>Mini mapa</button></a>
+          <a href="cadastro_locais.html" data-admin-link><button class="item-menu" type="button" data-view="planejar"><span class="icone">+</span>Cadastro de destinos</button></a>
+          <a href="destinos.html#favoritos" data-favoritos-menu><button class="item-menu" type="button" data-view="favoritos"><span class="icone">F</span>Favoritos <b id="totalFavoritos">0</b></button></a>
+          <a href="login.html"><button class="item-menu" type="button" data-view="perfil"><span class="icone">C</span>Minha conta</button></a>
+          <button class="item-menu" type="button" data-view="sair" id="btnSair"><span class="icone">S</span>Sair</button>
+        </nav>
+      </aside>
+      <div class="fundo-menu" aria-hidden="true"></div>
+
+      <div class="area-pagina">
+        <header class="cabecalho">
+          <button class="botao-menu" type="button" aria-label="Abrir menu">&#9776;</button>
+          <button class="logo-cabecalho" type="button" data-view="destinos" aria-label="TravelSync">
+            <img src="../assets/imagem/logotravelsync.png" alt="TravelSync" />
+          </button>
+          <label class="busca-topo">
+            <span>&#8981;</span>
+            <input id="buscaTopo" type="search" placeholder="Buscar destinos, atrações, dicas..." />
+          </label>
+          <div class="acoes-topo">
+            <button class="botao-icone" aria-label="Notificações">&#9671;</button>
+            <button class="botao-icone" aria-label="Mensagens">&#9993;</button>
+            
+              <div class="perfil-topo">
+                <span class="foto-perfil"></span>
+                <span><a href="login.html">Minha conta</a></span>
+                <span></span>
+              </div>
+          </div>
+        </header>
+       
+<main class="pagina-conta">
+  <section class="titulo-pagina titulo-menor">
+    <span class="rotulo-secao">Nova conta</span>
+    <h1>Cadastro de usuario</h1>
+    <p>Crie sua conta para salvar favoritos, comentar destinos e editar seu perfil.</p>
+  </section>
+
+  <section class="grade-conta">
+    <article class="card-conta">
+      <form autocomplete="on" id="cadastrousu" class="form-conta">
+        <label for="ino">Nome</label>
+        <input type="text" name="no" id="ino" required>
+
+        <label for="iemail">E-mail</label>
+        <input type="email" name="email" id="iemail" required>
+
+        <label for="isenha">Senha</label>
+        <input type="password" name="senha" id="isenha" minlength="4" required>
+
+        <label for="inousu">Nome de usuario</label>
+        <input type="text" name="nousu" id="inousu">
+
+        <button type="submit" id="cada">Cadastrar</button>
+      </form>
+      <p class="texto-conta">Ja tem conta? <a href="login.html">Entrar agora</a>.</p>
+    </article>
+  </section>
+</main>
+
+        <footer class="rodape">
+          <span>&copy; 2024 Travel Sync</span>
+          <a href="#">Sobre</a>
+          <a href="#">Contato</a>
+          <a href="#">Termos de uso</a>
+          <a href="#">Privacidade</a>
+          <div class="redes-sociais" aria-label="Redes sociais">
+            <span>&#9678;</span>
+            <span>&#9679;</span>
+            <span>&#9670;</span>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/cadastro_usuario.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TravelSync - Início</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="../css/inicio.css" />
+  </head>
+  <body>
+    <div class="layout-geral">
+      <aside class="menu-lateral">
+        <button class="fechar-menu" type="button" aria-label="Fechar menu">&times;</button>
+        <button class="logo-menu" type="button" data-view="destinos" aria-label="TravelSync">
+          <img src="../assets/imagem/logotravelsync.png" alt="TravelSync" />
+        </button>
+
+        <nav class="menu" aria-label="Menu principal">
+          <a href="index.html"><button class="item-menu" type="button" data-view="inicio"><span class="icone">I</span>Inicio</button></a>
+          <a href="destinos.html"><button class="item-menu ativo" type="button" data-view="destinos"><span class="icone">D</span>Destinos</button></a>
+          <a href="minimapa.html"><button class="item-menu" type="button" data-view="grupo"><span class="icone">M</span>Mini mapa</button></a>
+          <a href="cadastro_locais.html" data-admin-link><button class="item-menu" type="button" data-view="planejar"><span class="icone">+</span>Cadastro de destinos</button></a>
+          <a href="destinos.html#favoritos" data-favoritos-menu><button class="item-menu" type="button" data-view="favoritos"><span class="icone">F</span>Favoritos <b id="totalFavoritos">0</b></button></a>
+          <a href="login.html"><button class="item-menu" type="button" data-view="perfil"><span class="icone">C</span>Minha conta</button></a>
+          <button class="item-menu" type="button" data-view="sair" id="btnSair"><span class="icone">S</span>Sair</button>
+        </nav>
+      </aside>
+      <div class="fundo-menu" aria-hidden="true"></div>
+
+      <div class="area-pagina">
+        <header class="cabecalho">
+          <button class="botao-menu" type="button" aria-label="Abrir menu">&#9776;</button>
+          <button class="logo-cabecalho" type="button" data-view="destinos" aria-label="TravelSync">
+            <img src="../assets/imagem/logotravelsync.png" alt="TravelSync" />
+          </button>
+          <label class="busca-topo">
+            <span>&#8981;</span>
+            <input id="buscaTopo" type="search" placeholder="Buscar destinos, atrações, dicas..." />
+          </label>
+          <div class="acoes-topo">
+            <button class="botao-icone" aria-label="Notificações">&#9671;</button>
+            <button class="botao-icone" aria-label="Mensagens">&#9993;</button>
+              <div class="perfil-topo">
+                <span class="foto-perfil"></span>
+                <span><a href="login.html">Minha conta</a></span>
+                <span></span>
+              </div>
+          </div>
+        </header>
+         <section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Descubra o mundo</p>
+    <h1 class="hero-title">Encontre eventos <br>e destinos incríveis</h1>
+    <p class="hero-sub">Pesquise por nome, categoria ou localização</p>
+    <div class="search-box">
+      <svg class="search-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="Digite o nome do evento ou destino..." autocomplete="off">
+      <div class="search-suggestions" id="searchSuggestions"></div>
+      <button class="btn-search" id="btnSearch">Buscar</button>
+    </div>
+  </div>
+</section>
+
+<section class="filters-section">
+  <div class="container">
+    <div class="filters-grid">
+      <div class="filter-block" id="filterCategoria">
+        <label>Categoria</label>
+        <div class="filter-select" id="catSelect">
+          <span id="catLabel">Todas as categorias</span>
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="dropdown" id="catDropdown">
+          <div class="dropdown-item" data-value="">Todas as categorias</div>
+          <div class="dropdown-item" data-value="Natureza">Natureza</div>
+          <div class="dropdown-item" data-value="Cultura">Cultura</div>
+          <div class="dropdown-item" data-value="Workshop">Workshop</div>
+          <div class="dropdown-item" data-value="Praia">Praia</div>
+          <div class="dropdown-item" data-value="Cidade">Cidade</div>
+        </div>
+      </div>
+      <div class="filter-block" id="filterCidade">
+        <label>Cidade</label>
+        <div class="filter-select" id="cidSelect">
+          <span id="cidLabel">Todas as cidades</span>
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="dropdown" id="cidDropdown">
+          <div class="dropdown-item" data-value="">Todas as cidades</div>
+          <div class="dropdown-item" data-value="Belo Horizonte - MG">Belo Horizonte - MG</div>
+          <div class="dropdown-item" data-value="Recife - PE">Recife - PE</div>
+          <div class="dropdown-item" data-value="Salvador - BA">Salvador - BA</div>
+          <div class="dropdown-item" data-value="Chapada Diamantina - BA">Chapada Diamantina - BA</div>
+          <div class="dropdown-item" data-value="Ouro Preto - MG">Ouro Preto - MG</div>
+        </div>
+      </div>
+      <div class="filter-block">
+        <label>Data</label>
+        <div class="filter-select date-filter">
+          <input type="date" id="dateFilter" placeholder="Selecione uma data">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="events-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Eventos em destaque</h2>
+      <span class="results-count" id="resultsCount">6 resultados</span>
+    </div>
+    <div class="cards-grid" id="cardsGrid">
+
+      <div class="card" data-name="Cachoeira do Paraíso" data-categoria="Natureza" data-cidade="Chapada Diamantina - BA" data-data="2026-06-10">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Cachoeira do Paraíso" loading="lazy">
+          <span class="card-badge">Natureza</span>
+        </div>
+        <div class="card-body">
+          <h3>Cachoeira do Paraíso</h3>
+          <div class="card-meta">
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Chapada Diamantina - BA</span>
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>10/06/2026</span>
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>08:00</span>
+          </div>
+          <p class="card-desc">Uma trilha incrível até uma das cachoeiras mais belas do Brasil, cercada de natureza exuberante.</p>
+          <button class="btn-detalhes">Ver detalhes</button>
+        </div>
+      </div>
+
+      <div class="card" data-name="Feira Gastronômica de Recife" data-categoria="Cultura" data-cidade="Recife - PE" data-data="2026-07-15">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600&q=80" alt="Feira Gastronômica de Recife" loading="lazy">
+          <span class="card-badge">Cultura</span>
+        </div>
+        <div class="card-body">
+          <h3>Feira Gastronômica de Recife</h3>
+          <div class="card-meta">
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Recife - PE</span>
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>15/07/2026</span>
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>18:30</span>
+          </div>
+          <p class="card-desc">Barracas de comida regional, música ao vivo e degustações para conhecer os sabores de Pernambuco.</p>
+          <button class="btn-detalhes">Ver detalhes</button>
+        </div>
+      </div>
+
+      <div class="card" data-name="Salvador Histórico" data-categoria="Cultura" data-cidade="Salvador - BA" data-data="2026-06-25">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1580130775562-0ef92da028de?w=600&q=80" alt="Salvador" loading="lazy">
+          <span class="card-badge">Cultura</span>
+        </div>
+        <div class="card-body">
+          <h3>Salvador Histórico</h3>
+          <div class="card-meta">
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Salvador - BA</span>
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>25/06/2026</span>
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>09:00</span>
+          </div>
+          <p class="card-desc">Tour pelo Pelourinho, o centro histórico mais vibrante do Brasil com arquitetura colonial única.</p>
+          <button class="btn-detalhes">Ver detalhes</button>
+        </div>
+      </div>
+
+      <div class="card" data-name="Workshop de HTML e CSS" data-categoria="Workshop" data-cidade="Belo Horizonte - MG" data-data="2026-05-20">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80" alt="Workshop HTML CSS" loading="lazy">
+          <span class="card-badge">Workshop</span>
+        </div>
+        <div class="card-body">
+          <h3>Workshop de HTML e CSS</h3>
+          <div class="card-meta">
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Belo Horizonte - MG</span>
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>20/05/2026</span>
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>14:00</span>
+          </div>
+          <p class="card-desc">Aprenda HTML e CSS do zero de forma prática e divertida com instrutores experientes.</p>
+          <button class="btn-detalhes">Ver detalhes</button>
+        </div>
+      </div>
+
+      <div class="card" data-name="Mostra de Cinema de Ouro Preto" data-categoria="Cultura" data-cidade="Ouro Preto - MG" data-data="2026-08-05">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&q=80" alt="Mostra de Cinema de Ouro Preto" loading="lazy">
+          <span class="card-badge">Cultura</span>
+        </div>
+        <div class="card-body">
+          <h3>Mostra de Cinema de Ouro Preto</h3>
+          <div class="card-meta">
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Ouro Preto - MG</span>
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>05/08/2026</span>
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>19:00</span>
+          </div>
+          <p class="card-desc">Sessões de curtas, debates com convidados e programação cultural no centro histórico da cidade.</p>
+          <button class="btn-detalhes">Ver detalhes</button>
+        </div>
+      </div>
+
+      <div class="card" data-name="Festival Cultural BH" data-categoria="Cultura" data-cidade="Belo Horizonte - MG" data-data="2026-09-12">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=80" alt="Festival BH" loading="lazy">
+          <span class="card-badge">Cultura</span>
+        </div>
+        <div class="card-body">
+          <h3>Festival Cultural BH</h3>
+          <div class="card-meta">
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Belo Horizonte - MG</span>
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>12/09/2026</span>
+            <span><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>18:00</span>
+          </div>
+          <p class="card-desc">O maior festival de arte, música e gastronomia da capital mineira. Não perca essa experiência!</p>
+          <button class="btn-detalhes">Ver detalhes</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="no-results" id="noResults" style="display:none;">
+      <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <p>Nenhum resultado encontrado.</p>
+    </div>
+
+    <div class="load-more-wrap">
+      <a href="destinos.html"><button class="btn-load-more" id="btnLoadMore">Ver mais eventos</button></a>
+    </div>
+  </div>
+</section>
+
+
+        <footer class="rodape">
+          <span>&copy; 2024 Travel Sync</span>
+          <a href="#">Sobre</a>
+          <a href="#">Contato</a>
+          <a href="#">Termos de uso</a>
+          <a href="#">Privacidade</a>
+          <div class="redes-sociais" aria-label="Redes sociais">
+            <span>&#9678;</span>
+            <span>&#9679;</span>
+            <span>&#9670;</span>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/inicio.js"></script>
+  </body>
+</html>
+
+
