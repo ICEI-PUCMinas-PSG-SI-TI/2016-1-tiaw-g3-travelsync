@@ -60,6 +60,31 @@ Descompasso entre Perfil e Sugestão 
 • Problema: Algoritmos de viagem comuns sugerem "o que é popular" e não o que se encaixa no estilo de vida. O Carlos quer museus com Wi-Fi para trabalhar; o Eduardo quer locais animados para solteiros com preço baixo. 
 • Impacto: Frustração e sensação de dinheiro mal gasto
 
+
+
+## Entrevistas qualitativas
+
+Foram realizadas entrevistas informais com potenciais usuários da aplicação, incluindo pessoas que costumam viajar sozinhas, em família, em casal e usuários que necessitam de recursos de acessibilidade. As entrevistas tiveram como objetivo compreender as principais dificuldades encontradas durante o planejamento de viagens e validar as hipóteses levantadas na Matriz CSD.
+
+As principais perguntas abordaram:
+
+• Como os usuários escolhem um destino turístico;
+• Quais informações consideram mais importantes antes de viajar;
+• Dificuldades encontradas durante o planejamento;
+• Importância das avaliações de outros usuários;
+• Necessidade de filtros por acessibilidade, infraestrutura, preço e localização;
+• Interesse em organizar reservas e favoritos em uma única plataforma.
+
+## Highlights de Pesquisa
+
+A análise das entrevistas permitiu identificar alguns padrões entre os participantes:
+
+• A maioria utiliza diversos sites para pesquisar destinos, hospedagens e atrações, tornando o planejamento mais demorado.
+• Avaliações de outros usuários são consideradas um dos fatores mais importantes na escolha de um destino.
+• Muitos entrevistados demonstraram interesse em visualizar informações como acessibilidade, infraestrutura, clima e localização antes de decidir pela viagem.
+• Usuários valorizam filtros inteligentes para encontrar destinos que atendam às suas preferências.
+• Houve interesse em uma plataforma que centralize pesquisas, avaliações, favoritos e reservas em um único ambiente.
+
 ## Personas
 
 Persona 1 – Eduardo
