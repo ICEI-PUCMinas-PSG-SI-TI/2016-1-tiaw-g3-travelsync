@@ -50,15 +50,20 @@ Hospedagem: O setor reclama da necessidade de maior oferta de quartos e linhas 
 
 ## Mapeamento do Problema 
 A partir das dores identificadas nas personas de Beatriz, Eduardo, Helena, Carlos, Neiva e Heitor, o problema pode ser dividido em 3 partes: 
+
  Fragmentação e Falta de Confiança 
-•Problema: Usuários perdem muito tempo saltando de site em site sem saber se as informações são reais ou atualizadas. 
-•Impacto: Ansiedade e medo de cair em golpes ou reservas que não correspondem às fotos (principalmente para Beatriz e Helena). 
+ - Problema: Usuários perdem muito tempo saltando de site em site sem saber se as informações são reais ou atualizadas. 
+ - Impacto: Ansiedade e medo de cair em golpes ou reservas que não correspondem às fotos (principalmente para Beatriz e Helena). 
+
+
 Inexistência de Filtros de Acessibilidade Real 
-• Problema: Falta de detalhes técnicos para nichos. O Heitor (deficiente auditivo) e a Neiva (idosa) sofrem com locais que dizem ser "abertos ao público", mas não possuem infraestrutura inclusiva ou atendimento preparado. 
-• Impacto: Exclusão social e insegurança física/comunicativa durante a viagem. 
+ - Problema: Falta de detalhes técnicos para nichos. O Heitor (deficiente auditivo) e a Neiva (idosa) sofrem com locais que dizem ser "abertos ao público", mas não possuem infraestrutura inclusiva ou atendimento preparado. 
+ - Impacto: Exclusão social e insegurança física/comunicativa durante a viagem. 
+
+
 Descompasso entre Perfil e Sugestão 
-• Problema: Algoritmos de viagem comuns sugerem "o que é popular" e não o que se encaixa no estilo de vida. O Carlos quer museus com Wi-Fi para trabalhar; o Eduardo quer locais animados para solteiros com preço baixo. 
-• Impacto: Frustração e sensação de dinheiro mal gasto
+ - Problema: Algoritmos de viagem comuns sugerem "o que é popular" e não o que se encaixa no estilo de vida. O Carlos quer museus com Wi-Fi para trabalhar; o Eduardo quer locais animados para solteiros com preço baixo.
+ - Impacto: Frustração e sensação de dinheiro mal gasto
 
 
 
@@ -68,22 +73,22 @@ Foram realizadas entrevistas informais com potenciais usuários da aplicação, 
 
 As principais perguntas abordaram:
 
-• Como os usuários escolhem um destino turístico;
-• Quais informações consideram mais importantes antes de viajar;
-• Dificuldades encontradas durante o planejamento;
-• Importância das avaliações de outros usuários;
-• Necessidade de filtros por acessibilidade, infraestrutura, preço e localização;
-• Interesse em organizar reservas e favoritos em uma única plataforma.
+- Como os usuários escolhem um destino turístico;
+- Quais informações consideram mais importantes antes de viajar;
+- Dificuldades encontradas durante o planejamento;
+- Importância das avaliações de outros usuários;
+- Necessidade de filtros por acessibilidade, infraestrutura, preço e localização;
+- Interesse em organizar reservas e favoritos em uma única plataforma.
 
 ## Highlights de Pesquisa
 
 A análise das entrevistas permitiu identificar alguns padrões entre os participantes:
 
-• A maioria utiliza diversos sites para pesquisar destinos, hospedagens e atrações, tornando o planejamento mais demorado.
-• Avaliações de outros usuários são consideradas um dos fatores mais importantes na escolha de um destino.
-• Muitos entrevistados demonstraram interesse em visualizar informações como acessibilidade, infraestrutura, clima e localização antes de decidir pela viagem.
-• Usuários valorizam filtros inteligentes para encontrar destinos que atendam às suas preferências.
-• Houve interesse em uma plataforma que centralize pesquisas, avaliações, favoritos e reservas em um único ambiente.
+- A maioria utiliza diversos sites para pesquisar destinos, hospedagens e atrações, tornando o planejamento mais demorado.
+- Avaliações de outros usuários são consideradas um dos fatores mais importantes na escolha de um destino.
+- Muitos entrevistados demonstraram interesse em visualizar informações como acessibilidade, infraestrutura, clima e localização antes de decidir pela viagem.
+- Usuários valorizam filtros inteligentes para encontrar destinos que atendam às suas preferências.
+- Houve interesse em uma plataforma que centralize pesquisas, avaliações, favoritos e reservas em um único ambiente.
 
 ## Personas
 
@@ -264,6 +269,211 @@ As ferramentas empregadas no projeto são:
 5. [Implementação](./docs/5-Implementação.md)
 6. [Referências](./docs/8-Referências.md)
 7. [Apresentação do trabalho](./docs/apresentacao) 
+
+
+
+## Solução Implementada
+
+### Funcionalidades
+
+#### Página Inicial (Home)
+
+**Descrição**
+
+Tela inicial da aplicação que apresenta uma barra de pesquisa para localizar destinos, atrações e eventos, além de um carrossel com destinos em destaque.
+
+Estrutura de dados associada
+
+- Destino
+- Evento
+
+*Como acessar:*
+
+Disponível para qualquer usuário ao acessar a página principal da aplicação.
+
+#### Listagem de Destinos
+
+**Descrição**
+
+Apresenta todos os destinos cadastrados em formato de cards, permitindo aplicar filtros por categoria, região, preço e avaliação.
+
+Estrutura de dados associada
+
+- Destino
+
+*Como acessar:*
+
+Menu Destinos.
+
+#### Página de Detalhes do Destino
+
+**Descrição**
+
+Exibe informações completas sobre um destino, incluindo imagens, descrição, avaliações, clima, localização, atrações e dicas.
+
+Estrutura de dados associada
+
+- Destino
+- Avaliação
+
+*Como acessar:*
+
+Selecionando qualquer destino na listagem.
+
+#### Sistema de Favoritos
+
+**Descrição**
+
+Permite salvar destinos favoritos para consulta posterior.
+
+Estrutura de dados associada
+
+- Favorito
+- Usuário
+
+*Como acessar:*
+
+Clique no ícone de coração disponível nos cards ou na página do destino.
+
+Necessário estar logado.
+
+#### Mapa Interativo
+
+**Descrição**
+
+Exibe os destinos em um mapa interativo utilizando geolocalização.
+
+Estrutura de dados associada
+
+- Destino
+
+*Como acessar:*
+
+Menu Mapa.
+
+#### Login e Perfil
+
+**Descrição**
+
+Permite criar uma conta, realizar login e visualizar reservas realizadas.
+
+Estrutura de dados associada
+
+- Usuário
+- Reserva
+
+*Como acessar:*
+
+Menu Minha Conta.
+
+#### Reserva de Destinos
+
+**Descrição**
+
+Permite simular uma reserva informando datas, quantidade de pessoas e forma de pagamento.
+
+Estrutura de dados associada
+
+- Reserva
+
+*Como acessar:*
+
+Botão Reservar na página do destino.
+
+### Estruturas de Dados
+#### Usuário
+
+Representa os dados do usuário cadastrado no sistema.
+
+{
+  "id": "usr_001",
+  "nome": "Isabela",
+  "email": "isabela7@gmail.com",
+  "favoritos": ["dest_003"],
+  "reservas": ["res_101"]
+}
+
+#### Destino
+
+Representa um destino turístico disponível na plataforma.
+
+{
+  "id": "dest_003",
+  "nome": "Rio de Janeiro",
+  "categoria": "Cultural",
+  "avaliacaoMedia": 4.7,
+  "precoMin": 200,
+  "precoMax": 700
+}
+
+#### Favorito
+
+Relaciona um usuário a um destino favoritado.
+
+{
+  "usuarioId": "usr_001",
+  "destinoId": "dest_003"
+}
+
+#### Reserva
+
+Armazena as reservas realizadas pelos usuários.
+
+{
+  "usuarioId": "usr_001",
+  "destinoId": "dest_012",
+  "valorTotal": 6480.00,
+  "status": "confirmada"
+}
+
+#### Avaliação
+
+Representa a nota e o comentário de um usuário sobre um destino.
+
+{
+  "usuarioId": "usr_001",
+  "destinoId": "dest_003",
+  "nota": 5,
+  "comentario": "Excelente experiência."
+}
+
+### Módulos e APIs
+#### Frameworks e bibliotecas
+
+As principais tecnologias utilizadas no desenvolvimento da aplicação foram:
+
+| Tecnologia | Finalidade |
+|------------|------------|
+| HTML5 | Estrutura das páginas da aplicação. |
+| CSS3 | Estilização da interface e definição do layout visual. |
+| JavaScript | Implementação da lógica da aplicação e interação com o usuário. |
+| Bootstrap | Desenvolvimento de uma interface responsiva e utilização de componentes visuais. |
+| Leaflet.js | Exibição do mapa interativo e manipulação dos recursos de geolocalização. |
+
+#### APIs utilizadas
+
+| API | Finalidade |
+|-----|------------|
+| OpenStreetMap | Fornecimento dos dados cartográficos utilizados pelo Leaflet para exibição dos mapas e localização dos destinos. |
+
+#### Controle de versão
+
+Durante o desenvolvimento do projeto, foram utilizadas as seguintes ferramentas para gerenciamento do código-fonte:
+
+| Ferramenta | Finalidade |
+|------------|------------|
+| Git | Controle de versão e gerenciamento das alterações realizadas no código-fonte. |
+| GitHub | Hospedagem do repositório, colaboração entre os integrantes da equipe e integração das branches por meio de merge. |
+
+## Referências Bibliográficas
+
+Bootstrap. Bootstrap Documentation. Disponível em: https://getbootstrap.com/. Acesso em: 30 jun. 2026.
+Leaflet. Leaflet Documentation. Disponível em: https://leafletjs.com/. Acesso em: 30 jun. 2026.
+OpenStreetMap. OpenStreetMap. Disponível em: https://www.openstreetmap.org/. Acesso em: 30 jun. 2026.
+MDN Web Docs. HTML, CSS e JavaScript Documentation. Disponível em: https://developer.mozilla.org/. Acesso em: 30 jun. 2026.
+Git. Git Documentation. Disponível em: https://git-scm.com/doc. Acesso em: 30 jun. 2026.
+GitHub. GitHub Docs. Disponível em: https://docs.github.com/. Acesso em: 30 jun. 2026.
+Figma. Figma. Disponível em: https://www.figma.com/. Acesso em: 30 jun. 2026.
 
 
 
